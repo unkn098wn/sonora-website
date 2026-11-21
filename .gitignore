@@ -1,0 +1,6 @@
+# Exclude oversized Universal APKs from standard git commits to comply with GitHub 100MB limit
+downloads/*Universal*.apk
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
