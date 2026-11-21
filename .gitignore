@@ -1,5 +1,5 @@
-# Exclude oversized Universal APKs from standard git commits to comply with GitHub 100MB limit
-downloads/*Universal*.apk
+# Exclude downloads folder from git repository (hosted via GitHub Releases)
+downloads/
 .DS_Store
 Thumbs.db
 .idea/
