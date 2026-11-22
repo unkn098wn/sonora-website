@@ -1,4 +1,5 @@
 @echo off
+chcp 65001 > nul
 title Push Sonora-Website to GitHub
 cls
 echo ===================================================
