@@ -1,3 +1,6 @@
 /telegram https://t.me/sonoramus1c_bot 302
 /bot https://t.me/sonoramus1c_bot 302
-/download /#downloads 302
+/download /#download 302
+/downloads/Sonora-v2.6.0-Android.apk https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Android.apk 302
+/downloads/Sonora-v2.6.0-Setup.exe https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Setup.exe 302
+/downloads/:file https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/:file 302
