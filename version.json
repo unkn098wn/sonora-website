@@ -1,0 +1,22 @@
+{
+  "version": "2.6.0",
+  "build_number": 26,
+  "tag_name": "v2.6.0",
+  "release_notes": "Sonora 2.6.0: Синхронизация звука с Android, стабильный seek, умный shuffle, 10-полосный эквалайзер и DSP, единый профиль (Email + Telegram), кнопка дизлайка, жанровые фильтры Моей Волны, категории поиска, добавление и обновление плейлистов, HD-обложки, тексты песен, Shazam.",
+  "body": "Sonora 2.6.0: Синхронизация звука с Android, стабильный seek, умный shuffle, 10-полосный эквалайзер и DSP, единый профиль (Email + Telegram), кнопка дизлайка, жанровые фильтры Моей Волны, категории поиска, добавление и обновление плейлистов, HD-обложки, тексты песен, Shazam.",
+  "html_url": "https://sonora-music.pages.dev",
+  "download_url_windows": "https://sonora-music.pages.dev/downloads/Sonora-v2.6.0-Setup.exe",
+  "download_url_android": "https://sonora-music.pages.dev/downloads/Sonora-v2.6.0-Android.apk",
+  "assets": [
+    {
+      "name": "Sonora-v2.6.0-Setup.exe",
+      "browser_download_url": "https://sonora-music.pages.dev/downloads/Sonora-v2.6.0-Setup.exe",
+      "size": 28502179
+    },
+    {
+      "name": "Sonora-v2.6.0-Android.apk",
+      "browser_download_url": "https://sonora-music.pages.dev/downloads/Sonora-v2.6.0-Android.apk",
+      "size": 138717989
+    }
+  ]
+}
