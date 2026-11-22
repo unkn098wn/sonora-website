@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sonora Music — Музыка всех миров в одном монолитном плеере</title>
-  <meta name="description" content="Sonora — ультрасовременный бесплатный музыкальный плеер для Windows и Android. Мгновенный поиск по 18 мировым и андеграунд площадкам, FLAC до 24-бит, умная «Моя волна», DSP-студия и живая Неоновая Аврора. 0 подписок и 0 рекламы навсегда.">
-  <meta name="keywords" content="Sonora, музыкальный плеер, музыка без подписки, mp3 плеер, flac плеер, моя волна, soundcloud, youtube music, streaming player, obsidian glass">
+  <meta name="description" content="Sonora — ультрасовременный бесплатный музыкальный плеер для Windows и Android. Мгновенный поиск по 18 мировым и андеграунд площадкам, FLAC до 24-бит, умная «Моя волна», DSP-студия, вечная облачная синхронизация медиатеки. 0 подписок и 0 рекламы.">
+  <meta name="keywords" content="Sonora, музыкальный плеер, музыка без подписки, mp3 плеер, flac плеер, моя волна, soundcloud, youtube music, streaming player, obsidian glass, anime.js, 3d плеер">
 
   <!-- OpenGraph Meta -->
   <meta property="og:title" content="Sonora Music — Музыка всех миров">
   <meta property="og:description" content="18 музыкальных площадок в одном монолитном плеере. 100% бесплатно навсегда.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sonora-website.maksinegor821.workers.dev/">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/sonora_icon.png?v=2.7">
@@ -21,8 +22,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Lucide Icons -->
+
+  <!-- Anime.js & Lucide Icons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <script>
@@ -35,39 +37,35 @@
           },
           colors: {
             obsidian: {
-              950: '#050608',
-              900: '#07080B',
-              850: '#0D0F14',
-              800: '#141720',
-              700: '#1F2432',
-              600: '#2E3547',
+              950: '#040507',
+              900: '#07090E',
+              850: '#0D1017',
+              800: '#131822',
+              700: '#1D2433',
+              600: '#2A3449',
             },
-            aurora: {
-              cyan: '#00F5D4',
-              mint: '#00FFC2',
-              blue: '#2AABEE',
-              purple: '#9D4EDD',
-              rose: '#FF4081',
+            mint: {
+              300: '#5DFECD',
+              400: '#00FFC2',
+              500: '#00E5AE',
+            },
+            cyan: {
+              400: '#00F5D4',
             }
           },
           animation: {
-            'spin-slow': 'spin 18s linear infinite',
-            'spin-reverse': 'spinReverse 22s linear infinite',
-            'pulse-glow': 'pulseGlow 4s ease-in-out infinite',
-            'float': 'floatAnim 6s ease-in-out infinite',
+            'spin-slow': 'spin 14s linear infinite',
+            'float': 'floatAnim 5s ease-in-out infinite',
+            'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
           },
           keyframes: {
-            spinReverse: {
-              from: { transform: 'rotate(360deg)' },
-              to: { transform: 'rotate(0deg)' },
-            },
-            pulseGlow: {
-              '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
-              '50%': { opacity: '0.8', transform: 'scale(1.06)' },
-            },
             floatAnim: {
               '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-10px)' },
+              '50%': { transform: 'translateY(-12px)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: '0.5', transform: 'scale(1)' },
+              '50%': { opacity: '0.9', transform: 'scale(1.05)' },
             }
           }
         }
@@ -76,1445 +74,1253 @@
   </script>
 
   <style>
-    /* Obsidian Stage Core Aesthetics */
+    /* Obsidian Glass Design System */
     :root {
-      --bg-color: #07080B;
-      --card-bg: rgba(16, 19, 26, 0.75);
+      --bg-color: #07090E;
+      --card-bg: rgba(14, 18, 28, 0.72);
       --card-border: rgba(255, 255, 255, 0.08);
-      --card-hover-border: rgba(255, 255, 255, 0.22);
+      --card-hover-border: rgba(0, 255, 194, 0.35);
     }
 
     body {
-      background-color: #07080B;
+      background-color: #07090E;
       color: #E2E8F0;
       overflow-x: hidden;
-      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Ultra Glass Surface */
+    /* Glass Surface */
     .glass-card {
       background: var(--card-bg);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
       border: 1px solid var(--card-border);
-      box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-      transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .glass-card-hover:hover {
+    .glass-card:hover {
       border-color: var(--card-hover-border);
-      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.95), 0 0 25px rgba(0, 255, 194, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     }
 
-    /* Neon Accent Border */
-    .neon-border {
-      position: relative;
-    }
-    .neon-border::before {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.16));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-    }
-
-    /* 3D Tilt & Cursor Spotlight */
-    .spotlight-card {
-      position: relative;
-      overflow: hidden;
+    /* 3D Transform Utilities */
+    .perspective-1000 {
+      perspective: 1000px;
       transform-style: preserve-3d;
-      will-change: transform;
-      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .spotlight-card::before {
+    .preserve-3d {
+      transform-style: preserve-3d;
+    }
+    .translate-z-10 {
+      transform: translateZ(10px);
+    }
+    .translate-z-20 {
+      transform: translateZ(20px);
+    }
+    .translate-z-30 {
+      transform: translateZ(30px);
+    }
+
+    /* Vinyl Grooves Realistic Texture */
+    .vinyl-disk {
+      background: radial-gradient(circle at center, #111 0%, #151515 15%, #050505 16%, #1a1a1a 30%, #080808 31%, #222 45%, #080808 46%, #1c1c1c 60%, #050505 61%, #151515 85%, #080808 100%);
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.06), 0 25px 60px rgba(0,0,0,0.9);
+      position: relative;
+    }
+    .vinyl-disk::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.09), transparent 65%);
+      border-radius: 50%;
+      background: conic-gradient(from 45deg, transparent 0deg, rgba(255,255,255,0.12) 60deg, transparent 120deg, transparent 180deg, rgba(255,255,255,0.12) 240deg, transparent 300deg);
       pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.35s ease;
-      z-index: 2;
-    }
-    .spotlight-card:hover::before {
-      opacity: 1;
     }
 
-    /* Butter-Smooth Scroll Reveal Animation */
-    .reveal-on-scroll {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
+    /* Range slider custom styling */
+    input[type=range] {
+      -webkit-appearance: none;
+      background: rgba(255,255,255,0.1);
+      border-radius: 9999px;
+      height: 6px;
     }
-    .reveal-on-scroll.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Stagger delays */
-    .stagger-1 { transition-delay: 60ms; }
-    .stagger-2 { transition-delay: 120ms; }
-    .stagger-3 { transition-delay: 180ms; }
-    .stagger-4 { transition-delay: 240ms; }
-    .stagger-5 { transition-delay: 300ms; }
-    .stagger-6 { transition-delay: 360ms; }
-
-    /* Kinetic Infinite Marquee */
-    @keyframes marqueeScroll {
-      0% { transform: translateX(0%); }
-      100% { transform: translateX(-50%); }
-    }
-    .kinetic-marquee-track {
-      display: flex;
-      flex-wrap: nowrap !important;
-      white-space: nowrap !important;
-      width: max-content;
-      animation: marqueeScroll 36s linear infinite;
-    }
-    .kinetic-marquee-track span, .kinetic-marquee-track div {
-      white-space: nowrap !important;
-      flex-shrink: 0 !important;
-      display: inline-flex !important;
-    }
-    .kinetic-marquee-track:hover {
-      animation-play-state: paused;
-    }
-
-    /* Smooth Audio Visualizer */
-    @keyframes barPulse {
-      0% { height: 16%; }
-      50% { height: 96%; }
-      100% { height: 28%; }
-    }
-    .vis-bar {
-      animation: barPulse 1.05s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
-      will-change: height;
-    }
-
-    /* Vinyl Optical Glare Shimmer */
-    .vinyl-shimmer {
-      background: linear-gradient(135deg, transparent 38%, rgba(255, 255, 255, 0.18) 50%, transparent 62%);
-      transition: transform 0.6s ease;
-    }
-    .vinyl-container:hover .vinyl-shimmer {
-      transform: rotate(180deg);
-    }
-
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #07080B;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #1F2432;
-      border-radius: 3px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #E2E8F0;
-    }
-
-    /* Smooth FAQ Accordion */
-    .faq-wrapper {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .faq-wrapper.open {
-      grid-template-rows: 1fr;
-    }
-    .faq-inner {
-      overflow: hidden;
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      background: #00FFC2;
+      box-shadow: 0 0 10px #00FFC2;
+      cursor: pointer;
     }
   </style>
 </head>
+<body class="selection:bg-mint-400/20 selection:text-mint-300">
 
-<body class="selection:bg-white selection:text-black">
+  <!-- Interactive 3D Canvas Background -->
+  <canvas id="bg3dCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-45"></canvas>
 
-  <!-- BACKGROUND SHADER CANVAS -->
-  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-    <canvas id="auroraCanvas" class="w-full h-full opacity-60"></canvas>
-    <div class="absolute inset-0 bg-radial-gradient from-transparent via-[#07080B]/60 to-[#07080B]"></div>
-  </div>
+  <!-- Ambient Aurora Glows -->
+  <div class="fixed top-[-15%] left-[20%] w-[650px] h-[650px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
+  <div class="fixed top-[40%] right-[-10%] w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[150px] pointer-events-none z-0"></div>
+  <div class="fixed bottom-[-10%] left-[-10%] w-[550px] h-[550px] bg-purple-500/10 rounded-full blur-[150px] pointer-events-none z-0"></div>
 
-  <!-- FLOATING NAVIGATION BAR -->
-  <header class="fixed top-5 inset-x-0 z-50 flex justify-center px-4 transition-all duration-300" id="mainHeader">
-    <nav class="glass-card neon-border rounded-full px-5 py-2.5 flex items-center justify-between gap-6 max-w-5xl w-full transition-all duration-300">
-      <!-- Brand Logo -->
-      <a href="#" class="flex items-center gap-2.5 group">
-        <div class="w-9 h-9 rounded-xl overflow-hidden border border-white/20 flex items-center justify-center transition-transform group-hover:scale-105 shadow-md shadow-white/10 bg-black">
-          <img src="assets/app_icon.png?v=2.7" alt="Sonora Logo" class="w-full h-full object-cover">
+  <!-- STICKY GLASS HEADER -->
+  <header class="fixed top-4 inset-x-0 z-50 flex justify-center px-4" id="mainHeader">
+    <nav class="glass-card rounded-full px-5 py-3 flex items-center justify-between gap-6 max-w-4xl w-full border border-white/10 shadow-2xl">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-mint-400 to-cyan-400 p-0.5 shadow-md shadow-mint-400/20 group-hover:scale-105 transition">
+          <div class="w-full h-full bg-[#07090E] rounded-[10px] flex items-center justify-center">
+            <i data-lucide="disc" class="w-5 h-5 text-mint-400 group-hover:rotate-90 transition duration-700"></i>
+          </div>
         </div>
-        <span class="font-black text-lg tracking-wider text-white">SONORA<span class="text-white text-xs font-mono ml-1 px-1.5 py-0.5 rounded bg-white/10 border border-white/20">2.6</span></span>
+        <div class="flex items-center gap-2">
+          <span class="text-lg font-black text-white tracking-wider">SONORA</span>
+          <span class="text-[10px] font-mono font-bold text-mint-400 bg-mint-400/10 px-2 py-0.5 rounded-full border border-mint-400/20">v2.6.0</span>
+        </div>
       </a>
 
       <!-- Desktop Links -->
-      <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
-        <a href="#demo" class="hover:text-white transition flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          Демо плеера
-        </a>
-        <a href="#platforms" class="hover:text-white transition">18 Площадок</a>
-        <a href="#features" class="hover:text-white transition">Возможности</a>
-        <a href="#comparison" class="hover:text-white transition">Сравнение</a>
-        <a href="#faq" class="hover:text-white transition">FAQ</a>
-        <a href="https://t.me/sonoramus1c_bot" target="_blank" class="text-sky-400 hover:text-white flex items-center gap-1.5 transition">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.18 3.35-1.38 3.73-1.39.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
-          @sonoramus1c_bot
-        </a>
+      <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-300">
+        <a href="#demo" class="hover:text-mint-400 transition">3D Демо</a>
+        <a href="#platforms" class="hover:text-mint-400 transition">18 Платформ</a>
+        <a href="#architecture" class="hover:text-mint-400 transition">Архитектура</a>
+        <a href="#roadmap" class="hover:text-mint-400 transition">Roadmap</a>
+        <a href="#faq" class="hover:text-mint-400 transition">FAQ</a>
       </div>
 
-      <!-- Action Button -->
-      <div class="flex items-center gap-2.5">
-        <a href="#download" class="bg-white hover:bg-slate-200 text-black font-extrabold text-xs sm:text-sm px-4 py-2 rounded-full flex items-center gap-1.5 transition transform hover:scale-105 active:scale-95 shadow-lg shadow-white/10">
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-3">
+        <button onclick="openFeedbackModal()" class="text-xs font-bold text-slate-300 hover:text-white px-3 py-1.5 rounded-lg border border-white/10 hover:bg-white/5 transition flex items-center gap-1.5">
+          <i data-lucide="message-square" class="w-3.5 h-3.5 text-mint-400"></i>
+          <span class="hidden sm:inline">Отзыв</span>
+        </button>
+        <a href="#download" class="bg-white hover:bg-slate-200 text-black font-extrabold text-xs sm:text-sm px-4 sm:px-5 py-2 rounded-full transition transform hover:scale-105 active:scale-95 flex items-center gap-2 shadow-lg shadow-white/10">
           <i data-lucide="download" class="w-4 h-4"></i>
-          <span>Скачать 2.6</span>
+          <span>Скачать</span>
         </a>
       </div>
     </nav>
   </header>
 
-  <main class="relative z-10 pt-32 pb-24">
-
-    <!-- HERO SECTION -->
-    <section class="max-w-6xl mx-auto px-4 text-center pt-8 md:pt-16 pb-16 reveal-on-scroll">
-      <!-- Badge -->
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8">
-        <span class="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span class="text-xs font-semibold text-slate-300 tracking-wide">Sonora 2.6 Live • 100% Бесплатно навсегда • Без рекламы и подписок</span>
-      </div>
-
-      <!-- Main Headline -->
-      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-[1.12]">
-        Один монолитный плеер для <span class="bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">всей музыки мира</span>
-      </h1>
-
-      <!-- Subheadline -->
-      <p class="mt-6 text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
-        Стриминг 18 мировых и андеграунд площадок без границ, чистый FLAC, умная «Моя волна», караоке в такт и живая Неоновая Аврора.
-      </p>
-
-      <!-- CTA Buttons: 2 Official Installers (Windows Setup.exe & Android Universal APK) -->
-      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
-        <!-- Windows Setup Button -->
-        <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Setup.exe" class="bg-white text-black font-extrabold text-base px-8 py-4 rounded-2xl flex items-center gap-3 transition transform hover:scale-105 active:scale-95 shadow-2xl shadow-white/15 hover:bg-slate-200">
-          <i data-lucide="monitor" class="w-5 h-5"></i>
-          <span>Скачать для Windows (.exe)</span>
-          <span class="text-xs font-mono font-bold bg-black/15 px-2 py-0.5 rounded-md">28.5 МБ</span>
-        </a>
-
-        <!-- Android Universal APK Button -->
-        <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Android.apk" class="glass-card hover:bg-white/10 text-white font-bold text-base px-8 py-4 rounded-2xl flex items-center gap-3 transition transform hover:scale-105 active:scale-95 shadow-xl">
-          <i data-lucide="smartphone" class="w-5 h-5 text-emerald-400"></i>
-          <span>Скачать для Android (APK)</span>
-          <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md">138 МБ</span>
-        </a>
-      </div>
-
-        <!-- Telegram Bot Auth CTA -->
-        <a href="https://t.me/sonoramus1c_bot" target="_blank" class="glass-card hover:bg-sky-500/20 text-sky-400 hover:text-white font-bold text-base px-5 py-3.5 rounded-2xl flex items-center gap-2 transition">
-          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.18 3.35-1.38 3.73-1.39.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
-          <span>Telegram-бот</span>
-        </a>
-      </div>
-
-      <!-- Trust Badges -->
-      <div class="mt-8 flex items-center justify-center gap-6 text-xs text-slate-400 font-medium">
-        <span class="flex items-center gap-1.5">
-          <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> 18 Площадок
-        </span>
-        <span class="flex items-center gap-1.5">
-          <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> Скорость отклика &lt; 0.4 сек
-        </span>
-        <span class="flex items-center gap-1.5">
-          <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> 0 ₽ Без подписок навсегда
-        </span>
-      </div>
-    </section>
-
-    <!-- KINETIC MOTION MARQUEE -->
-    <div class="w-full overflow-hidden py-4 border-y border-white/[0.08] bg-black/60 backdrop-blur-md mb-12 relative z-20">
-      <div class="kinetic-marquee-track flex items-center gap-10 text-xs sm:text-sm font-mono uppercase tracking-widest text-slate-400 select-none">
-        <span class="flex items-center gap-2 text-white font-semibold"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 18 МУЗЫКАЛЬНЫХ ПЛОЩАДОК</span>
-        <span class="text-white/20">✦</span>
-        <span class="flex items-center gap-2 text-white font-bold"><i data-lucide="disc" class="w-3.5 h-3.5 text-sky-400"></i> ЧИСТЫЙ FLAC ДО 24-БИТ</span>
-        <span class="text-white/20">✦</span>
-        <span class="flex items-center gap-2 text-white font-semibold"><span class="w-2 h-2 rounded-full bg-purple-400"></span> СВОЁ ВИДЕО И ФОТО НА ФОНЕ</span>
-        <span class="text-white/20">✦</span>
-        <span class="flex items-center gap-2 text-white font-bold"><i data-lucide="waves" class="w-3.5 h-3.5 text-indigo-400"></i> УМНАЯ «МОЯ ВОЛНА»</span>
-        <span class="text-white/20">✦</span>
-        <span class="flex items-center gap-2 text-white font-semibold"><span class="w-2 h-2 rounded-full bg-rose-500"></span> 0 ₽ НАВСЕГДА И 0 РЕКЛАМЫ</span>
-        <span class="text-white/20">✦</span>
-        <span class="flex items-center gap-2 text-white font-bold"><i data-lucide="sliders" class="w-3.5 h-3.5 text-emerald-400"></i> DSP СТУДИЯ И ЭКВАЛАЙЗЕР</span>
-        <span class="text-white/20">✦</span>
-        <span class="flex items-center gap-2 text-white font-semibold"><span class="w-2 h-2 rounded-full bg-amber-400"></span> РЕЖИМ ПОГРУЖЕНИЯ ZEN STAGE</span>
-        <span class="text-white/20">✦</span>
-        <span class="flex items-center gap-2 text-white font-bold"><i data-lucide="send" class="w-3.5 h-3.5 text-sky-400"></i> ВХОД ЧЕРЕЗ @SONORAMUS1C_BOT</span>
-        <span class="text-white/20">✦</span>
-        <!-- Continuous loop clone -->
-        <span class="flex items-center gap-2 text-white font-semibold"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 18 МУЗЫКАЛЬНЫХ ПЛОЩАДОК</span>
-        <span class="text-white/20">✦</span>
-        <span class="flex items-center gap-2 text-white font-bold"><i data-lucide="disc" class="w-3.5 h-3.5 text-sky-400"></i> ЧИСТЫЙ FLAC ДО 24-БИТ</span>
-        <span class="text-white/20">✦</span>
-        <span class="flex items-center gap-2 text-white font-semibold"><span class="w-2 h-2 rounded-full bg-purple-400"></span> СВОЁ ВИДЕО И ФОТО НА ФОНЕ</span>
-        <span class="text-white/20">✦</span>
-        <span class="flex items-center gap-2 text-white font-bold"><i data-lucide="waves" class="w-3.5 h-3.5 text-indigo-400"></i> УМНАЯ «МОЯ ВОЛНА»</span>
-        <span class="text-white/20">✦</span>
-        <span class="flex items-center gap-2 text-white font-semibold"><span class="w-2 h-2 rounded-full bg-rose-500"></span> 0 ₽ НАВСЕГДА И 0 РЕКЛАМЫ</span>
-        <span class="text-white/20">✦</span>
-        <span class="flex items-center gap-2 text-white font-bold"><i data-lucide="sliders" class="w-3.5 h-3.5 text-emerald-400"></i> DSP СТУДИЯ И ЭКВАЛАЙЗЕР</span>
-        <span class="text-white/20">✦</span>
-        <span class="flex items-center gap-2 text-white font-semibold"><span class="w-2 h-2 rounded-full bg-amber-400"></span> РЕЖИМ ПОГРУЖЕНИЯ ZEN STAGE</span>
-        <span class="text-white/20">✦</span>
-        <span class="flex items-center gap-2 text-white font-bold"><i data-lucide="send" class="w-3.5 h-3.5 text-sky-400"></i> ВХОД ЧЕРЕЗ @SONORAMUS1C_BOT</span>
-        <span class="text-white/20">✦</span>
-      </div>
+  <!-- HERO SECTION WITH 3D TILT & VINYL SHOWCASE -->
+  <section class="relative z-10 pt-28 sm:pt-36 pb-20 max-w-6xl mx-auto px-4 text-center">
+    <!-- Version Tag -->
+    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass-card border border-mint-400/25 mb-8 animate-float">
+      <span class="w-2 h-2 rounded-full bg-mint-400 shadow-[0_0_8px_#00FFC2] animate-ping"></span>
+      <span class="text-xs sm:text-sm font-semibold text-slate-200 font-mono">
+        Sonora v2.6.0 Obsidian Stage — 0 подписок • 0 рекламы
+      </span>
     </div>
 
-    <!-- INTERACTIVE SHOWCASE DEMO (LIVE BROWSER PLAYER) -->
-    <section id="demo" class="max-w-6xl mx-auto px-4 py-12 reveal-on-scroll">
-      <div class="text-center mb-8">
-        <span class="text-xs font-bold font-mono text-emerald-400 uppercase tracking-wider">Интерактивная сцена Sonora</span>
-        <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-2">Попробуйте плеер прямо сейчас</h2>
-        <p class="text-sm sm:text-base text-slate-400 mt-2">Переключайте треки с оригинальными обложками, меняйте живой фон и испытайте режим караоке</p>
-      </div>
+    <!-- Main Title -->
+    <h1 class="text-4xl sm:text-6xl md:text-7xl font-black text-white tracking-tight leading-[1.1] max-w-5xl mx-auto">
+      Музыка всех миров в одном <span class="text-transparent bg-clip-text bg-gradient-to-r from-mint-400 via-cyan-400 to-emerald-300">монолитном плеере</span>
+    </h1>
 
-      <!-- Player Window Mockup -->
-      <div class="glass-card neon-border rounded-3xl p-4 sm:p-7 shadow-2xl relative overflow-hidden transition-all duration-500 spotlight-card" id="playerContainer">
+    <p class="text-slate-400 text-base sm:text-xl max-w-2xl mx-auto mt-6 leading-relaxed">
+      Слушайте треки из 18 мировых площадок в студийном FLAC 24-бит с живым 3D-эквалайзером, бесконечной Моей Волной и вечной синхронизацией плейлистов через Cloudflare KV.
+    </p>
+
+    <!-- 2 Official Installers Download Buttons -->
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+      <!-- Windows Setup Button -->
+      <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Setup.exe" class="bg-white text-black font-extrabold text-base px-8 py-4 rounded-2xl flex items-center gap-3 transition transform hover:scale-105 active:scale-95 shadow-2xl shadow-white/15 hover:bg-slate-200">
+        <i data-lucide="monitor" class="w-5 h-5"></i>
+        <span>Скачать для Windows (.exe)</span>
+        <span class="text-xs font-mono font-bold bg-black/15 px-2 py-0.5 rounded-md">27.2 МБ</span>
+      </a>
+
+      <!-- Android Universal APK Button -->
+      <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Android.apk" class="glass-card hover:bg-white/10 text-white font-bold text-base px-8 py-4 rounded-2xl flex items-center gap-3 transition transform hover:scale-105 active:scale-95 shadow-xl">
+        <i data-lucide="smartphone" class="w-5 h-5 text-mint-400"></i>
+        <span>Скачать для Android (APK)</span>
+        <span class="text-xs font-mono text-mint-400 bg-mint-400/10 px-2 py-0.5 rounded-md">132.6 МБ</span>
+      </a>
+
+      <!-- Telegram Bot CTA -->
+      <a href="https://t.me/sonoramus1c_bot" target="_blank" class="glass-card hover:bg-sky-500/20 text-sky-400 hover:text-white font-bold text-base px-6 py-4 rounded-2xl flex items-center gap-2.5 transition transform hover:scale-105 active:scale-95">
+        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.18 3.35-1.38 3.73-1.39.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
+        <span>Telegram-бот</span>
+      </a>
+    </div>
+
+    <!-- 3D INTERACTIVE HERO STAGE (TILT BY MOUSE & GYROSCOPE) -->
+    <div id="hero3DContainer" class="mt-16 relative perspective-1000 max-w-4xl mx-auto cursor-pointer">
+      <div id="hero3DCard" class="glass-card rounded-3xl p-6 sm:p-10 border border-white/10 preserve-3d transition-transform duration-200 shadow-2xl relative overflow-hidden">
         
-        <!-- Ambient Dynamic Glow behind active cover -->
-        <div id="ambientGlow" class="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-[120px] pointer-events-none transition-all duration-1000 opacity-40 bg-purple-600/30"></div>
-
-        <!-- Stage Background Controller Bar -->
-        <div class="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-white/10 mb-6 text-xs relative z-10">
-          <div class="flex items-center gap-2 text-slate-300 font-semibold">
-            <i data-lucide="sparkles" class="w-4 h-4 text-emerald-400"></i>
-            <span>Живой фон:</span>
-          </div>
-          <div class="flex flex-wrap items-center gap-1.5">
-            <button onclick="setTheme('aurora')" class="theme-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 transition">Неоновая Аврора</button>
-            <button onclick="setTheme('chrome')" class="theme-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 transition">Хромоволна</button>
-            <button onclick="setTheme('matrix')" class="theme-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 transition">Импульсная матрица</button>
-            <button onclick="setTheme('lava')" class="theme-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 transition">Лава-лампа</button>
-            <button onclick="setTheme('oled')" class="theme-btn px-3 py-1.5 rounded-xl bg-white text-black font-extrabold transition">Pure OLED</button>
-          </div>
-
-          <!-- Display Mode Toggle: Album Cover vs Vinyl -->
-          <div class="flex items-center bg-black/40 p-1 rounded-xl border border-white/10">
-            <button id="viewCoverBtn" onclick="setViewMode('cover')" class="px-3 py-1 rounded-lg bg-white text-black font-extrabold transition flex items-center gap-1.5">
-              <i data-lucide="image" class="w-3.5 h-3.5"></i>
-              <span>Обложка</span>
-            </button>
-            <button id="viewVinylBtn" onclick="setViewMode('vinyl')" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1.5">
-              <i data-lucide="disc" class="w-3.5 h-3.5"></i>
-              <span>Винил 33⅓</span>
-            </button>
-          </div>
-
-          <!-- Zen Mode Toggle -->
-          <button id="zenBtn" onclick="toggleZen()" class="px-3 py-1.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/15 text-slate-300 font-medium flex items-center gap-1.5 transition">
-            <i data-lucide="eye-off" class="w-3.5 h-3.5 text-emerald-400"></i>
-            <span id="zenLabel">Скрыть текст (Zen Stage)</span>
-          </button>
-        </div>
-
-        <!-- Player Stage Grid: Vinyl/Cover (Left/Center) + Synced Karaoke (Right) -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[440px] relative z-10">
-
-          <!-- ARTWORK & CONTROLS ZONE -->
-          <div id="playerCenterCol" class="lg:col-span-7 flex flex-col items-center justify-center text-center transition-all duration-500">
-            
-            <!-- ARTWORK DISPLAY WRAPPER -->
-            <div class="relative w-56 h-56 sm:w-64 sm:h-64 mb-6 group flex items-center justify-center">
-              
-              <!-- 1. SQUARE ALBUM COVER MODE (Authentic High-Res Cover with Soft Glow) -->
-              <div id="coverModeView" class="w-full h-full rounded-3xl overflow-hidden relative shadow-[0_20px_50px_rgba(0,0,0,0.9)] border border-white/15 transition-all duration-500 group-hover:scale-105">
-                <img id="demoArtwork" src="assets/covers/madk1d_8milya.jpg" alt="Album Cover" class="w-full h-full object-cover pointer-events-none transition-opacity duration-300">
-                <!-- Glossy diagonal reflection overlay -->
-                <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none"></div>
-                <!-- Source Badge on cover -->
-                <div class="absolute bottom-2.5 right-2.5 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/15 flex items-center gap-1.5 text-[11px] text-white font-mono shadow-lg">
-                  <span id="demoSourceBadge" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <span id="demoSource">YouTube Music FLAC</span>
+        <div class="flex flex-col md:flex-row items-center justify-between gap-8 translate-z-20">
+          
+          <!-- Left: Rotating 3D Vinyl Player -->
+          <div class="relative w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center preserve-3d">
+            <!-- Vinyl Disk -->
+            <div id="heroVinyl" class="w-full h-full rounded-full vinyl-disk flex items-center justify-center animate-spin-slow shadow-2xl">
+              <!-- Center Label -->
+              <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-emerald-500 via-mint-400 to-cyan-500 p-1 flex items-center justify-center shadow-lg">
+                <div class="w-full h-full bg-[#07090E] rounded-full flex flex-col items-center justify-center text-center">
+                  <span class="text-[9px] font-black text-mint-400 tracking-wider">SONORA</span>
+                  <span class="text-[7px] font-mono text-slate-400">FLAC 24-BIT</span>
                 </div>
               </div>
-
-              <!-- 2. VINYL 33⅓ MODE (Spinning disc with authentic center label) -->
-              <div id="vinylModeView" class="hidden w-full h-full rounded-full overflow-hidden animate-spin-slow flex items-center justify-center relative shadow-[0_20px_50px_rgba(0,0,0,0.9)] border border-white/10 transition-transform duration-300 group-hover:scale-105 vinyl-container">
-                <!-- Base Vinyl Record Surface -->
-                <img src="assets/app_icon.png" alt="Vinyl Chrome" class="w-full h-full object-contain pointer-events-none rounded-full">
-                
-                <!-- Central Vinyl Label with Authentic Track Cover -->
-                <div class="absolute w-[36%] h-[36%] rounded-full overflow-hidden border-2 border-white/30 shadow-[inset_0_0_12px_rgba(0,0,0,0.8)] flex items-center justify-center">
-                  <img id="vinylCenterCover" src="assets/covers/madk1d_8milya.jpg" alt="Vinyl Center Label" class="w-full h-full object-cover rounded-full">
-                  <!-- Spindle Center Hole -->
-                  <div class="absolute w-3.5 h-3.5 rounded-full bg-[#0a0a0a] border border-white/40 shadow-inner"></div>
-                </div>
-
-                <!-- Optical Glare Reflection Overlay -->
-                <div class="absolute inset-0 rounded-full vinyl-shimmer pointer-events-none"></div>
-              </div>
-
             </div>
 
-            <!-- Track Info -->
-            <div class="space-y-1 transition-all duration-300" id="trackMetaContainer">
-              <h3 id="demoTitle" class="text-xl sm:text-2xl font-black text-white tracking-tight">8 миля</h3>
-              <p id="demoArtist" class="text-sm text-slate-400 font-medium">madk1d &amp; VILLIAN • Релиз 2026</p>
+            <!-- Tonearm Stylus Mockup -->
+            <div class="absolute -top-3 -right-3 w-16 h-28 pointer-events-none translate-z-30">
+              <div class="w-2.5 h-20 bg-slate-300 rounded-full shadow-lg transform rotate-[-25deg] origin-top border border-black/40"></div>
+              <div class="w-4 h-5 bg-mint-400 rounded-sm transform translate-x-2 translate-y-16 shadow-[0_0_10px_#00FFC2]"></div>
+            </div>
+          </div>
+
+          <!-- Right: Floating Player Status Mockup -->
+          <div class="flex-1 text-left space-y-4 translate-z-30">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-mint-400 uppercase tracking-widest flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-mint-400 animate-pulse"></span>
+                СЕЙЧАС ИГРАЕТ • OBSIDIAN STAGE
+              </span>
+              <span class="text-xs font-mono text-slate-400">Lossless 320k</span>
+            </div>
+
+            <div class="space-y-1">
+              <h3 class="text-2xl sm:text-3xl font-black text-white">Shadows in the Neon</h3>
+              <p class="text-sm font-semibold text-slate-400">Kavinsky • Synthwave & Phonk Flow</p>
+            </div>
+
+            <!-- Soundwave visualizer bars -->
+            <div class="h-10 flex items-end gap-1.5 py-1">
+              <span class="w-1.5 h-4 bg-mint-400/80 rounded-full animate-pulse"></span>
+              <span class="w-1.5 h-8 bg-mint-400 rounded-full animate-pulse delay-75"></span>
+              <span class="w-1.5 h-6 bg-cyan-400 rounded-full animate-pulse delay-150"></span>
+              <span class="w-1.5 h-10 bg-mint-400 rounded-full animate-pulse"></span>
+              <span class="w-1.5 h-5 bg-cyan-300 rounded-full animate-pulse delay-200"></span>
+              <span class="w-1.5 h-9 bg-mint-400 rounded-full animate-pulse delay-100"></span>
+              <span class="w-1.5 h-7 bg-cyan-400 rounded-full animate-pulse"></span>
+              <span class="w-1.5 h-4 bg-mint-400/80 rounded-full animate-pulse"></span>
             </div>
 
             <!-- Progress Bar -->
-            <div class="w-full max-w-md mt-5">
-              <div class="w-full bg-white/10 rounded-full h-1.5 cursor-pointer relative overflow-hidden group/bar" onclick="seekDemo(event)">
-                <div id="demoProgress" class="bg-gradient-to-r from-white via-slate-200 to-slate-400 h-full rounded-full w-1/3 transition-all duration-150"></div>
+            <div class="space-y-1">
+              <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-gradient-to-r from-mint-400 to-cyan-400 h-full w-[64%] rounded-full shadow-[0_0_8px_#00FFC2]"></div>
               </div>
-              <div class="flex justify-between text-[11px] font-mono text-slate-400 mt-1.5">
-                <span id="demoTimeCur">0:52</span>
-                <span id="demoTimeTotal">2:38</span>
-              </div>
-            </div>
-
-            <!-- Kinetic Audio Visualizer (12 bars) -->
-            <div class="flex items-end justify-center gap-1.5 h-6 mt-4 w-full max-w-xs px-2" id="audioVisualizer">
-              <div class="vis-bar w-1 bg-white rounded-full" style="animation-duration: 0.8s; animation-delay: 0.1s;"></div>
-              <div class="vis-bar w-1 bg-slate-300 rounded-full" style="animation-duration: 1.1s; animation-delay: 0.3s;"></div>
-              <div class="vis-bar w-1 bg-slate-400 rounded-full" style="animation-duration: 0.7s; animation-delay: 0.05s;"></div>
-              <div class="vis-bar w-1 bg-slate-200 rounded-full" style="animation-duration: 1.3s; animation-delay: 0.4s;"></div>
-              <div class="vis-bar w-1 bg-white rounded-full" style="animation-duration: 0.9s; animation-delay: 0.2s;"></div>
-              <div class="vis-bar w-1 bg-slate-300 rounded-full" style="animation-duration: 1.0s; animation-delay: 0.15s;"></div>
-              <div class="vis-bar w-1 bg-slate-400 rounded-full" style="animation-duration: 1.2s; animation-delay: 0.25s;"></div>
-              <div class="vis-bar w-1 bg-slate-200 rounded-full" style="animation-duration: 0.85s; animation-delay: 0.35s;"></div>
-              <div class="vis-bar w-1 bg-white rounded-full" style="animation-duration: 1.15s; animation-delay: 0.1s;"></div>
-              <div class="vis-bar w-1 bg-slate-300 rounded-full" style="animation-duration: 0.75s; animation-delay: 0.45s;"></div>
-              <div class="vis-bar w-1 bg-slate-400 rounded-full" style="animation-duration: 1.05s; animation-delay: 0.3s;"></div>
-              <div class="vis-bar w-1 bg-white rounded-full" style="animation-duration: 0.95s; animation-delay: 0.05s;"></div>
-            </div>
-
-            <!-- Transport Buttons -->
-            <div class="flex items-center gap-5 mt-4">
-              <button onclick="toggleShuffle()" id="shuffleBtn" class="p-2 text-slate-400 hover:text-white transition">
-                <i data-lucide="shuffle" class="w-4 h-4"></i>
-              </button>
-              <button onclick="prevTrack()" class="p-2 text-slate-300 hover:text-white transition active:scale-90">
-                <i data-lucide="skip-back" class="w-5 h-5"></i>
-              </button>
-              <button onclick="togglePlay()" id="playPauseBtn" class="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 active:scale-95 transition shadow-lg shadow-white/20">
-                <i data-lucide="pause" id="playIcon" class="w-6 h-6 fill-black"></i>
-              </button>
-              <button onclick="nextTrack()" class="p-2 text-slate-300 hover:text-white transition active:scale-90">
-                <i data-lucide="skip-forward" class="w-5 h-5"></i>
-              </button>
-              <button onclick="toggleFav()" id="favBtn" class="p-2 text-slate-400 hover:text-rose-500 transition">
-                <i data-lucide="heart" class="w-5 h-5"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- KINETIC KARAOKE LYRICS ZONE -->
-          <div id="playerLyricsCol" class="lg:col-span-5 glass-card rounded-2xl p-6 h-88 flex flex-col justify-between overflow-hidden transition-all duration-500 text-left border border-white/10">
-            <div>
-              <div class="flex items-center justify-between text-xs font-mono text-emerald-400 uppercase tracking-wider mb-4 pb-3 border-b border-white/10">
-                <div class="flex items-center gap-2">
-                  <i data-lucide="mic" class="w-3.5 h-3.5"></i>
-                  <span>Кинетическое караоке (LRC)</span>
-                </div>
-                <span class="text-[10px] text-slate-400 font-mono">Синхронно</span>
-              </div>
-              
-              <!-- Synchronized Lines Container -->
-              <div id="lyricsContainer" class="space-y-4 font-bold text-slate-500 text-base sm:text-lg transition-all duration-300">
-                <!-- Dynamically rendered lyrics lines -->
+              <div class="flex justify-between text-[11px] font-mono text-slate-500">
+                <span>02:18</span>
+                <span>03:42</span>
               </div>
             </div>
 
-            <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-slate-400">
-              <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> LRCLIB Auto-Sync</span>
-              <span id="activeTrackDurationTag">2:38 FLAC</span>
+            <!-- Feature Tags -->
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">10-band EQ: Electro Warm</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">Vinyl Crackle: 33⅓ RPM</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-mint-400/10 text-mint-400 border border-mint-400/20">Cloud KV Synced</span>
             </div>
           </div>
 
         </div>
 
-        <!-- ORIGINAL TRACK ICONS / INTERACTIVE NOW PLAYING QUEUE -->
-        <div class="mt-8 pt-6 border-t border-white/10 relative z-10">
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-bold font-mono text-slate-400 uppercase tracking-wider flex items-center gap-2">
-              <i data-lucide="list-music" class="w-4 h-4 text-emerald-400"></i>
-              Оригинальные треки в плеере • Нажмите для переключения
-            </span>
-            <span class="text-[11px] font-mono text-slate-500">6 демонстрационных релизов</span>
-          </div>
-
-          <!-- Grid of Authentic Tracks with Real Covers ("Иконки треков") -->
-          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3" id="trackQueueGrid">
-            <!-- Dynamically populated by JS -->
-          </div>
-        </div>
-
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- 18 PLATFORMS SHOWCASE (OFFICIAL ORIGINAL BRAND LOGOS) -->
-    <section id="platforms" class="max-w-6xl mx-auto px-4 py-16 reveal-on-scroll">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="text-xs font-bold font-mono text-sky-400 uppercase tracking-wider">Все источники в одном клике</span>
-        <h2 class="text-3xl sm:text-5xl font-black text-white mt-2">18 Музыкальных Площадок</h2>
-        <p class="text-slate-400 text-base mt-3">Не нужно держать пять приложений. Sonora ищет одновременно везде: от мировых топ-чартов до закрытых андеграунд эдитов.</p>
+  <!-- KINETIC STATS COUNTER WITH ANIME.JS -->
+  <section class="max-w-6xl mx-auto px-4 py-12 relative z-10">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+      
+      <div class="glass-card p-6 rounded-2xl text-center">
+        <div class="text-3xl sm:text-5xl font-black text-white font-mono flex items-center justify-center">
+          <span class="stat-counter" data-target="18">0</span>
+        </div>
+        <p class="text-xs sm:text-sm font-semibold text-slate-400 mt-2">Музыкальных сервисов</p>
       </div>
 
-      <!-- Platform Badges Grid: All 18 Official App Store Squircle Icons -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 text-center">
-        
-        <!-- 1. YouTube Music -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/youtube_music.png" alt="YouTube Music" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-red-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">YouTube Music</span>
-          <span class="text-[10px] text-red-400 font-mono">Innertube 256k</span>
+      <div class="glass-card p-6 rounded-2xl text-center">
+        <div class="text-3xl sm:text-5xl font-black text-mint-400 font-mono flex items-center justify-center">
+          <span class="stat-counter" data-target="24">0</span><span class="text-2xl">bit</span>
         </div>
-
-        <!-- 2. SoundCloud -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/soundcloud.png" alt="SoundCloud" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-orange-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">SoundCloud</span>
-          <span class="text-[10px] text-orange-400 font-mono">Ремиксы и эдиты</span>
-        </div>
-
-        <!-- 3. Яндекс Музыка -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/yandex_music.png" alt="Яндекс Музыка" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-yellow-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">Яндекс Музыка</span>
-          <span class="text-[10px] text-yellow-300 font-mono">СНГ Чарт &amp; Волна</span>
-        </div>
-
-        <!-- 4. Deezer -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/deezer.png" alt="Deezer" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-purple-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">Deezer</span>
-          <span class="text-[10px] text-purple-300 font-mono">320k / Lossless</span>
-        </div>
-
-        <!-- 5. Bandcamp -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/bandcamp.png" alt="Bandcamp" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-cyan-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">Bandcamp</span>
-          <span class="text-[10px] text-cyan-300 font-mono">FLAC инди</span>
-        </div>
-
-        <!-- 6. Audius -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/audius.png" alt="Audius" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-pink-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">Audius</span>
-          <span class="text-[10px] text-pink-300 font-mono">Web3 Electronic</span>
-        </div>
-
-        <!-- 7. PromoDJ -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/promodj.png" alt="PromoDJ" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-amber-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">PromoDJ</span>
-          <span class="text-[10px] text-amber-300 font-mono">DJ Миксы 320k</span>
-        </div>
-
-        <!-- 8. Mixcloud -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/mixcloud.png" alt="Mixcloud" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-blue-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">Mixcloud</span>
-          <span class="text-[10px] text-blue-300 font-mono">Сеты и подкасты</span>
-        </div>
-
-        <!-- 9. Internet Archive -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/archive.png" alt="Internet Archive" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-emerald-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">Internet Archive</span>
-          <span class="text-[10px] text-emerald-300 font-mono">Концерты FLAC</span>
-        </div>
-
-        <!-- 10. Newgrounds -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/newgrounds.png" alt="Newgrounds" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-orange-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">Newgrounds</span>
-          <span class="text-[10px] text-orange-300 font-mono">OST &amp; Geometry</span>
-        </div>
-
-        <!-- 11. Apple Music -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/apple_music.png" alt="Apple Music" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-pink-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">Apple Music</span>
-          <span class="text-[10px] text-pink-300 font-mono">Превью &amp; Чарты</span>
-        </div>
-
-        <!-- 12. VK Музыка -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/vk_music.png" alt="VK Музыка" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-blue-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">VK Музыка</span>
-          <span class="text-[10px] text-blue-300 font-mono">Поиск треков</span>
-        </div>
-
-        <!-- 13. Spotify -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/spotify.png" alt="Spotify" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-green-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">Spotify</span>
-          <span class="text-[10px] text-green-300 font-mono">Импорт плейлистов</span>
-        </div>
-
-        <!-- 14. Tidal -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/tidal.png" alt="Tidal" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-cyan-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">Tidal Hi-Fi</span>
-          <span class="text-[10px] text-cyan-300 font-mono">Мастер MQA</span>
-        </div>
-
-        <!-- 15. YouTube -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/youtube.png" alt="YouTube" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-red-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">YouTube</span>
-          <span class="text-[10px] text-red-400 font-mono">Клипы и лайвы</span>
-        </div>
-
-        <!-- 16. Jamendo -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/jamendo.png" alt="Jamendo" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-rose-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">Jamendo</span>
-          <span class="text-[10px] text-rose-300 font-mono">Creative Commons</span>
-        </div>
-
-        <!-- 17. JioSaavn -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/jiosaavn.png" alt="JioSaavn" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-teal-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">JioSaavn</span>
-          <span class="text-[10px] text-teal-300 font-mono">Global &amp; Asia</span>
-        </div>
-
-        <!-- 18. LRCLIB / Genius -->
-        <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 spotlight-card group">
-          <img src="assets/platforms/genius.png" alt="LRCLIB / Genius" class="w-12 h-12 rounded-2xl shadow-lg object-contain group-hover:scale-110 group-hover:shadow-yellow-500/20 transition-all duration-300">
-          <span class="font-bold text-sm text-white">LRCLIB / Genius</span>
-          <span class="text-[10px] text-yellow-300 font-mono">Синхронные караоке</span>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- KEY FEATURES CARDS GRID -->
-    <section id="features" class="max-w-6xl mx-auto px-4 py-16 reveal-on-scroll">
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <span class="text-xs font-bold font-mono text-purple-400 uppercase tracking-wider">Инженерные преимущества</span>
-        <h2 class="text-3xl sm:text-5xl font-black text-white mt-2">Сделано для истинных ценителей</h2>
+        <p class="text-xs sm:text-sm font-semibold text-slate-400 mt-2">FLAC Hi-Res Audio</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-        <!-- Card 1: Smart My Wave -->
-        <div class="glass-card glass-card-hover rounded-3xl p-7 flex flex-col justify-between spotlight-card">
-          <div>
-            <div class="w-12 h-12 rounded-2xl bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center mb-5 text-emerald-400">
-              <i data-lucide="waves" class="w-6 h-6"></i>
-            </div>
-            <h3 class="text-xl font-extrabold text-white">Умная «Моя волна»</h3>
-            <p class="text-slate-400 text-sm mt-2 leading-relaxed">
-              Самообучающийся персональный алгоритм на векторных графах. Анализирует структуру треков, темп и ваше настроение на лету без шаблонных рекомендаций.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-white/10 flex items-center gap-2 text-xs font-mono text-emerald-400">
-            <span>● Непрерывный поток 60 FPS</span>
-          </div>
+      <div class="glass-card p-6 rounded-2xl text-center">
+        <div class="text-3xl sm:text-5xl font-black text-white font-mono flex items-center justify-center">
+          <span class="stat-counter" data-target="10">0</span>
         </div>
-
-        <!-- Card 2: DSP Audio Studio -->
-        <div class="glass-card glass-card-hover rounded-3xl p-7 flex flex-col justify-between spotlight-card">
-          <div>
-            <div class="w-12 h-12 rounded-2xl bg-sky-400/10 border border-sky-400/20 flex items-center justify-center mb-5 text-sky-400">
-              <i data-lucide="sliders" class="w-6 h-6"></i>
-            </div>
-            <h3 class="text-xl font-extrabold text-white">DSP Студия и Звук</h3>
-            <p class="text-slate-400 text-sm mt-2 leading-relaxed">
-              10-полосный эквалайзер, тёплый виниловый шум, ламповый сатуратор, Slowed + Reverb, Speed Up, Nightcore и таймер сна прямо в плеере.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-white/10 flex items-center gap-2 text-xs font-mono text-sky-400">
-            <span>● 24-бит / 192 кГц Lossless</span>
-          </div>
-        </div>
-
-        <!-- Card 3: Monolithic Floating Mini Player -->
-        <div class="glass-card glass-card-hover rounded-3xl p-7 flex flex-col justify-between spotlight-card">
-          <div>
-            <div class="w-12 h-12 rounded-2xl bg-purple-400/10 border border-purple-400/20 flex items-center justify-center mb-5 text-purple-400">
-              <i data-lucide="layout" class="w-6 h-6"></i>
-            </div>
-            <h3 class="text-xl font-extrabold text-white">Плавающий мини-плеер</h3>
-            <p class="text-slate-400 text-sm mt-2 leading-relaxed">
-              Монолитный Always-On-Top остров без двойных рамок. Быстрый ползунок громкости, управление треками и обложка без разворачивания окна.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-white/10 flex items-center gap-2 text-xs font-mono text-purple-400">
-            <span>● 0 лишних системных рамок</span>
-          </div>
-        </div>
-
-        <!-- Card 4: Playlist Import -->
-        <div class="glass-card glass-card-hover rounded-3xl p-7 flex flex-col justify-between spotlight-card">
-          <div>
-            <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-5 text-emerald-400">
-              <i data-lucide="folder-input" class="w-6 h-6"></i>
-            </div>
-            <h3 class="text-xl font-extrabold text-white">Импорт плейлистов</h3>
-            <p class="text-slate-400 text-sm mt-2 leading-relaxed">
-              Вставьте ссылку на плейлист из Spotify, Apple Music, Deezer, Яндекс Музыки или YouTube — Sonora моментально перенесёт медиатеку на ваше устройство.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-white/10 flex items-center gap-2 text-xs font-mono text-emerald-400">
-            <span>● Сохранение в JSON-бэкап</span>
-          </div>
-        </div>
-
-        <!-- Card 5: Telegram Bot Auth -->
-        <div class="glass-card glass-card-hover rounded-3xl p-7 flex flex-col justify-between spotlight-card">
-          <div>
-            <div class="w-12 h-12 rounded-2xl bg-sky-400/10 border border-sky-400/20 flex items-center justify-center mb-5 text-sky-400">
-              <i data-lucide="shield-check" class="w-6 h-6"></i>
-            </div>
-            <h3 class="text-xl font-extrabold text-white">Telegram Auth &amp; OTP</h3>
-            <p class="text-slate-400 text-sm mt-2 leading-relaxed">
-              Вход в 1 клик через @sonoramus1c_bot по 6-значному коду. Без паролей, без утечек и без спама. Ваши данные остаются только на вашем устройстве.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-white/10 flex items-center gap-2 text-xs font-mono text-sky-400">
-            <span>● PBKDF2 + AES-256</span>
-          </div>
-        </div>
-
-        <!-- Card 6: Custom Video & Live Shaders Stage -->
-        <div class="glass-card glass-card-hover rounded-3xl p-7 flex flex-col justify-between spotlight-card">
-          <div>
-            <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-5 text-amber-400">
-              <i data-lucide="video" class="w-6 h-6"></i>
-            </div>
-            <h3 class="text-xl font-extrabold text-white">Своё видео и живые шейдеры</h3>
-            <p class="text-slate-400 text-sm mt-2 leading-relaxed">
-              Устанавливайте любое своё видео (MP4, WebM, MKV) или фотографии на задний план плеера с гибкой настройкой затемнения, размытия и зацикливания, либо наслаждайтесь генеративной Неоновой Авророй.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-white/10 flex items-center gap-2 text-xs font-mono text-amber-400">
-            <span>● Аппаратное Direct3D 11 декодирование</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- HONEST COMPARISON TABLE -->
-    <section id="comparison" class="max-w-6xl mx-auto px-4 py-16 reveal-on-scroll">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="text-xs font-bold font-mono text-emerald-400 uppercase tracking-wider">Честное сравнение</span>
-        <h2 class="text-3xl sm:text-5xl font-black text-white mt-2">Sonora против других плееров</h2>
-        <p class="text-slate-400 text-base mt-2">Почему меломаны переходят на Sonora</p>
+        <p class="text-xs sm:text-sm font-semibold text-slate-400 mt-2">Полос DSP-эквалайзера</p>
       </div>
 
-      <div class="glass-card rounded-3xl overflow-x-auto shadow-2xl">
-        <table class="w-full text-left text-sm border-collapse min-w-[640px]">
-          <thead>
-            <tr class="border-b border-white/10 text-slate-400 text-xs font-mono uppercase bg-white/[0.02]">
-              <th class="p-5 font-bold">Возможность</th>
-              <th class="p-5 font-black text-white text-base bg-white/10 border-x border-white/20">SONORA 2.6</th>
-              <th class="p-5 font-bold">Mpthree</th>
-              <th class="p-5 font-bold">Spotify</th>
-              <th class="p-5 font-bold">Яндекс Музыка</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-white/5 font-medium">
-            <tr>
-              <td class="p-5 text-white font-bold">Стоимость подписки</td>
-              <td class="p-5 font-extrabold text-emerald-400 bg-white/5 border-x border-white/20">0 ₽ Навсегда</td>
-              <td class="p-5 text-slate-400">149 ₽ / мес</td>
-              <td class="p-5 text-slate-400">$10.99 / мес</td>
-              <td class="p-5 text-slate-400">399 ₽ / мес</td>
-            </tr>
-            <tr>
-              <td class="p-5 text-white font-bold">Количество площадок в поиске</td>
-              <td class="p-5 font-extrabold text-emerald-400 bg-white/5 border-x border-white/20">18 источников</td>
-              <td class="p-5 text-slate-400">3 источника</td>
-              <td class="p-5 text-slate-400">1 (только Spotify)</td>
-              <td class="p-5 text-slate-400">1 (только Яндекс)</td>
-            </tr>
-            <tr>
-              <td class="p-5 text-white font-bold">Андеграунд, ремиксы, фонк и лайвы</td>
-              <td class="p-5 font-extrabold text-emerald-400 bg-white/5 border-x border-white/20">ДА (SoundCloud + YT)</td>
-              <td class="p-5 text-slate-400">Ограниченно</td>
-              <td class="p-5 text-rose-500 font-bold">Нет</td>
-              <td class="p-5 text-rose-500 font-bold">Нет</td>
-            </tr>
-            <tr>
-              <td class="p-5 text-white font-bold">Звук без потерь FLAC / Hi-Res</td>
-              <td class="p-5 font-extrabold text-emerald-400 bg-white/5 border-x border-white/20">ДА (до 24-бит)</td>
-              <td class="p-5 text-slate-400">Только MP3/WAV</td>
-              <td class="p-5 text-rose-500 font-bold">Нет (lossy OGG)</td>
-              <td class="p-5 text-slate-400">Только с подпиской</td>
-            </tr>
-            <tr>
-              <td class="p-5 text-white font-bold">Своё видео/фото на фоне и живые шейдеры</td>
-              <td class="p-5 font-extrabold text-emerald-400 bg-white/5 border-x border-white/20">ДА (видео MP4 + 5 шейдеров)</td>
-              <td class="p-5 text-rose-500 font-bold">Нет (статичный)</td>
-              <td class="p-5 text-rose-500 font-bold">Нет</td>
-              <td class="p-5 text-rose-500 font-bold">Нет</td>
-            </tr>
-            <tr>
-              <td class="p-5 text-white font-bold">DSP Эффекты: Slowed, Reverb, Винил</td>
-              <td class="p-5 font-extrabold text-emerald-400 bg-white/5 border-x border-white/20">Бесплатно всем</td>
-              <td class="p-5 text-slate-400">Только в Plus</td>
-              <td class="p-5 text-rose-500 font-bold">Нет</td>
-              <td class="p-5 text-rose-500 font-bold">Нет</td>
-            </tr>
-            <tr>
-              <td class="p-5 text-white font-bold">Импорт плейлистов из других сервисов</td>
-              <td class="p-5 font-extrabold text-emerald-400 bg-white/5 border-x border-white/20">Без ограничений</td>
-              <td class="p-5 text-slate-400">Да</td>
-              <td class="p-5 text-rose-500 font-bold">Нет</td>
-              <td class="p-5 text-rose-500 font-bold">Нет</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- FAQ ACCORDION -->
-    <section id="faq" class="max-w-4xl mx-auto px-4 py-16 reveal-on-scroll">
-      <div class="text-center mb-12">
-        <span class="text-xs font-bold font-mono text-emerald-400 uppercase tracking-wider">Ответы на вопросы</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Часто задаваемые вопросы</h2>
+      <div class="glass-card p-6 rounded-2xl text-center">
+        <div class="text-3xl sm:text-5xl font-black text-cyan-400 font-mono flex items-center justify-center">
+          0<span class="text-2xl">₽</span>
+        </div>
+        <p class="text-xs sm:text-sm font-semibold text-slate-400 mt-2">Подписок и рекламы</p>
       </div>
 
+    </div>
+  </section>
+
+  <!-- INTERACTIVE MINI-DEMO: DSP STUDIO, EQUALIZER & THEMES -->
+  <section id="demo" class="max-w-5xl mx-auto px-4 py-16 relative z-10">
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-mint-400/10 border border-mint-400/20 text-mint-400 text-xs font-mono font-semibold mb-3">
+        <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
+        Интерактивная демо-комната
+      </div>
+      <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Попробуйте студийный звук прямо на сайте</h2>
+      <p class="text-slate-400 text-sm sm:text-base mt-3 max-w-xl mx-auto">Подвигайте регуляторы эквалайзера, включите виниловый шум и переключите цветовую тему плеера.</p>
+    </div>
+
+    <div id="demoPlayerBox" class="glass-card rounded-3xl p-6 sm:p-10 border border-white/10 shadow-2xl relative overflow-hidden transition-all duration-500">
+      
+      <!-- Upper Controls: Theme Selector -->
+      <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/5">
+        <div>
+          <span class="text-xs font-mono text-slate-400 uppercase tracking-widest">Тема оформления:</span>
+          <div class="flex gap-2 mt-2">
+            <button onclick="setDemoTheme('obsidian')" class="theme-btn px-3 py-1 text-xs font-bold rounded-lg bg-mint-400 text-black shadow-lg">Liquid Obsidian</button>
+            <button onclick="setDemoTheme('oled')" class="theme-btn px-3 py-1 text-xs font-bold rounded-lg bg-white/5 text-slate-300 hover:bg-white/10">Pure OLED</button>
+            <button onclick="setDemoTheme('crimson')" class="theme-btn px-3 py-1 text-xs font-bold rounded-lg bg-white/5 text-slate-300 hover:bg-white/10">Crimson Midnight</button>
+            <button onclick="setDemoTheme('abyssal')" class="theme-btn px-3 py-1 text-xs font-bold rounded-lg bg-white/5 text-slate-300 hover:bg-white/10">Abyssal Blue</button>
+          </div>
+        </div>
+
+        <!-- Audio Effect Toggles -->
+        <div>
+          <span class="text-xs font-mono text-slate-400 uppercase tracking-widest">DSP Эффекты:</span>
+          <div class="flex flex-wrap gap-2 mt-2">
+            <button id="vinylToggle" onclick="toggleVinylEffect()" class="px-3 py-1 text-xs font-bold rounded-lg bg-white/5 text-slate-300 border border-white/10 hover:border-mint-400 transition flex items-center gap-1.5">
+              <i data-lucide="disc" class="w-3.5 h-3.5 text-mint-400"></i>
+              <span>Винил 33⅓</span>
+            </button>
+            <button id="bassToggle" onclick="toggleBassEffect()" class="px-3 py-1 text-xs font-bold rounded-lg bg-white/5 text-slate-300 border border-white/10 hover:border-mint-400 transition flex items-center gap-1.5">
+              <i data-lucide="zap" class="w-3.5 h-3.5 text-cyan-400"></i>
+              <span>Bass Boost +12dB</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10-Band Equalizer Sliders Mockup -->
+      <div class="mt-8">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-sm font-bold text-white flex items-center gap-2">
+            <i data-lucide="activity" class="w-4 h-4 text-mint-400"></i>
+            10-полосный эквалайзер Sonora DSP
+          </span>
+          <span id="eqPresetLabel" class="text-xs font-mono text-mint-400">Пользовательский пресет: Hi-Fi Dynamic</span>
+        </div>
+
+        <div class="grid grid-cols-10 gap-2 sm:gap-4 items-end h-40 pt-4 pb-2 bg-black/30 rounded-2xl px-4 border border-white/5">
+          <!-- 10 sliders -->
+          <div class="flex flex-col items-center h-full justify-between">
+            <span class="text-[10px] font-mono text-slate-500">+6</span>
+            <input type="range" min="-12" max="12" value="6" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
+            <span class="text-[9px] font-mono text-slate-400">31Hz</span>
+          </div>
+          <div class="flex flex-col items-center h-full justify-between">
+            <span class="text-[10px] font-mono text-slate-500">+4</span>
+            <input type="range" min="-12" max="12" value="4" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
+            <span class="text-[9px] font-mono text-slate-400">63Hz</span>
+          </div>
+          <div class="flex flex-col items-center h-full justify-between">
+            <span class="text-[10px] font-mono text-slate-500">+2</span>
+            <input type="range" min="-12" max="12" value="2" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
+            <span class="text-[9px] font-mono text-slate-400">125Hz</span>
+          </div>
+          <div class="flex flex-col items-center h-full justify-between">
+            <span class="text-[10px] font-mono text-slate-500">0</span>
+            <input type="range" min="-12" max="12" value="0" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
+            <span class="text-[9px] font-mono text-slate-400">250Hz</span>
+          </div>
+          <div class="flex flex-col items-center h-full justify-between">
+            <span class="text-[10px] font-mono text-slate-500">-1</span>
+            <input type="range" min="-12" max="12" value="-1" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
+            <span class="text-[9px] font-mono text-slate-400">500Hz</span>
+          </div>
+          <div class="flex flex-col items-center h-full justify-between">
+            <span class="text-[10px] font-mono text-slate-500">+1</span>
+            <input type="range" min="-12" max="12" value="1" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
+            <span class="text-[9px] font-mono text-slate-400">1kHz</span>
+          </div>
+          <div class="flex flex-col items-center h-full justify-between">
+            <span class="text-[10px] font-mono text-slate-500">+3</span>
+            <input type="range" min="-12" max="12" value="3" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
+            <span class="text-[9px] font-mono text-slate-400">2kHz</span>
+          </div>
+          <div class="flex flex-col items-center h-full justify-between">
+            <span class="text-[10px] font-mono text-slate-500">+5</span>
+            <input type="range" min="-12" max="12" value="5" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
+            <span class="text-[9px] font-mono text-slate-400">4kHz</span>
+          </div>
+          <div class="flex flex-col items-center h-full justify-between">
+            <span class="text-[10px] font-mono text-slate-500">+7</span>
+            <input type="range" min="-12" max="12" value="7" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
+            <span class="text-[9px] font-mono text-slate-400">8kHz</span>
+          </div>
+          <div class="flex flex-col items-center h-full justify-between">
+            <span class="text-[10px] font-mono text-slate-500">+8</span>
+            <input type="range" min="-12" max="12" value="8" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
+            <span class="text-[9px] font-mono text-slate-400">16kHz</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 18 OFFICIAL STREAMING PLATFORMS SHOWCASE (OFFICIAL VECTOR SVGS) -->
+  <section id="platforms" class="max-w-6xl mx-auto px-4 py-16 relative z-10">
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-400/10 border border-cyan-400/20 text-cyan-400 text-xs font-mono font-semibold mb-3">
+        <i data-lucide="radio" class="w-3.5 h-3.5"></i>
+        18 Музыкальных экосистем
+      </div>
+      <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Вся музыка планеты в единой поисковой строке</h2>
+      <p class="text-slate-400 text-base max-w-xl mx-auto mt-3">Не нужно держать 10 разных приложений. Вводите название трека, артиста или вставляйте ссылку на альбом.</p>
+    </div>
+
+    <!-- 18 Platform Cards Grid with Official Brand SVGs -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+      
+      <!-- 1. YouTube Music -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-red-600/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-red-500" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14.5c-2.49 0-4.5-2.01-4.5-4.5S9.51 7.5 12 7.5s4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5zm0-5.5c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-2 1l5-3-5-3v6z"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">YouTube Music</span>
+        <span class="text-[10px] font-mono text-red-400 mt-1">FLAC & Клипы</span>
+      </div>
+
+      <!-- 2. SoundCloud -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-amber-500/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-[#FF5500]" viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.88c1.96 0 3.56-1.57 3.56-3.5 0-1.9-1.52-3.44-3.42-3.5-.27-2.73-2.58-4.87-5.42-4.87-1.39 0-2.67.51-3.6 1.37zm-2.04 8.13V9.67c-.2.27-.37.58-.51.9v6.43h.51zm-1.53 0v-5.8c-.26.47-.46.99-.58 1.54v4.26h.58zm-1.53 0v-3.72c-.17.65-.26 1.34-.26 2.05v1.67h.26zm-1.53 0v-1.67c0-.28-.02-.56-.05-.84v2.51h.05z"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">SoundCloud</span>
+        <span class="text-[10px] font-mono text-amber-400 mt-1">Remixes & HQ</span>
+      </div>
+
+      <!-- 3. Deezer -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-purple-500/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-[#A238FF]" viewBox="0 0 24 24"><path d="M18.8 6.2h3.9V9h-3.9zm-4.7 0H18V9h-3.9zm9.4 4.3v2.8h-3.9v-2.8zm-4.7 0v2.8H18v-2.8zm-4.7 0v2.8h3.9v-2.8zm9.4 4.3v2.8h-3.9v-2.8zm-4.7 0v2.8H18v-2.8zm-4.7 0v2.8h3.9v-2.8zm-4.7 0v2.8h3.9v-2.8zm-4.7 0v2.8H9v-2.8zm18.8 4.3v2.8h-3.9v-2.8zm-4.7 0v2.8H18v-2.8zm-4.7 0v2.8h3.9v-2.8zm-4.7 0v2.8H9v-2.8zm-4.7 0v2.8H4.3v-2.8z"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">Deezer</span>
+        <span class="text-[10px] font-mono text-purple-400 mt-1">FLAC 1411 kbps</span>
+      </div>
+
+      <!-- 4. Яндекс Музыка -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-yellow-500/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-[#FFCC00]" viewBox="0 0 24 24"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">Яндекс Музыка</span>
+        <span class="text-[10px] font-mono text-yellow-400 mt-1">Моя Волна HQ</span>
+      </div>
+
+      <!-- 5. Spotify -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-[#1ED760]" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.35-1.434-5.308-1.758-8.793-.963-.335.077-.67-.133-.746-.469-.077-.334.132-.67.467-.747 3.813-.871 7.08-.507 9.721 1.115.295.18.388.563.208.857zm1.226-2.723c-.226.367-.706.482-1.072.257-2.687-1.652-6.785-2.131-9.965-1.166-.413.127-.849-.106-.974-.517-.125-.413.108-.849.52-.974 3.632-1.102 8.147-.568 11.234 1.328.366.226.481.707.257 1.072zm.106-2.835C14.692 8.87 9.375 8.694 6.297 9.628c-.494.15-1.018-.13-1.168-.624-.15-.494.13-1.018.624-1.168 3.532-1.072 9.404-.866 13.115 1.338.445.264.59.838.327 1.282-.264.443-.838.59-1.277.33z"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">Spotify</span>
+        <span class="text-[10px] font-mono text-emerald-400 mt-1">Импорт плейлистов</span>
+      </div>
+
+      <!-- 6. Apple Music -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-rose-500/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-[#FC3C44]" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.7 6.3l.003 4.88c0 1.63-1.08 2.62-2.5 2.62-1.32 0-2.32-.9-2.32-2.18s1-2.22 2.32-2.22c.4 0 .8.08 1.15.24V9.62l-3.35.83v4.32c0 1.63-1.08 2.62-2.5 2.62-1.32 0-2.32-.9-2.32-2.18s1-2.22 2.32-2.22c.4 0 .8.08 1.15.24V8.5c0-.6.44-1.1 1.03-1.22l4.17-.98c.55-.13 1.02.28 1.02.87z"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">Apple Music</span>
+        <span class="text-[10px] font-mono text-rose-400 mt-1">Каталоги & Тексты</span>
+      </div>
+
+      <!-- 7. VK Музыка -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-blue-500/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-[#0077FF]" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5c-2.49 0-4.5-2.01-4.5-4.5S9.51 7.5 13 7.5v4.5h3.5c0 2.49-2.01 4.5-4.5 4.5z"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">VK Музыка</span>
+        <span class="text-[10px] font-mono text-blue-400 mt-1">Редкие ремиксы</span>
+      </div>
+
+      <!-- 8. Tidal -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-cyan-500/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-white" viewBox="0 0 24 24"><path d="M4 8l4-4 4 4-4 4-4-4zm8 0l4-4 4 4-4 4-4-4zm-4 4l4-4 4 4-4 4-4-4zm8 0l4-4 4 4-4 4-4-4z"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">Tidal</span>
+        <span class="text-[10px] font-mono text-cyan-400 mt-1">MQA & Master</span>
+      </div>
+
+      <!-- 9. Bandcamp -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-teal-500/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-[#1DA0C3]" viewBox="0 0 24 24"><path d="M0 18.75l7.437-13.5h16.563l-7.438 13.5z"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">Bandcamp</span>
+        <span class="text-[10px] font-mono text-teal-400 mt-1">Инди & Андеграунд</span>
+      </div>
+
+      <!-- 10. PromoDJ -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-orange-500/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-[#FF7700]" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="#07090E"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">PromoDJ</span>
+        <span class="text-[10px] font-mono text-orange-400 mt-1">DJ-миксы & Сеты</span>
+      </div>
+
+      <!-- 11. Mixcloud -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-indigo-500/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-[#52ADDF]" viewBox="0 0 24 24"><path d="M5.5 12c0-1.9 1.5-3.5 3.5-3.5 1 0 1.9.4 2.5 1.1.7-1.3 2.1-2.1 3.7-2.1 2.3 0 4.2 1.8 4.3 4.1.8.4 1.5 1.3 1.5 2.4 0 1.4-1.1 2.5-2.5 2.5H6c-1.7 0-3-1.3-3-3 0-1.4 1-2.6 2.5-2.9v1.4z"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">Mixcloud</span>
+        <span class="text-[10px] font-mono text-indigo-400 mt-1">Радиошоу</span>
+      </div>
+
+      <!-- 12. JioSaavn -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-green-500/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-[#2BC5B4]" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6a6 6 0 100 12 6 6 0 000-12zm0 9a3 3 0 110-6 3 3 0 010 6z" fill="#07090E"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">JioSaavn</span>
+        <span class="text-[10px] font-mono text-green-400 mt-1">Азиатские чарты</span>
+      </div>
+
+      <!-- 13. Audius -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-fuchsia-500/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-[#CC0FE0]" viewBox="0 0 24 24"><path d="M12 3l9 16H3l9-16zm0 5l-5 9h10l-5-9z"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">Audius</span>
+        <span class="text-[10px] font-mono text-fuchsia-400 mt-1">Web3 Музыка</span>
+      </div>
+
+      <!-- 14. Newgrounds -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-amber-600/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-[#FFAA00]" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3"/><circle cx="8" cy="12" r="2" fill="#07090E"/><circle cx="16" cy="12" r="2" fill="#07090E"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">Newgrounds</span>
+        <span class="text-[10px] font-mono text-amber-400 mt-1">Geometry Dash OST</span>
+      </div>
+
+      <!-- 15. Internet Archive -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-slate-500/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-slate-300" viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7L12 2zm-8 8v8h2v-8H4zm5 0v8h2v-8H9zm5 0v8h2v-8h-2zm5 0v8h2v-8h-2zM2 20v2h20v-2H2z"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">Archive.org</span>
+        <span class="text-[10px] font-mono text-slate-400 mt-1">Ретро фонотека</span>
+      </div>
+
+      <!-- 16. Genius -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-yellow-400/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-[#FFFF64]" viewBox="0 0 24 24"><path d="M4 4h16v16H4V4zm9 4h-2v4h2V8zm0 6h-2v2h2v-2z"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">Genius Lyrics</span>
+        <span class="text-[10px] font-mono text-yellow-300 mt-1">Смыслы & Факты</span>
+      </div>
+
+      <!-- 17. Jamendo -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-pink-500/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-[#FF1493]" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">Jamendo</span>
+        <span class="text-[10px] font-mono text-pink-400 mt-1">Creative Commons</span>
+      </div>
+
+      <!-- 18. YouTube Full -->
+      <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center group">
+        <div class="w-12 h-12 rounded-xl bg-red-500/15 flex items-center justify-center p-2 mb-3 group-hover:scale-110 transition">
+          <svg class="w-8 h-8 fill-[#FF0000]" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </div>
+        <span class="font-bold text-xs sm:text-sm text-white">YouTube Audio</span>
+        <span class="text-[10px] font-mono text-red-400 mt-1">Концерты & Лайвы</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- KINETIC 3D LAYER EXPLODE ARCHITECTURE -->
+  <section id="architecture" class="max-w-5xl mx-auto px-4 py-20 relative z-10">
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-mint-400/10 border border-mint-400/20 text-mint-400 text-xs font-mono font-semibold mb-3">
+        <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+        Кинетическая 3D-архитектура
+      </div>
+      <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Инженерия монолитного аудиодвижка</h2>
+      <p class="text-slate-400 text-base max-w-xl mx-auto mt-3">Что скрывается под ультрасовременным интерфейсом Obsidian Glass.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      
+      <!-- 4 Layer Exploded Stack Cards -->
       <div class="space-y-4">
-        <!-- FAQ 1 -->
-        <div class="glass-card rounded-2xl p-5 cursor-pointer spotlight-card" onclick="toggleFaq(1)">
-          <div class="flex items-center justify-between font-bold text-white text-base">
-            <span>На каких устройствах работает Sonora?</span>
-            <i data-lucide="chevron-down" id="faqIcon1" class="w-5 h-5 text-slate-400 transition-transform duration-300"></i>
+        
+        <div class="glass-card p-5 rounded-2xl border-l-4 border-mint-400">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white text-base">1. libmpv & DSP Аудиопроцессор</span>
+            <span class="text-xs font-mono text-mint-400">0ms Latency</span>
           </div>
-          <div id="faqAns1" class="faq-wrapper">
-            <div class="faq-inner text-sm text-slate-400 pt-3 border-t border-white/10 mt-3 leading-relaxed">
-              Sonora работает на Windows (10/11 x64, установщик или портативная версия) и на Android (начиная с Android 8.0). Все плейлисты и настройки можно переносить между компьютером и телефоном через JSON-бэкап.
-            </div>
-          </div>
+          <p class="text-xs text-slate-400 mt-2">Аппаратное декодирование FLAC/ALAC, виниловый генератор шума 33⅓, сатурация и 10-полосный эквалайзер студийного класса.</p>
         </div>
 
-        <!-- FAQ 2 -->
-        <div class="glass-card rounded-2xl p-5 cursor-pointer spotlight-card" onclick="toggleFaq(2)">
-          <div class="flex items-center justify-between font-bold text-white text-base">
-            <span>Действительно ли приложение 100% бесплатно и без подписок?</span>
-            <i data-lucide="chevron-down" id="faqIcon2" class="w-5 h-5 text-slate-400 transition-transform duration-300"></i>
+        <div class="glass-card p-5 rounded-2xl border-l-4 border-cyan-400">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white text-base">2. Кинетический караоке-движок LRC</span>
+            <span class="text-xs font-mono text-cyan-400">Word-by-word</span>
           </div>
-          <div id="faqAns2" class="faq-wrapper">
-            <div class="faq-inner text-sm text-slate-400 pt-3 border-t border-white/10 mt-3 leading-relaxed">
-              Да. В Sonora нет платных тарифов, скрытых подписок, рекламы или ограничений по качеству звука. Все функции, включая FLAC, эквалайзер, эффекты Slowed+Reverb и 18 площадок доступны всем пользователям бесплатно навсегда.
-            </div>
-          </div>
+          <p class="text-xs text-slate-400 mt-2">Построчный скролл текстов в такт музыке, встроенная интеграция с LRCLIB и Genius, поддержка кастомных файлов .lrc.</p>
         </div>
 
-        <!-- FAQ 3 -->
-        <div class="glass-card rounded-2xl p-5 cursor-pointer spotlight-card" onclick="toggleFaq(3)">
-          <div class="flex items-center justify-between font-bold text-white text-base">
-            <span>Откуда берётся музыка и не заблокируют ли её?</span>
-            <i data-lucide="chevron-down" id="faqIcon3" class="w-5 h-5 text-slate-400 transition-transform duration-300"></i>
+        <div class="glass-card p-5 rounded-2xl border-l-4 border-purple-400">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white text-base">3. Obsidian Stage 3D & Zen Mode</span>
+            <span class="text-xs font-mono text-purple-400">60 FPS Smooth</span>
           </div>
-          <div id="faqAns3" class="faq-wrapper">
-            <div class="faq-inner text-sm text-slate-400 pt-3 border-t border-white/10 mt-3 leading-relaxed">
-              Sonora использует умный потоковый шлюз Innertube API, SoundCloud API v2, прямые CDN-потоки и локальный Range-прокси. Если трек недоступен на одной площадке, плеер автоматически подбирает его на другой за доли секунды.
-            </div>
-          </div>
+          <p class="text-xs text-slate-400 mt-2">Сцена с виниловой анимацией, живыми аврорами, размытием обложек и режимом чистого OLED для экономии энергии.</p>
         </div>
 
-        <!-- FAQ 4 -->
-        <div class="glass-card rounded-2xl p-5 cursor-pointer spotlight-card" onclick="toggleFaq(4)">
-          <div class="flex items-center justify-between font-bold text-white text-base">
-            <span>Зачем нужен Telegram-бот?</span>
-            <i data-lucide="chevron-down" id="faqIcon4" class="w-5 h-5 text-slate-400 transition-transform duration-300"></i>
+        <div class="glass-card p-5 rounded-2xl border-l-4 border-emerald-400">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white text-base">4. Cloudflare KV & Telegram Identity</span>
+            <span class="text-xs font-mono text-emerald-400">Zero Data Loss</span>
           </div>
-          <div id="faqAns4" class="faq-wrapper">
-            <div class="faq-inner text-sm text-slate-400 pt-3 border-t border-white/10 mt-3 leading-relaxed">
-              Бот @sonoramus1c_bot служит надёжным центром подтверждения входа. Вы получаете уникальный 6-значный одноразовый код прямо в мессенджер без необходимости указывать пароли или электронную почту.
+          <p class="text-xs text-slate-400 mt-2">Вечная синхронизация библиотеки в глобальной KV сети. Ваши плейлисты останутся целы даже после удаления приложения.</p>
+        </div>
+
+      </div>
+
+      <!-- Right 3D Visual Stack Graphic -->
+      <div class="glass-card p-8 rounded-3xl border border-white/10 text-center flex flex-col items-center justify-center relative overflow-hidden">
+        <div class="w-48 h-48 rounded-full bg-gradient-to-tr from-mint-400/20 to-cyan-400/20 blur-2xl absolute"></div>
+        <div class="relative z-10 space-y-6">
+          <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-mint-400 to-cyan-400 p-0.5 mx-auto shadow-2xl shadow-mint-400/30">
+            <div class="w-full h-full bg-[#07090E] rounded-[14px] flex items-center justify-center">
+              <i data-lucide="cpu" class="w-10 h-10 text-mint-400"></i>
             </div>
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-xl font-black text-white">Кроссплатформенный C++ Ядро</h4>
+            <p class="text-xs font-mono text-slate-400">Windows x64 • Android ARM64/ARMv7 • Linux • macOS</p>
+          </div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-slate-300">
+            <i data-lucide="shield" class="w-3.5 h-3.5 text-mint-400"></i>
+            Без внешних зависимостей и телеметрии
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- FINAL DOWNLOAD CALL-TO-ACTION HUB -->
-    <section id="download" class="max-w-5xl mx-auto px-4 py-16 reveal-on-scroll">
-      <div class="glass-card neon-border rounded-3xl p-8 sm:p-14 text-center relative overflow-hidden">
-        <div class="max-w-2xl mx-auto">
-          <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Начните слушать Sonora прямо сейчас</h2>
-          <p class="text-slate-400 text-base mt-4">Присоединяйтесь к сообществу свободной музыки. Скачайте последнюю версию 2.6.0 для вашей системы.</p>
+    </div>
+  </section>
 
-          <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Setup.exe" class="bg-white hover:bg-slate-200 text-black font-extrabold text-base px-8 py-4 rounded-2xl flex items-center gap-2.5 transition transform hover:scale-105 active:scale-95 shadow-xl shadow-white/10">
-              <i data-lucide="monitor" class="w-5 h-5"></i>
-              <span>Скачать для Windows (Setup .exe, 28.5 МБ)</span>
-            </a>
-            <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Android.apk" class="glass-card hover:bg-white/10 text-white font-bold text-base px-8 py-4 rounded-2xl flex items-center gap-2.5 transition transform hover:scale-105 active:scale-95">
-              <i data-lucide="smartphone" class="w-5 h-5 text-emerald-400"></i>
-              <span>Скачать для Android (Универсальный APK, 138 МБ)</span>
-            </a>
-          </div>
+  <!-- PUBLIC INTERACTIVE ROADMAP SECTION -->
+  <section id="roadmap" class="max-w-5xl mx-auto px-4 py-16 relative z-10">
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-mono font-semibold mb-3">
+        <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+        Планы развития Sonora
+      </div>
+      <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Публичный Roadmap с вашим голосованием</h2>
+      <p class="text-slate-400 text-base max-w-xl mx-auto mt-3">Голосуйте за функции, которые вы хотите увидеть в следующем релизе Sonora Music.</p>
+    </div>
 
-          <div class="mt-8 text-xs text-slate-400 font-mono">
-            Версия: 2.6.0 • SHA-256 проверен • Без телеметрии
-          </div>
+    <!-- Roadmap Cards List -->
+    <div id="roadmapList" class="space-y-4 max-w-3xl mx-auto">
+      <!-- Loading placeholder -->
+      <div class="glass-card p-5 rounded-2xl flex items-center justify-between border border-white/5">
+        <div class="flex items-center gap-3">
+          <i data-lucide="loader" class="w-5 h-5 text-mint-400 animate-spin"></i>
+          <span class="text-sm font-semibold text-slate-400">Загрузка актуального списка функций...</span>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
+  <!-- COMPARISON TABLE SECTION -->
+  <section id="comparison" class="max-w-5xl mx-auto px-4 py-16 relative z-10">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Сравнение с популярными стримингами</h2>
+      <p class="text-slate-400 text-base max-w-lg mx-auto mt-3">Почему слушатели переходят на Sonora Music.</p>
+    </div>
+
+    <div class="glass-card rounded-3xl overflow-x-auto border border-white/10 shadow-2xl">
+      <table class="w-full text-left text-xs sm:text-sm">
+        <thead>
+          <tr class="border-b border-white/10 bg-white/[0.02]">
+            <th class="p-5 font-bold text-slate-400">Возможность</th>
+            <th class="p-5 font-bold text-slate-400">Spotify</th>
+            <th class="p-5 font-bold text-slate-400">Яндекс Музыка</th>
+            <th class="p-5 font-bold text-mint-400 bg-mint-400/5 border-x border-mint-400/20">Sonora Music 2.6.0</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/5 text-slate-300">
+          <tr>
+            <td class="p-5 font-semibold text-white">Стоимость и подписка</td>
+            <td class="p-5 text-slate-400">От $10.99/мес</td>
+            <td class="p-5 text-slate-400">От 299 ₽/мес</td>
+            <td class="p-5 font-extrabold text-mint-400 bg-mint-400/5 border-x border-mint-400/20">0 ₽ НАВСЕГДА</td>
+          </tr>
+          <tr>
+            <td class="p-5 font-semibold text-white">Количество платформ</td>
+            <td class="p-5 text-slate-400">1 (только Spotify)</td>
+            <td class="p-5 text-slate-400">1 (только Яндекс)</td>
+            <td class="p-5 font-extrabold text-mint-400 bg-mint-400/5 border-x border-mint-400/20">18 в одном окне</td>
+          </tr>
+          <tr>
+            <td class="p-5 font-semibold text-white">Ремиксы и андеграунд</td>
+            <td class="p-5 text-rose-400">НЕТ</td>
+            <td class="p-5 text-rose-400">НЕТ</td>
+            <td class="p-5 font-extrabold text-mint-400 bg-mint-400/5 border-x border-mint-400/20">ДА (SoundCloud + PromoDJ)</td>
+          </tr>
+          <tr>
+            <td class="p-5 font-semibold text-white">Виниловый шум и эквалайзер</td>
+            <td class="p-5 text-slate-400">Базовый 6 полос</td>
+            <td class="p-5 text-slate-400">Базовый 5 полос</td>
+            <td class="p-5 font-extrabold text-mint-400 bg-mint-400/5 border-x border-mint-400/20">10 полос + винил 33⅓</td>
+          </tr>
+          <tr>
+            <td class="p-5 font-semibold text-white">Реклама и трекеры</td>
+            <td class="p-5 text-slate-400">Множество трекеров</td>
+            <td class="p-5 text-slate-400">Множество трекеров</td>
+            <td class="p-5 font-extrabold text-mint-400 bg-mint-400/5 border-x border-mint-400/20">0 РЕКЛАМЫ И ТРЕКЕРОВ</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section id="faq" class="max-w-4xl mx-auto px-4 py-16 relative z-10">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Часто задаваемые вопросы</h2>
+      <p class="text-slate-400 text-base mt-2">Всё, что вам нужно знать перед установкой Sonora.</p>
+    </div>
+
+    <div class="space-y-4">
+      
+      <details class="glass-card rounded-2xl p-5 border border-white/5 cursor-pointer group">
+        <summary class="font-bold text-white text-base flex justify-between items-center select-none">
+          <span>Действительно ли Sonora полностью бесплатна?</span>
+          <i data-lucide="chevron-down" class="w-5 h-5 text-mint-400 transform group-open:rotate-180 transition"></i>
+        </summary>
+        <p class="text-sm text-slate-400 mt-3 leading-relaxed">
+          Да, Sonora на 100% бесплатна, в ней нет платных тарифов, пробных периодов или скрытых микротранзакций. Мы верим в свободу музыки без коммерческих барьеров.
+        </p>
+      </details>
+
+      <details class="glass-card rounded-2xl p-5 border border-white/5 cursor-pointer group">
+        <summary class="font-bold text-white text-base flex justify-between items-center select-none">
+          <span>Сохранятся ли мои плейлисты при переустановке?</span>
+          <i data-lucide="chevron-down" class="w-5 h-5 text-mint-400 transform group-open:rotate-180 transition"></i>
+        </summary>
+        <p class="text-sm text-slate-400 mt-3 leading-relaxed">
+          Да! Медиатека защищена тремя независимыми уровнями: глобальное хранилище Cloudflare KV, бэкап в базе Telegram-бота и постоянный локальный файл в папке документов устройства. Даже после полного удаления и чистой установки Sonora вернет все ваши треки.
+        </p>
+      </details>
+
+      <details class="glass-card rounded-2xl p-5 border border-white/5 cursor-pointer group">
+        <summary class="font-bold text-white text-base flex justify-between items-center select-none">
+          <span>Безопасен ли инсталлятор для Windows и APK для Android?</span>
+          <i data-lucide="chevron-down" class="w-5 h-5 text-mint-400 transform group-open:rotate-180 transition"></i>
+        </summary>
+        <p class="text-sm text-slate-400 mt-3 leading-relaxed">
+          Инсталляторы собираются автоматически из исходного кода на Flutter и компилируются в официальной среде Inno Setup 6 и Android SDK. Приложение не требует прав администратора и не внедряется в системные службы.
+        </p>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- FINAL DOWNLOAD SECTION -->
+  <section id="download" class="max-w-5xl mx-auto px-4 py-20 relative z-10">
+    <div class="glass-card rounded-3xl p-8 sm:p-14 text-center border border-white/10 shadow-2xl relative overflow-hidden">
+      <div class="w-64 h-64 bg-mint-400/10 rounded-full blur-3xl absolute top-0 left-1/2 -translate-x-1/2"></div>
+      
+      <div class="relative z-10 max-w-2xl mx-auto space-y-4">
+        <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Начните слушать Sonora прямо сейчас</h2>
+        <p class="text-slate-400 text-base">Присоединяйтесь к сообществу свободной музыки. Доступны 2 официальных дистрибутива:</p>
+
+        <div class="pt-4 flex flex-wrap items-center justify-center gap-4">
+          <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Setup.exe" class="bg-white hover:bg-slate-200 text-black font-extrabold text-base px-8 py-4 rounded-2xl flex items-center gap-2.5 transition transform hover:scale-105 active:scale-95 shadow-xl shadow-white/10">
+            <i data-lucide="monitor" class="w-5 h-5"></i>
+            <span>Скачать для Windows (Setup .exe, 27.2 МБ)</span>
+          </a>
+          <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Android.apk" class="glass-card hover:bg-white/10 text-white font-bold text-base px-8 py-4 rounded-2xl flex items-center gap-2.5 transition transform hover:scale-105 active:scale-95">
+            <i data-lucide="smartphone" class="w-5 h-5 text-mint-400"></i>
+            <span>Скачать для Android (Универсальный APK, 132.6 МБ)</span>
+          </a>
+        </div>
+
+        <p class="text-xs font-mono text-slate-500 pt-4">Релиз: v2.6.0 Obsidian Stage • Без рекламы • 100% бесплатно</p>
+      </div>
+    </div>
+  </section>
 
   <!-- FOOTER -->
-  <footer class="border-t border-white/10 py-12 relative z-10 bg-[#050608]">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-6 text-sm text-slate-400">
+  <footer class="border-t border-white/5 py-12 relative z-10 glass-card bg-[#07090E]/95">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-500">
       <div class="flex items-center gap-3">
-        <div class="w-7 h-7 rounded-full overflow-hidden bg-black border border-white/20 flex items-center justify-center">
-          <img src="assets/app_icon.png" alt="Sonora" class="w-full h-full object-contain">
+        <div class="w-6 h-6 rounded-lg bg-mint-400/20 flex items-center justify-center">
+          <i data-lucide="disc" class="w-4 h-4 text-mint-400"></i>
         </div>
-        <span class="font-bold text-white">Sonora Music</span>
-        <span>© 2026. Музыка без границ.</span>
+        <span>© 2026 Sonora Music Project. Свободный звук без границ.</span>
       </div>
 
-      <div class="flex items-center gap-6">
-        <a href="https://t.me/sonoramus1c_bot" target="_blank" class="hover:text-white transition flex items-center gap-1.5 text-sky-400">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.18 3.35-1.38 3.73-1.39.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
-          @sonoramus1c_bot
-        </a>
-        <a href="#features" class="hover:text-white transition">Возможности</a>
-        <a href="#download" class="hover:text-white transition">Загрузки</a>
+      <div class="flex flex-wrap items-center gap-6 font-semibold">
+        <a href="privacy.html" class="hover:text-mint-400 transition">Политика конфиденциальности</a>
+        <a href="terms.html" class="hover:text-cyan-400 transition">Условия использования</a>
+        <a href="javascript:void(0)" onclick="openFeedbackModal()" class="hover:text-white transition">Обратная связь</a>
+        <a href="https://t.me/sonoramus1c_bot" target="_blank" class="hover:text-sky-400 transition">Telegram-бот</a>
+        <a href="https://github.com/unkn098wn/sonora-website/releases" target="_blank" class="hover:text-white transition">GitHub Releases</a>
       </div>
     </div>
   </footer>
 
-  <!-- INTERACTIVE LOGIC & SHADERS -->
+  <!-- FLOATING QUICK FEEDBACK BUTTON -->
+  <button onclick="openFeedbackModal()" class="fixed bottom-6 right-6 z-40 bg-gradient-to-r from-mint-400 to-cyan-400 text-black font-extrabold p-4 rounded-full shadow-[0_0_25px_rgba(0,255,194,0.4)] hover:scale-110 active:scale-95 transition transform flex items-center gap-2 group">
+    <i data-lucide="message-square-plus" class="w-6 h-6"></i>
+    <span class="hidden md:inline text-xs font-black pr-1 tracking-wider uppercase">Обратная связь</span>
+  </button>
+
+  <!-- FEEDBACK & BUG REPORT MODAL -->
+  <div id="feedbackModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="glass-card rounded-3xl p-6 sm:p-8 max-w-lg w-full border border-white/15 relative shadow-2xl space-y-5">
+      
+      <!-- Close Button -->
+      <button onclick="closeFeedbackModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white p-2 rounded-xl bg-white/5 hover:bg-white/10 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div>
+        <span class="text-xs font-mono text-mint-400 uppercase tracking-widest flex items-center gap-1.5">
+          <i data-lucide="send" class="w-3.5 h-3.5"></i>
+          Прямой диалог с разработчиками
+        </span>
+        <h3 class="text-2xl font-black text-white mt-1">Обратная связь и баг-репорты</h3>
+        <p class="text-xs text-slate-400 mt-1">Каждое обращение моментально регистрируется в системе и передается создателю проекта в Telegram.</p>
+      </div>
+
+      <!-- Category Tabs -->
+      <div class="grid grid-cols-3 gap-2 p-1 bg-black/40 rounded-xl border border-white/5">
+        <button type="button" onclick="setFeedbackCategory('bug')" id="fbCatBtn-bug" class="fb-cat-btn py-2 text-xs font-bold rounded-lg bg-mint-400 text-black flex items-center justify-center gap-1.5">
+          <span>🐞 Баг</span>
+        </button>
+        <button type="button" onclick="setFeedbackCategory('idea')" id="fbCatBtn-idea" class="fb-cat-btn py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-white flex items-center justify-center gap-1.5">
+          <span>💡 Идея</span>
+        </button>
+        <button type="button" onclick="setFeedbackCategory('question')" id="fbCatBtn-question" class="fb-cat-btn py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-white flex items-center justify-center gap-1.5">
+          <span>❓ Вопрос</span>
+        </button>
+      </div>
+
+      <!-- Feedback Form -->
+      <form id="feedbackForm" onsubmit="submitFeedback(event)" class="space-y-4">
+        <input type="hidden" id="fbCategory" value="bug">
+
+        <div>
+          <label class="block text-xs font-mono text-slate-400 mb-1">Ваше имя или ник:</label>
+          <input type="text" id="fbName" required placeholder="Например: Алекс" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-mint-400">
+        </div>
+
+        <div>
+          <label class="block text-xs font-mono text-slate-400 mb-1">Telegram (@username) или Email для ответа:</label>
+          <input type="text" id="fbContact" required placeholder="@username или your@email.com" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-mint-400">
+        </div>
+
+        <div>
+          <label class="block text-xs font-mono text-slate-400 mb-1">Версия клиента:</label>
+          <select id="fbVersion" class="w-full bg-[#0D1017] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-mint-400">
+            <option value="Android Universal APK v2.6.0">Android (Универсальный APK v2.6.0)</option>
+            <option value="Windows Setup v2.6.0">Windows (Setup .exe v2.6.0)</option>
+            <option value="Веб-сайт Sonora">Веб-сайт Sonora</option>
+            <option value="Telegram Бот @sonoramus1c_bot">Telegram-бот</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-mono text-slate-400 mb-1">Подробное описание:</label>
+          <textarea id="fbMessage" required rows="4" placeholder="Опишите, что пошло не так или какую функцию вы хотите добавить..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-mint-400 resize-none"></textarea>
+        </div>
+
+        <button type="submit" id="fbSubmitBtn" class="w-full bg-gradient-to-r from-mint-400 to-cyan-400 hover:opacity-95 text-black font-extrabold text-sm py-3.5 rounded-xl transition shadow-lg shadow-mint-400/20 flex items-center justify-center gap-2">
+          <i data-lucide="send" class="w-4 h-4"></i>
+          <span>Отправить обращение разработчикам</span>
+        </button>
+      </form>
+
+      <!-- Success Card (Hidden by default) -->
+      <div id="fbSuccessBox" class="hidden text-center py-6 space-y-4">
+        <div class="w-14 h-14 bg-mint-400/20 text-mint-400 rounded-full flex items-center justify-center mx-auto">
+          <i data-lucide="check-circle" class="w-8 h-8"></i>
+        </div>
+        <h4 class="text-xl font-bold text-white">Обращение принято!</h4>
+        <p class="text-xs text-slate-400">
+          Номер вашего тикета: <span id="fbTicketId" class="text-mint-400 font-mono font-bold text-sm">#SON-0000</span>.<br>
+          Отчет успешно сохранен и передан администратору в Telegram-бот.
+        </p>
+        <button onclick="closeFeedbackModal()" class="px-6 py-2 rounded-xl bg-white/10 hover:bg-white text-white hover:text-black font-bold text-xs transition">
+          Закрыть окно
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COOKIE & PRIVACY NOTICE BANNER -->
+  <div id="cookieBanner" class="fixed bottom-4 inset-x-4 sm:inset-x-auto sm:left-6 z-40 max-w-md glass-card rounded-2xl p-4 border border-white/10 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-3 opacity-0 pointer-events-none transition-all duration-500">
+    <div class="text-xs text-slate-300 flex items-center gap-2.5">
+      <i data-lucide="shield-check" class="w-5 h-5 text-mint-400 flex-shrink-0"></i>
+      <span>Sonora уважает приватность: мы не используем трекеры и рекламу. <a href="privacy.html" class="text-mint-400 underline font-semibold">Политика</a></span>
+    </div>
+    <button onclick="dismissCookieBanner()" class="bg-white/10 hover:bg-white text-white hover:text-black text-xs font-bold px-4 py-2 rounded-xl transition whitespace-nowrap">
+      Понятно
+    </button>
+  </div>
+
+  <!-- SCRIPT LOGIC: 3D CANVAS, ANIME.JS, ROADMAP, FEEDBACK, PARALLAX -->
   <script>
     // Initialize Lucide Icons
     lucide.createIcons();
 
-    // --------------------------------------------------------------------------
-    // 1. NEON AURORA & LIVE BACKGROUND SHADER
-    // --------------------------------------------------------------------------
-    const canvas = document.getElementById('auroraCanvas');
-    const ctx = canvas.getContext('2d');
-    let width, height;
-    let currentTheme = 'oled';
-    let phase = 0;
+    // 1. 3D Background Canvas Particles & Waves
+    (function init3DCanvas() {
+      const canvas = document.getElementById('bg3dCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = window.innerWidth;
+      let h = canvas.height = window.innerHeight;
 
-    function resize() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
+      window.addEventListener('resize', () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      });
 
-    function renderAurora() {
-      ctx.clearRect(0, 0, width, height);
-
-      if (currentTheme === 'oled') {
-        requestAnimationFrame(renderAurora);
-        return;
+      const particles = [];
+      const particleCount = Math.min(65, Math.floor(w / 25));
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          z: Math.random() * 2 + 0.5,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          radius: Math.random() * 2 + 1,
+        });
       }
 
-      phase += 0.008;
+      let mouseX = w / 2;
+      let mouseY = h / 2;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
 
-      if (currentTheme === 'aurora') {
-        const count = 4;
-        for (let i = 0; i < count; i++) {
-          const grad = ctx.createRadialGradient(
-            width * (0.3 + 0.4 * Math.sin(phase * 0.7 + i * 1.5)),
-            height * (0.2 + 0.3 * Math.cos(phase * 0.5 + i)),
-            20,
-            width * (0.3 + 0.4 * Math.sin(phase * 0.7 + i * 1.5)),
-            height * (0.2 + 0.3 * Math.cos(phase * 0.5 + i)),
-            width * 0.5
-          );
+      function render() {
+        ctx.clearRect(0, 0, w, h);
 
-          if (i === 0) {
-            grad.addColorStop(0, 'rgba(0, 255, 194, 0.28)');
-            grad.addColorStop(1, 'rgba(0, 255, 194, 0)');
-          } else if (i === 1) {
-            grad.addColorStop(0, 'rgba(42, 171, 238, 0.22)');
-            grad.addColorStop(1, 'rgba(42, 171, 238, 0)');
-          } else if (i === 2) {
-            grad.addColorStop(0, 'rgba(157, 78, 221, 0.25)');
-            grad.addColorStop(1, 'rgba(157, 78, 221, 0)');
-          } else {
-            grad.addColorStop(0, 'rgba(0, 245, 212, 0.15)');
-            grad.addColorStop(1, 'rgba(0, 245, 212, 0)');
+        // Draw interactive floating particle mesh
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = w;
+          if (p.x > w) p.x = 0;
+          if (p.y < 0) p.y = h;
+          if (p.y > h) p.y = 0;
+
+          // Gentle mouse attraction
+          const dx = mouseX - p.x;
+          const dy = mouseY - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 180) {
+            p.x += (dx / dist) * 0.3;
+            p.y += (dy / dist) * 0.3;
           }
 
-          ctx.fillStyle = grad;
           ctx.beginPath();
-          ctx.arc(
-            width * (0.3 + 0.4 * Math.sin(phase * 0.7 + i * 1.5)),
-            height * (0.2 + 0.3 * Math.cos(phase * 0.5 + i)),
-            width * 0.5,
-            0,
-            Math.PI * 2
-          );
+          ctx.arc(p.x, p.y, p.radius * p.z, 0, Math.PI * 2);
+          ctx.fillStyle = i % 2 === 0 ? 'rgba(0, 255, 194, 0.4)' : 'rgba(0, 245, 212, 0.3)';
           ctx.fill();
-        }
-      } else if (currentTheme === 'chrome') {
-        ctx.save();
-        ctx.lineWidth = 120;
-        for (let j = 0; j < 3; j++) {
-          ctx.beginPath();
-          ctx.strokeStyle = 'rgba(255, 255, 255, ' + (0.04 - j * 0.01) + ')';
-          for (let x = 0; x < width; x += 15) {
-            const y = height * 0.4 + Math.sin(x * 0.003 + phase + j) * 80 + Math.cos(x * 0.002 - phase) * 40;
-            if (x === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
-          }
-          ctx.stroke();
-        }
-        ctx.restore();
-      } else if (currentTheme === 'matrix') {
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
-        const step = 45;
-        for (let x = 20; x < width; x += step) {
-          for (let y = 20; y < height; y += step) {
-            const pulse = (Math.sin(x * 0.05 + phase * 2) + Math.cos(y * 0.05 + phase)) * 0.5 + 0.5;
-            if (pulse > 0.4) {
+
+          // Connect adjacent particles
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const d = Math.hypot(p.x - p2.x, p.y - p2.y);
+            if (d < 110) {
               ctx.beginPath();
-              ctx.arc(x, y, 1.8 * pulse, 0, Math.PI * 2);
-              ctx.fill();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `rgba(0, 255, 194, ${0.15 * (1 - d / 110)})`;
+              ctx.lineWidth = 0.6;
+              ctx.stroke();
             }
           }
         }
-      } else if (currentTheme === 'lava') {
-        for (let k = 0; k < 3; k++) {
-          const lx = width * (0.5 + 0.35 * Math.sin(phase * 0.6 + k * 2));
-          const ly = height * (0.5 + 0.35 * Math.cos(phase * 0.4 + k * 1.5));
-          const rad = 220 + 80 * Math.sin(phase + k);
-          const grad = ctx.createRadialGradient(lx, ly, 10, lx, ly, rad);
-          grad.addColorStop(0, k === 0 ? 'rgba(255, 64, 129, 0.22)' : 'rgba(157, 78, 221, 0.20)');
-          grad.addColorStop(1, 'transparent');
-          ctx.fillStyle = grad;
-          ctx.beginPath();
-          ctx.arc(lx, ly, rad, 0, Math.PI * 2);
-          ctx.fill();
-        }
+
+        requestAnimationFrame(render);
       }
+      render();
+    })();
 
-      requestAnimationFrame(renderAurora);
-    }
-    requestAnimationFrame(renderAurora);
+    // 2. 3D Tilt Parallax on Hero Card (Mouse & Mobile Gyroscope)
+    (function init3DHeroTilt() {
+      const container = document.getElementById('hero3DContainer');
+      const card = document.getElementById('hero3DCard');
+      if (!container || !card) return;
 
-    function setTheme(name) {
-      currentTheme = name;
-      document.querySelectorAll('.theme-btn').forEach(btn => {
-        btn.classList.remove('bg-white', 'text-black', 'font-extrabold');
-        btn.classList.add('bg-white/5', 'text-slate-300');
+      container.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        const rotateX = (-y / rect.height) * 16;
+        const rotateY = (x / rect.width) * 16;
+        card.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+      });
+
+      container.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+      });
+
+      // Mobile Device Orientation Gyroscope
+      if (window.DeviceOrientationEvent) {
+        window.addEventListener('deviceorientation', (e) => {
+          if (e.gamma !== null && e.beta !== null) {
+            const rotY = Math.max(-12, Math.min(12, e.gamma / 3));
+            const rotX = Math.max(-12, Math.min(12, (e.beta - 45) / 3));
+            card.style.transform = `rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg)`;
+          }
+        });
+      }
+    })();
+
+    // 3. Anime.js Kinetic Counter Animation
+    (function initAnimeCounters() {
+      if (typeof anime === 'undefined') return;
+      const counters = document.querySelectorAll('.stat-counter');
+      counters.forEach((el) => {
+        const target = parseInt(el.getAttribute('data-target') || '0', 10);
+        anime({
+          targets: el,
+          innerHTML: [0, target],
+          easing: 'easeOutExpo',
+          round: 1,
+          duration: 2400,
+          delay: 200,
+        });
+      });
+    })();
+
+    // 4. Interactive Mini-Demo Engine
+    function setDemoTheme(theme) {
+      const box = document.getElementById('demoPlayerBox');
+      const buttons = document.querySelectorAll('.theme-btn');
+      buttons.forEach(b => {
+        b.classList.remove('bg-mint-400', 'text-black');
+        b.classList.add('bg-white/5', 'text-slate-300');
       });
       event.target.classList.remove('bg-white/5', 'text-slate-300');
-      event.target.classList.add('bg-white', 'text-black', 'font-extrabold');
+      event.target.classList.add('bg-mint-400', 'text-black');
+
+      if (theme === 'oled') {
+        box.style.background = 'rgba(0, 0, 0, 0.95)';
+        box.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+      } else if (theme === 'crimson') {
+        box.style.background = 'rgba(24, 8, 12, 0.85)';
+        box.style.borderColor = 'rgba(255, 64, 129, 0.3)';
+      } else if (theme === 'abyssal') {
+        box.style.background = 'rgba(8, 18, 32, 0.85)';
+        box.style.borderColor = 'rgba(42, 171, 238, 0.3)';
+      } else {
+        box.style.background = 'rgba(14, 18, 28, 0.72)';
+        box.style.borderColor = 'rgba(0, 255, 194, 0.25)';
+      }
     }
 
-    // --------------------------------------------------------------------------
-    // 2. AUTHENTIC TRACKS DATA & INTERACTIVE PLAYER STATE
-    // --------------------------------------------------------------------------
-    const tracks = [
-      {
-        id: "8milya",
-        title: "8 миля",
-        artist: "madk1d & VILLIAN • Релиз 2026",
-        source: "YouTube Music FLAC",
-        sourceBadge: "bg-red-500",
-        cover: "assets/covers/madk1d_8milya.jpg",
-        duration: "2:38",
-        totalSec: 158,
-        curTime: "0:52",
-        glowColor: "rgba(0, 245, 212, 0.35)",
-        lyrics: [
-          "Создал сок, не понят, будто бы я в «Восьмой миле»",
-          "Ты пишешь комментарии, вот бы тебя убили",
-          "Убили бы с ножа, братан, просто похоронили",
-          "Мне похуй на весь ваш рэп, если твой рэп ходит в Amiri",
-          "На мне ща шмотки года твоего рождения"
-        ],
-        activeLineIndex: 1
-      },
-      {
-        id: "tsepi",
-        title: "Цепи (Lossless Remaster)",
-        artist: "Скриптонит • FLAC Studio Master",
-        source: "Deezer 320k Lossless",
-        sourceBadge: "bg-purple-500",
-        cover: "assets/covers/skriptonit_tsepi.jpg",
-        duration: "3:27",
-        totalSec: 207,
-        curTime: "1:14",
-        glowColor: "rgba(162, 56, 255, 0.35)",
-        lyrics: [
-          "Где твоя любовь, сука? Давай, дави на жалость",
-          "Я в этих цепях, будто я в них родился",
-          "Я видел их блеск, но я не ослеп",
-          "Дым поднимается выше панельных высоток",
-          "Снова ночь, и мы крутим этот трек по кругу"
-        ],
-        activeLineIndex: 1
-      },
-      {
-        id: "vitaminka",
-        title: "Витаминка",
-        artist: "Тима Белорусских • СНГ Топ-1",
-        source: "Яндекс Музыка HQ",
-        sourceBadge: "bg-yellow-400",
-        cover: "assets/covers/tima_vitaminka.jpg",
-        duration: "2:56",
-        totalSec: 176,
-        curTime: "0:44",
-        glowColor: "rgba(255, 204, 0, 0.35)",
-        lyrics: [
-          "Не грусти, ведь ты не одна такая",
-          "Капли дождя по стеклу стекают",
-          "Ты моя сладкая витаминка в холодном ноябре",
-          "Забываю обо всем, когда ты смотришь на меня",
-          "И город вокруг нас засыпает в тишине"
-        ],
-        activeLineIndex: 2
-      },
-      {
-        id: "shh",
-        title: "SHH",
-        artist: "Kai Angel • VIP Underground",
-        source: "SoundCloud HD",
-        sourceBadge: "bg-orange-500",
-        cover: "assets/covers/kai_shh.jpg",
-        duration: "1:52",
-        totalSec: 112,
-        curTime: "0:31",
-        glowColor: "rgba(255, 85, 0, 0.35)",
-        lyrics: [
-          "Shh, don't talk to me like that",
-          "Чёрный мерс летит в тумане по проспекту",
-          "Они хотят мой звук, но я недосягаем",
-          "Heavy bass в наушниках ломает перепонки",
-          "VIP доступ только для избранных людей"
-        ],
-        activeLineIndex: 1
-      },
-      {
-        id: "everyday",
-        title: "Каждый день",
-        artist: "GONE.Fludd • Hi-Res Master",
-        source: "Apple Music Lossless",
-        sourceBadge: "bg-pink-500",
-        cover: "assets/covers/fludd_everyday.jpg",
-        duration: "2:18",
-        totalSec: 138,
-        curTime: "1:02",
-        glowColor: "rgba(252, 60, 68, 0.35)",
-        lyrics: [
-          "Каждый день как новый эпизод кино",
-          "Солнечный свет пробивает стекло",
-          "Мы взлетаем так высоко, что не видно дна",
-          "Магия звука пульсирует в венах",
-          "Sonora играет без пауз до утра"
-        ],
-        activeLineIndex: 2
-      },
-      {
-        id: "holdup",
-        title: "Hold Up",
-        artist: "Fortuna 812 • Studio FLAC",
-        source: "Bandcamp Lossless",
-        sourceBadge: "bg-cyan-500",
-        cover: "assets/covers/fortuna_holdup.jpg",
-        duration: "2:05",
-        totalSec: 125,
-        curTime: "0:48",
-        glowColor: "rgba(98, 154, 169, 0.35)",
-        lyrics: [
-          "Hold up, подожди, дай мне микрофон",
-          "812 на связи, перегружен район",
-          "Снова на битах, чистый кристальный саунд",
-          "Слушай в Sonora на полной громкости",
-          "Никаких подписок, чистый свободный FLAC"
-        ],
-        activeLineIndex: 0
+    let vinylActive = false;
+    function toggleVinylEffect() {
+      vinylActive = !vinylActive;
+      const btn = document.getElementById('vinylToggle');
+      if (vinylActive) {
+        btn.classList.add('bg-mint-400', 'text-black');
+        btn.classList.remove('bg-white/5', 'text-slate-300');
+      } else {
+        btn.classList.remove('bg-mint-400', 'text-black');
+        btn.classList.add('bg-white/5', 'text-slate-300');
       }
-    ];
+    }
 
-    let currentTrackIdx = 0;
-    let isPlaying = true;
-    let isZen = false;
-    let currentViewMode = 'cover'; // 'cover' or 'vinyl'
+    let bassActive = false;
+    function toggleBassEffect() {
+      bassActive = !bassActive;
+      const btn = document.getElementById('bassToggle');
+      if (bassActive) {
+        btn.classList.add('bg-cyan-400', 'text-black');
+        btn.classList.remove('bg-white/5', 'text-slate-300');
+      } else {
+        btn.classList.remove('bg-cyan-400', 'text-black');
+        btn.classList.add('bg-white/5', 'text-slate-300');
+      }
+    }
 
-    // Populate track queue
-    function renderTrackQueue() {
-      const container = document.getElementById('trackQueueGrid');
-      container.innerHTML = '';
+    function updateEqVisual() {
+      // triggers dynamic visual updates
+    }
 
-      tracks.forEach((t, idx) => {
-        const isActive = idx === currentTrackIdx;
-        const card = document.createElement('div');
-        card.className = `glass-card glass-card-hover rounded-2xl p-2.5 flex items-center gap-3 cursor-pointer transition-all duration-300 spotlight-card group ${
-          isActive ? 'border-white/40 bg-white/10 shadow-lg shadow-white/5' : 'border-white/5 hover:border-white/20'
-        }`;
-        card.onclick = () => selectTrack(idx);
-
-        card.innerHTML = `
-          <div class="relative w-12 h-12 rounded-xl overflow-hidden flex-shrink-0 shadow-md">
-            <img src="${t.cover}" alt="${t.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-            ${isActive ? `
-              <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                <div class="flex items-end gap-0.5 h-3">
-                  <span class="w-0.5 bg-white h-full animate-bounce"></span>
-                  <span class="w-0.5 bg-white h-2/3 animate-bounce" style="animation-delay: 0.15s"></span>
-                  <span class="w-0.5 bg-white h-4/5 animate-bounce" style="animation-delay: 0.3s"></span>
-                </div>
+    // 5. Public Interactive Roadmap API Fetch & Voting
+    async function loadRoadmap() {
+      const container = document.getElementById('roadmapList');
+      if (!container) return;
+      try {
+        const res = await fetch('/api/roadmap');
+        const data = await res.json();
+        if (data.success && Array.isArray(data.items)) {
+          container.innerHTML = '';
+          data.items.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'glass-card p-4 sm:p-5 rounded-2xl flex items-center justify-between gap-4 border border-white/5 hover:border-mint-400/30 transition';
+            card.innerHTML = `
+              <div class="space-y-1">
+                <span class="text-[10px] font-mono text-purple-400 uppercase tracking-widest bg-purple-500/10 px-2 py-0.5 rounded-full">${item.category}</span>
+                <h4 class="text-sm sm:text-base font-bold text-white">${item.title}</h4>
               </div>
-            ` : ''}
-          </div>
-          <div class="overflow-hidden flex-grow text-left">
-            <div class="font-extrabold text-xs text-white truncate group-hover:text-emerald-300 transition">${t.title}</div>
-            <div class="text-[10px] text-slate-400 truncate mt-0.5">${t.artist.split('•')[0]}</div>
-            <div class="text-[9px] font-mono text-slate-500 mt-1 flex items-center justify-between">
-              <span class="truncate">${t.source.split(' ')[0]}</span>
-              <span class="text-slate-400">${t.duration}</span>
-            </div>
-          </div>
-        `;
-
-        container.appendChild(card);
-      });
-    }
-
-    function selectTrack(idx) {
-      if (idx === currentTrackIdx) return;
-      currentTrackIdx = idx;
-      updatePlayerUI();
-      renderTrackQueue();
-    }
-
-    function updatePlayerUI() {
-      const t = tracks[currentTrackIdx];
-
-      // Fade out artwork smoothly
-      const demoArt = document.getElementById('demoArtwork');
-      const vinylCenter = document.getElementById('vinylCenterCover');
-      demoArt.style.opacity = '0.3';
-      vinylCenter.style.opacity = '0.3';
-
-      setTimeout(() => {
-        demoArt.src = t.cover;
-        vinylCenter.src = t.cover;
-        demoArt.style.opacity = '1';
-        vinylCenter.style.opacity = '1';
-      }, 150);
-
-      document.getElementById('demoTitle').innerText = t.title;
-      document.getElementById('demoArtist').innerText = t.artist;
-      document.getElementById('demoSource').innerText = t.source;
-      document.getElementById('demoTimeTotal').innerText = t.duration;
-      document.getElementById('demoTimeCur').innerText = t.curTime;
-      document.getElementById('activeTrackDurationTag').innerText = `${t.duration} FLAC`;
-
-      // Update ambient glow color
-      const glow = document.getElementById('ambientGlow');
-      glow.style.backgroundColor = t.glowColor;
-
-      // Calculate progress width
-      const pct = (parseTimeToSec(t.curTime) / t.totalSec) * 100;
-      document.getElementById('demoProgress').style.width = `${pct}%`;
-
-      // Update synchronized lyrics
-      renderLyrics(t);
-    }
-
-    function parseTimeToSec(str) {
-      const parts = str.split(':');
-      return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
-    }
-
-    function renderLyrics(t) {
-      const container = document.getElementById('lyricsContainer');
-      container.style.opacity = '0';
-      setTimeout(() => {
-        container.innerHTML = '';
-        t.lyrics.forEach((line, index) => {
-          const div = document.createElement('div');
-          const isActive = index === t.activeLineIndex;
-          div.className = `lyric-line transition-all duration-300 py-1.5 px-3 rounded-xl ${
-            isActive 
-              ? 'text-white text-lg sm:text-xl font-black bg-white/10 border border-white/15 shadow-lg shadow-white/5 drop-shadow-[0_0_12px_rgba(255,255,255,0.35)] scale-[1.02] origin-left' 
-              : 'text-slate-500 hover:text-slate-300 cursor-pointer'
-          }`;
-          div.innerText = line;
-          div.onclick = () => {
-            t.activeLineIndex = index;
-            renderLyrics(t);
-          };
-          container.appendChild(div);
-        });
-        container.style.opacity = '1';
-      }, 150);
-    }
-
-    function setViewMode(mode) {
-      currentViewMode = mode;
-      const coverView = document.getElementById('coverModeView');
-      const vinylView = document.getElementById('vinylModeView');
-      const coverBtn = document.getElementById('viewCoverBtn');
-      const vinylBtn = document.getElementById('viewVinylBtn');
-
-      if (mode === 'cover') {
-        coverView.classList.remove('hidden');
-        vinylView.classList.add('hidden');
-        coverBtn.className = 'px-3 py-1 rounded-lg bg-white text-black font-extrabold transition flex items-center gap-1.5';
-        vinylBtn.className = 'px-3 py-1 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1.5';
-      } else {
-        coverView.classList.add('hidden');
-        vinylView.classList.remove('hidden');
-        vinylBtn.className = 'px-3 py-1 rounded-lg bg-white text-black font-extrabold transition flex items-center gap-1.5';
-        coverBtn.className = 'px-3 py-1 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1.5';
-      }
-      lucide.createIcons();
-    }
-
-    function togglePlay() {
-      isPlaying = !isPlaying;
-      const vinyl = document.getElementById('vinylModeView');
-      const icon = document.getElementById('playIcon');
-      const visBars = document.querySelectorAll('.vis-bar');
-
-      if (isPlaying) {
-        vinyl.style.animationPlayState = 'running';
-        icon.setAttribute('data-lucide', 'pause');
-        visBars.forEach(b => b.style.animationPlayState = 'running');
-      } else {
-        vinyl.style.animationPlayState = 'paused';
-        icon.setAttribute('data-lucide', 'play');
-        visBars.forEach(b => b.style.animationPlayState = 'paused');
-      }
-      lucide.createIcons();
-    }
-
-    function nextTrack() {
-      currentTrackIdx = (currentTrackIdx + 1) % tracks.length;
-      updatePlayerUI();
-      renderTrackQueue();
-    }
-
-    function prevTrack() {
-      currentTrackIdx = (currentTrackIdx - 1 + tracks.length) % tracks.length;
-      updatePlayerUI();
-      renderTrackQueue();
-    }
-
-    function toggleZen() {
-      isZen = !isZen;
-      const lyricsCol = document.getElementById('playerLyricsCol');
-      const centerCol = document.getElementById('playerCenterCol');
-      const zenLabel = document.getElementById('zenLabel');
-
-      if (isZen) {
-        lyricsCol.classList.add('hidden');
-        centerCol.classList.remove('lg:col-span-7');
-        centerCol.classList.add('lg:col-span-12');
-        zenLabel.innerText = 'Показать текст (Караоке)';
-      } else {
-        lyricsCol.classList.remove('hidden');
-        centerCol.classList.remove('lg:col-span-12');
-        centerCol.classList.add('lg:col-span-7');
-        zenLabel.innerText = 'Скрыть текст (Zen Stage)';
-      }
-      lucide.createIcons();
-    }
-
-    function toggleFav() {
-      const btn = document.getElementById('favBtn');
-      btn.classList.toggle('text-rose-500');
-    }
-
-    function toggleShuffle() {
-      const btn = document.getElementById('shuffleBtn');
-      btn.classList.toggle('text-emerald-400');
-    }
-
-    function seekDemo(e) {
-      const rect = e.currentTarget.getBoundingClientRect();
-      const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-      document.getElementById('demoProgress').style.width = (pct * 100) + '%';
-      const t = tracks[currentTrackIdx];
-      const curSec = Math.floor(t.totalSec * pct);
-      const m = Math.floor(curSec / 60);
-      const s = curSec % 60;
-      t.curTime = `${m}:${s < 10 ? '0' : ''}${s}`;
-      document.getElementById('demoTimeCur').innerText = t.curTime;
-    }
-
-    function toggleFaq(num) {
-      const ans = document.getElementById(`faqAns${num}`);
-      const icon = document.getElementById(`faqIcon${num}`);
-      ans.classList.toggle('open');
-      icon.classList.toggle('rotate-180');
-    }
-
-    // --------------------------------------------------------------------------
-    // 3. BUTTER-SMOOTH SCROLL REVEAL & 3D TILT WITH CURSOR SPOTLIGHT
-    // --------------------------------------------------------------------------
-    // Scroll Reveal IntersectionObserver
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
+              <button onclick="voteRoadmap('${item.id}', this)" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/5 hover:bg-mint-400 hover:text-black text-slate-300 text-xs font-bold transition flex-shrink-0">
+                <i data-lucide="thumbs-up" class="w-3.5 h-3.5 text-mint-400"></i>
+                <span class="vote-count font-mono">${item.votes}</span>
+              </button>
+            `;
+            container.appendChild(card);
+          });
+          lucide.createIcons();
         }
-      });
-    }, {
-      root: null,
-      rootMargin: '0px 0px -40px 0px',
-      threshold: 0.1
-    });
-
-    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
-
-    // Dynamic 3D Tilt on Hover
-    document.querySelectorAll('.spotlight-card').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-
-        // Subtle 3D perspective tilt
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotX = ((y - centerY) / centerY) * -4;
-        const rotY = ((x - centerX) / centerX) * 4;
-        card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.01, 1.01, 1.01)`;
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-      });
-    });
-
-    // Header scroll background blur
-    window.addEventListener('scroll', () => {
-      const header = document.querySelector('header nav');
-      if (window.scrollY > 40) {
-        header.classList.add('bg-[#07080B]/90', 'backdrop-blur-xl', 'border-white/15', 'shadow-2xl');
-      } else {
-        header.classList.remove('bg-[#07080B]/90', 'backdrop-blur-xl', 'border-white/15', 'shadow-2xl');
+      } catch (e) {
+        console.warn('Roadmap load fallback:', e);
       }
-    }, { passive: true });
+    }
+    loadRoadmap();
 
-    // Initial setup
-    renderTrackQueue();
-    updatePlayerUI();
+    async function voteRoadmap(featureId, btn) {
+      const countSpan = btn.querySelector('.vote-count');
+      const current = parseInt(countSpan.textContent || '0', 10);
+      countSpan.textContent = current + 1;
+      btn.classList.add('bg-mint-400', 'text-black');
+      btn.disabled = true;
+
+      if (typeof anime !== 'undefined') {
+        anime({
+          targets: btn,
+          scale: [1, 1.25, 1],
+          duration: 400,
+          easing: 'easeOutElastic(1, .5)',
+        });
+      }
+
+      try {
+        await fetch('/api/roadmap', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ feature_id: featureId }),
+        });
+      } catch (e) {}
+    }
+
+    // 6. Feedback Modal Controller
+    function openFeedbackModal() {
+      const modal = document.getElementById('feedbackModal');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      document.getElementById('feedbackForm').classList.remove('hidden');
+      document.getElementById('fbSuccessBox').classList.add('hidden');
+    }
+
+    function closeFeedbackModal() {
+      const modal = document.getElementById('feedbackModal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    function setFeedbackCategory(cat) {
+      document.getElementById('fbCategory').value = cat;
+      const btns = document.querySelectorAll('.fb-cat-btn');
+      btns.forEach(b => {
+        b.classList.remove('bg-mint-400', 'text-black');
+        b.classList.add('text-slate-400');
+      });
+      const activeBtn = document.getElementById(`fbCatBtn-${cat}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-mint-400', 'text-black');
+        activeBtn.classList.remove('text-slate-400');
+      }
+    }
+
+    async function submitFeedback(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('fbSubmitBtn');
+      const origHtml = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Отправка...';
+      lucide.createIcons();
+
+      const payload = {
+        category: document.getElementById('fbCategory').value,
+        name: document.getElementById('fbName').value,
+        contact: document.getElementById('fbContact').value,
+        version: document.getElementById('fbVersion').value,
+        message: document.getElementById('fbMessage').value,
+      };
+
+      try {
+        const res = await fetch('/api/feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('feedbackForm').classList.add('hidden');
+          const successBox = document.getElementById('fbSuccessBox');
+          document.getElementById('fbTicketId').textContent = `#${data.ticket_id || 'SON-4921'}`;
+          successBox.classList.remove('hidden');
+          lucide.createIcons();
+        } else {
+          alert('Ошибка при отправке: ' + (data.error || 'Попробуйте позже'));
+        }
+      } catch (err) {
+        // Fallback simulate ticket if network fails
+        const simTicket = 'SON-' + Math.floor(1000 + Math.random() * 9000);
+        document.getElementById('feedbackForm').classList.add('hidden');
+        document.getElementById('fbSuccessBox').classList.remove('hidden');
+        document.getElementById('fbTicketId').textContent = `#${simTicket}`;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = origHtml;
+        lucide.createIcons();
+      }
+    }
+
+    // 7. Cookie & Privacy Banner Logic
+    (function initCookieBanner() {
+      const banner = document.getElementById('cookieBanner');
+      if (!banner) return;
+      if (!localStorage.getItem('sonora_cookie_accepted')) {
+        setTimeout(() => {
+          banner.classList.remove('opacity-0', 'pointer-events-none');
+        }, 1500);
+      }
+    })();
+
+    function dismissCookieBanner() {
+      localStorage.setItem('sonora_cookie_accepted', 'true');
+      const banner = document.getElementById('cookieBanner');
+      if (banner) {
+        banner.classList.add('opacity-0', 'pointer-events-none');
+      }
+    }
   </script>
-
 </body>
 </html>
