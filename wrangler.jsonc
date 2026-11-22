@@ -6,6 +6,12 @@
   "assets": {
     "directory": "."
   },
+  "kv_namespaces": [
+    {
+      "binding": "SONORA_KV",
+      "id": "ea3733cf45eb41c091df941d90a15af7"
+    }
+  ],
   "triggers": {
     "crons": ["*/10 * * * *"]
   }
