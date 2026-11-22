@@ -1,5 +1,5 @@
 {
-  "gateway_url": "http://127.0.0.1:8088",
+  "gateway_url": "https://sonora-bot.onrender.com",
   "status": "online",
-  "description": "Sonora Music Public Gateway"
+  "description": "Sonora Music Live 24/7 Cloud Server"
 }
