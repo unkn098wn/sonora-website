@@ -18,40 +18,39 @@
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #07090E;
-      color: #E2E8F0;
+      background-color: #000000;
+      color: #EDEDED;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
     }
     .glass-card {
-      background: rgba(18, 22, 34, 0.65);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(10, 10, 13, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.06);
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-cyan-500/30 selection:text-white">
+<body class="min-h-screen flex flex-col selection:bg-white/20 selection:text-white">
 
   <!-- Navigation -->
-  <header class="sticky top-0 z-50 glass-card border-b border-white/5 bg-[#07090E]/80">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3.5 group">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-cyan-400 to-blue-500 p-0.5 shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition">
-          <div class="w-full h-full bg-[#07090E] rounded-[14px] flex items-center justify-center">
-            <i data-lucide="disc" class="w-5 h-5 text-cyan-400 group-hover:rotate-45 transition duration-500"></i>
-          </div>
+  <header class="sticky top-0 z-50 glass-card border-b border-white/10 bg-black/80">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-8 h-8 rounded-lg bg-zinc-900 border border-white/15 flex items-center justify-center p-1.5 transition duration-300 group-hover:border-white/40">
+          <i data-lucide="disc" class="w-4 h-4 text-white group-hover:rotate-45 transition duration-500"></i>
         </div>
-        <div class="flex flex-col">
-          <span class="text-xl font-black text-white tracking-wider flex items-center gap-1.5">
-            SONORA <span class="text-xs font-mono font-semibold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full">v2.6.0</span>
-          </span>
-          <span class="text-[10px] text-slate-400 tracking-widest uppercase font-mono">Music Freedom Engine</span>
+        <div class="flex items-center gap-2">
+          <span class="text-sm font-black text-white tracking-widest font-mono">SONORA</span>
+          <span class="text-[10px] font-mono font-semibold text-zinc-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">v2.6.0</span>
         </div>
       </a>
 
       <div class="flex items-center gap-4">
-        <a href="privacy.html" class="text-xs sm:text-sm font-semibold text-slate-400 hover:text-white transition">Конфиденциальность</a>
-        <a href="index.html#download" class="bg-white/10 hover:bg-white text-white hover:text-black font-bold text-xs sm:text-sm px-4 py-2 rounded-xl transition flex items-center gap-2">
-          <i data-lucide="download" class="w-4 h-4"></i>
+        <a href="privacy.html" class="text-xs font-semibold text-zinc-400 hover:text-white transition font-mono">Конфиденциальность</a>
+        <a href="index.html#download" class="bg-white hover:bg-zinc-200 text-black font-extrabold text-xs px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5">
+          <i data-lucide="download" class="w-3.5 h-3.5"></i>
           <span>Скачать плеер</span>
         </a>
       </div>
@@ -61,107 +60,87 @@
   <!-- Hero Section -->
   <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
     <div class="mb-10 text-center sm:text-left">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono font-semibold mb-4">
-        <i data-lucide="file-text" class="w-4 h-4"></i>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono font-medium mb-4">
+        <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
         Пользовательское соглашение
       </div>
-      <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Условия использования</h1>
-      <p class="text-slate-400 text-sm sm:text-base mt-3">Последнее обновление: 23 ноября 2026 г. • Редакция 2.6.0 Obsidian Stage</p>
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">Условия использования</h1>
+      <p class="text-zinc-400 text-xs sm:text-sm mt-2 font-mono">Редакция 2.6.0 Obsidian Architecture • Действует для всех сервисов Sonora</p>
     </div>
 
     <!-- Detailed Document Content -->
-    <article class="glass-card p-8 sm:p-12 rounded-3xl space-y-8 text-sm sm:text-base leading-relaxed text-slate-300">
+    <article class="glass-card p-6 sm:p-10 rounded-2xl space-y-7 text-xs sm:text-sm leading-relaxed text-zinc-300">
       
       <section>
-        <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2.5">
-          <span class="text-cyan-400 font-mono text-lg">01.</span> Предмет соглашения
+        <h2 class="text-lg sm:text-xl font-bold text-white mb-2.5 flex items-center gap-2">
+          <span class="text-zinc-500 font-mono text-base">01.</span> Предмет соглашения
         </h2>
         <p>
           Настоящее Пользовательское соглашение (далее — «Соглашение») регулирует отношения между проектом <strong>Sonora Music</strong> и физическим лицом (далее — «Пользователь»), использующим мобильное приложение, версию для Windows, веб-сайт и официального бота в Telegram.
         </p>
-        <p class="mt-2">
-          Устанавливая, запуская или используя Sonora Music, вы подтверждаете свое полное и безоговорочное согласие со всеми положениями настоящего Соглашения и нашей <a href="privacy.html" class="text-cyan-400 underline hover:text-cyan-300">Политики конфиденциальности</a>.
+        <p class="mt-2 text-zinc-400">
+          Используя Sonora Music, вы подтверждаете свое согласие со всеми положениями настоящего Соглашения и нашей <a href="privacy.html" class="text-white underline font-medium">Политики конфиденциальности</a>.
         </p>
       </section>
 
       <section class="border-t border-white/5 pt-6">
-        <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2.5">
-          <span class="text-cyan-400 font-mono text-lg">02.</span> Назначение и функционал сервиса
+        <h2 class="text-lg sm:text-xl font-bold text-white mb-2.5 flex items-center gap-2">
+          <span class="text-zinc-500 font-mono text-base">02.</span> Назначение и функционал сервиса
         </h2>
-        <p>
+        <p class="text-zinc-400">
           Sonora Music — это независимый программный аудиопроигрыватель и DSP-клиент, разработанный для персонального некоммерческого прослушивания, эквализации и каталогизации музыки.
         </p>
-        <p class="mt-2">
-          Приложение предоставляет пользователю интерфейс для поиска и воспроизведения аудиозаписей, размещенных в открытом доступе на различных платформах (YouTube, SoundCloud, Deezer, Bandcamp, PromoDJ и др.).
+        <p class="mt-2 text-zinc-400">
+          Приложение предоставляет пользователю клиентский интерфейс для поиска и воспроизведения аудиозаписей, размещенных в открытом доступе на внешних платформах (YouTube, SoundCloud, Deezer, Bandcamp, PromoDJ и др.).
         </p>
       </section>
 
       <section class="border-t border-white/5 pt-6">
-        <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2.5">
-          <span class="text-cyan-400 font-mono text-lg">03.</span> Интеллектуальная собственность сторонних сервисов
+        <h2 class="text-lg sm:text-xl font-bold text-white mb-2.5 flex items-center gap-2">
+          <span class="text-zinc-500 font-mono text-base">03.</span> Интеллектуальная собственность
         </h2>
-        <div class="space-y-3">
-          <p>
-            Все товарные знаки, логотипы, названия стриминговых сервисов (YouTube Music, SoundCloud, Deezer, Яндекс Музыка, Spotify, Apple Music, VK Музыка и др.), а также авторские права на музыкальные произведения, тексты песен и обложки принадлежат их законным правообладателям и соответствующим платформам.
-          </p>
-          <p class="text-xs sm:text-sm text-slate-400 bg-white/[0.03] p-4 rounded-xl border border-white/5">
-            <strong>Примечание:</strong> Sonora Music является независимым проектом, не аффилированным с Google LLC, Apple Inc., Spotify AB, Deezer SA, Yandex LLC или SoundCloud Global Limited. Использование логотипов носит исключительно описательный характер для информирования пользователя об источнике аудиопотока.
-          </p>
-        </div>
-      </section>
-
-      <section class="border-t border-white/5 pt-6">
-        <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2.5">
-          <span class="text-cyan-400 font-mono text-lg">04.</span> Правила допустимого использования (AUP)
-        </h2>
-        <p>Пользователю категорически запрещается:</p>
-        <ul class="list-disc list-inside space-y-1.5 mt-2 text-slate-300">
-          <li>Использовать Sonora Music в коммерческих целях (публичное коммерческое вещание без лицензий правообладателей);</li>
-          <li>Совершать действия, направленные на нарушение стабильности серверной инфраструктуры Sonora (DDoS-атаки, флуд запросами к API шлюзу);</li>
-          <li>Использовать автоматизированных ботов для накрутки базы данных или спама через форму обратной связи.</li>
-        </ul>
-      </section>
-
-      <section class="border-t border-white/5 pt-6">
-        <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2.5">
-          <span class="text-cyan-400 font-mono text-lg">05.</span> Отказ от гарантий и ограничение ответственности
-        </h2>
-        <p>
-          Программное обеспечение предоставляется на условиях <strong>«КАК ЕСТЬ» («AS IS»)</strong> без каких-либо явных или подразумеваемых гарантий. Разработчики не несут ответственности за возможные временные сбои в доступе к сторонним API, блокировки провайдеров или несовместимость с отдельными аппаратными аудиодрайверами.
+        <p class="text-zinc-400">
+          Все аудиотреки, товарные знаки, обложки альбомов и метаданные, отображаемые в приложении, принадлежат их законным авторам и правообладателям. Sonora Music не претендует на авторские права на транслируемый контент и действует в рамках международных стандартов открытых протоколов передачи медиаданных.
         </p>
       </section>
 
       <section class="border-t border-white/5 pt-6">
-        <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2.5">
-          <span class="text-cyan-400 font-mono text-lg">06.</span> Изменение условий и обратная связь
+        <h2 class="text-lg sm:text-xl font-bold text-white mb-2.5 flex items-center gap-2">
+          <span class="text-zinc-500 font-mono text-base">04.</span> Отказ от ответственности
         </h2>
-        <p>
-          Мы оставляем за собой право периодически обновлять настоящее Соглашение. Актуальная версия всегда доступна на данной странице.
+        <p class="text-zinc-400">
+          Приложение предоставляется на условиях «КАК ЕСТЬ» (AS IS). Разработчики не несут ответственности за доступность сторонних серверов стриминга, качество интернет-соединения провайдера или временные сбои во внешних API.
         </p>
-        <p class="mt-2">
-          При возникновении любых вопросов вы можете связаться с нами через Telegram-бота 
-          <a href="https://t.me/sonoramus1c_bot" target="_blank" class="text-cyan-400 underline hover:text-cyan-300 font-semibold">@sonoramus1c_bot</a> или форму обратной связи на сайте.
+      </section>
+
+      <section class="border-t border-white/5 pt-6">
+        <h2 class="text-lg sm:text-xl font-bold text-white mb-2.5 flex items-center gap-2">
+          <span class="text-zinc-500 font-mono text-base">05.</span> Контакты
+        </h2>
+        <p class="text-zinc-400">
+          По всем юридическим вопросам и обращениям правообладателей вы можете связаться через официальный Telegram-бот: 
+          <a href="https://t.me/sonoramus1c_bot" target="_blank" class="text-white underline font-medium">@sonoramus1c_bot</a>.
         </p>
       </section>
 
     </article>
 
     <div class="mt-8 text-center">
-      <a href="index.html" class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white transition">
-        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+      <a href="index.html" class="inline-flex items-center gap-2 text-xs font-mono text-zinc-400 hover:text-white transition">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
         Вернуться на главную страницу
       </a>
     </div>
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-white/5 py-8 mt-16 glass-card bg-[#07090E]">
-    <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+  <footer class="border-t border-white/5 py-8 mt-16 bg-black">
+    <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
       <div>© 2026 Sonora Music Project. Свободный звук без границ.</div>
       <div class="flex items-center gap-6">
-        <a href="privacy.html" class="hover:text-slate-300 transition">Конфиденциальность</a>
-        <a href="terms.html" class="text-cyan-400 font-bold">Условия использования</a>
-        <a href="https://t.me/sonoramus1c_bot" target="_blank" class="hover:text-slate-300 transition">Telegram-бот</a>
+        <a href="privacy.html" class="hover:text-white transition">Конфиденциальность</a>
+        <a href="terms.html" class="text-white font-medium">Условия использования</a>
+        <a href="https://t.me/sonoramus1c_bot" target="_blank" class="hover:text-white transition">Telegram-бот</a>
       </div>
     </div>
   </footer>

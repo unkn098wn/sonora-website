@@ -18,43 +18,39 @@
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #07090E;
-      color: #E2E8F0;
+      background-color: #000000;
+      color: #EDEDED;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
     }
     .glass-card {
-      background: rgba(18, 22, 34, 0.65);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(10, 10, 13, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .neon-glow {
-      box-shadow: 0 0 50px -10px rgba(0, 255, 194, 0.2);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.06);
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-emerald-500/30 selection:text-white">
+<body class="min-h-screen flex flex-col selection:bg-white/20 selection:text-white">
 
   <!-- Navigation -->
-  <header class="sticky top-0 z-50 glass-card border-b border-white/5 bg-[#07090E]/80">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3.5 group">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 to-cyan-400 p-0.5 shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition">
-          <div class="w-full h-full bg-[#07090E] rounded-[14px] flex items-center justify-center">
-            <i data-lucide="disc" class="w-5 h-5 text-emerald-400 group-hover:rotate-45 transition duration-500"></i>
-          </div>
+  <header class="sticky top-0 z-50 glass-card border-b border-white/10 bg-black/80">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-8 h-8 rounded-lg bg-zinc-900 border border-white/15 flex items-center justify-center p-1.5 transition duration-300 group-hover:border-white/40">
+          <i data-lucide="disc" class="w-4 h-4 text-white group-hover:rotate-45 transition duration-500"></i>
         </div>
-        <div class="flex flex-col">
-          <span class="text-xl font-black text-white tracking-wider flex items-center gap-1.5">
-            SONORA <span class="text-xs font-mono font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">v2.6.0</span>
-          </span>
-          <span class="text-[10px] text-slate-400 tracking-widest uppercase font-mono">Music Freedom Engine</span>
+        <div class="flex items-center gap-2">
+          <span class="text-sm font-black text-white tracking-widest font-mono">SONORA</span>
+          <span class="text-[10px] font-mono font-semibold text-zinc-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">v2.6.0</span>
         </div>
       </a>
 
       <div class="flex items-center gap-4">
-        <a href="terms.html" class="text-xs sm:text-sm font-semibold text-slate-400 hover:text-white transition">Условия использования</a>
-        <a href="index.html#download" class="bg-white/10 hover:bg-white text-white hover:text-black font-bold text-xs sm:text-sm px-4 py-2 rounded-xl transition flex items-center gap-2">
-          <i data-lucide="download" class="w-4 h-4"></i>
+        <a href="terms.html" class="text-xs font-semibold text-zinc-400 hover:text-white transition font-mono">Условия использования</a>
+        <a href="index.html#download" class="bg-white hover:bg-zinc-200 text-black font-extrabold text-xs px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5">
+          <i data-lucide="download" class="w-3.5 h-3.5"></i>
           <span>Скачать плеер</span>
         </a>
       </div>
@@ -64,161 +60,134 @@
   <!-- Hero Section -->
   <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
     <div class="mb-10 text-center sm:text-left">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono font-semibold mb-4">
-        <i data-lucide="shield-check" class="w-4 h-4"></i>
-        Юридический протокол безопасности
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono font-medium mb-4">
+        <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+        Протокол приватности и безопасности
       </div>
-      <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Политика конфиденциальности</h1>
-      <p class="text-slate-400 text-sm sm:text-base mt-3">Дата вступления в силу: 23 ноября 2026 г. • Действует для всех сервисов Sonora Music</p>
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">Политика конфиденциальности</h1>
+      <p class="text-zinc-400 text-xs sm:text-sm mt-2 font-mono">Версия протокола: 2.6.0 • Действует для всех клиентов и шлюзов Sonora</p>
     </div>
 
-    <!-- Quick Highlights -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
-      <div class="glass-card p-5 rounded-2xl border border-emerald-500/20">
-        <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-3">
+    <!-- Quick Highlights in Monochrome Titanium -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+      <div class="glass-card p-5 rounded-xl border border-white/10">
+        <div class="w-8 h-8 rounded-lg bg-white/5 text-white flex items-center justify-center mb-3 border border-white/10">
           <i data-lucide="eye-off" class="w-4 h-4"></i>
         </div>
         <h3 class="font-bold text-white text-sm">Ноль слежки</h3>
-        <p class="text-slate-400 text-xs mt-1">Никаких рекламных трекеров, сбора геолокации или продажи данных третьим лицам.</p>
+        <p class="text-zinc-400 text-xs mt-1">Никаких рекламных трекеров, сбора геолокации или продажи данных третьим лицам.</p>
       </div>
 
-      <div class="glass-card p-5 rounded-2xl border border-cyan-500/20">
-        <div class="w-8 h-8 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-3">
+      <div class="glass-card p-5 rounded-xl border border-white/10">
+        <div class="w-8 h-8 rounded-lg bg-white/5 text-white flex items-center justify-center mb-3 border border-white/10">
           <i data-lucide="lock" class="w-4 h-4"></i>
         </div>
-        <h3 class="font-bold text-white text-sm">Безопасный OTP</h3>
-        <p class="text-slate-400 text-xs mt-1">Авторизация по одноразовым кодам Telegram. Мы не храним ваши пароли.</p>
+        <h3 class="font-bold text-white text-sm">Безопасный вход</h3>
+        <p class="text-zinc-400 text-xs mt-1">Авторизация по одноразовым кодам Telegram или Email. Мы не храним ваши пароли.</p>
       </div>
 
-      <div class="glass-card p-5 rounded-2xl border border-purple-500/20">
-        <div class="w-8 h-8 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-3">
-          <i data-lucide="cloud-lightning" class="w-4 h-4"></i>
+      <div class="glass-card p-5 rounded-xl border border-white/10">
+        <div class="w-8 h-8 rounded-lg bg-white/5 text-white flex items-center justify-center mb-3 border border-white/10">
+          <i data-lucide="cloud" class="w-4 h-4"></i>
         </div>
         <h3 class="font-bold text-white text-sm">Cloudflare KV Sync</h3>
-        <p class="text-slate-400 text-xs mt-1">Медиатека защищена распределенным шифрованием и локальными бэкапами.</p>
+        <p class="text-zinc-400 text-xs mt-1">Медиатека защищена распределенным хранением и постоянными локальными бэкапами.</p>
       </div>
     </div>
 
     <!-- Detailed Document Content -->
-    <article class="glass-card p-8 sm:p-12 rounded-3xl space-y-8 text-sm sm:text-base leading-relaxed text-slate-300">
+    <article class="glass-card p-6 sm:p-10 rounded-2xl space-y-7 text-xs sm:text-sm leading-relaxed text-zinc-300">
       
       <section>
-        <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2.5">
-          <span class="text-emerald-400 font-mono text-lg">01.</span> Общие положения
+        <h2 class="text-lg sm:text-xl font-bold text-white mb-2.5 flex items-center gap-2">
+          <span class="text-zinc-500 font-mono text-base">01.</span> Общие положения
         </h2>
         <p>
-          Настоящая Политика конфиденциальности определяет порядок обработки и защиты информации о пользователях мобильного и десктопного приложения <strong>Sonora Music</strong>, официального веб-сайта, Telegram-бота <strong>@sonoramus1c_bot</strong> и сопутствующих серверных сервисов (далее совместно — «Сервис» или «Sonora»).
+          Настоящая Политика конфиденциальности определяет порядок обработки и защиты информации о пользователях мобильного и десктопного приложения <strong>Sonora Music</strong>, официального веб-сайта, Telegram-бота <strong>@sonoramus1c_bot</strong> и сопутствующих серверных сервисов.
         </p>
-        <p class="mt-2">
-          Мы глубоко убеждены в фундаментальном праве каждого человека на тайну частной жизни и свободу доступа к музыке. Сервис спроектирован по архитектуре <em>Privacy by Design</em> — мы минимизируем сбор любых данных до строго необходимого для работы плеера.
+        <p class="mt-2 text-zinc-400">
+          Мы глубоко убеждены в фундаментальном праве каждого человека на тайну частной жизни и свободу доступа к музыке. Архитектура плеера построена по принципу <em>Privacy by Design</em> — мы минимизируем сбор любых данных до строго необходимого для работы плеера.
         </p>
       </section>
 
       <section class="border-t border-white/5 pt-6">
-        <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2.5">
-          <span class="text-emerald-400 font-mono text-lg">02.</span> Какие данные мы собираем и зачем
+        <h2 class="text-lg sm:text-xl font-bold text-white mb-2.5 flex items-center gap-2">
+          <span class="text-zinc-500 font-mono text-base">02.</span> Какие данные мы собираем и зачем
         </h2>
-        <div class="space-y-4">
-          <div class="p-4 rounded-xl bg-white/[0.03] border border-white/5">
+        <div class="space-y-3">
+          <div class="p-3.5 rounded-lg bg-white/[0.02] border border-white/5">
             <h4 class="font-bold text-white">1. Идентификатор аккаунта (Telegram или Email)</h4>
-            <p class="text-xs sm:text-sm text-slate-400 mt-1">
-              Используется исключительно для связывания вашей персональной медиатеки с профилем. Мы сохраняем ваш публичный Telegram ID или адрес электронной почты и публичное отображаемое имя для отображения в профиле. Мы никогда не запрашиваем пароли от ваших сторонних сервисов.
+            <p class="text-xs text-zinc-400 mt-1">
+              Используется исключительно для связывания вашей персональной медиатеки с профилем. Мы сохраняем ваш публичный Telegram ID или адрес электронной почты. Мы никогда не запрашиваем пароли от ваших сторонних сервисов.
             </p>
           </div>
 
-          <div class="p-4 rounded-xl bg-white/[0.03] border border-white/5">
-            <h4 class="font-bold text-white">2. Плейлисты и список «Любимых треков»</h4>
-            <p class="text-xs sm:text-sm text-slate-400 mt-1">
-              Названия созданных плейлистов, порядок треков и отметки «лайк» синхронизируются через изолированное облачное хранилище Cloudflare KV и сохраняются в резервной копии на вашем устройстве, чтобы ваши треки не исчезали при переустановках и обновлениях.
+          <div class="p-3.5 rounded-lg bg-white/[0.02] border border-white/5">
+            <h4 class="font-bold text-white">2. Плейлисты, вкусы «Моей волны» и «Любимые треки»</h4>
+            <p class="text-xs text-zinc-400 mt-1">
+              Названия плейлистов, отметки «лайк», сохраненные ремиксы и веса любимых жанров синхронизируются через Cloudflare KV и сохраняются в резервной копии на устройстве, чтобы медиатека не сбрасывалась при обновлениях.
             </p>
           </div>
 
-          <div class="p-4 rounded-xl bg-white/[0.03] border border-white/5">
-            <h4 class="font-bold text-white">3. Настройки воспроизведения и эквалайзера</h4>
-            <p class="text-xs sm:text-sm text-slate-400 mt-1">
-              Выбранная визуальная тема (Liquid Obsidian, Pure OLED и др.), пресеты эквалайзера и настройки эффекта винила хранятся локально на вашем устройстве в изолированном хранилище приложения.
+          <div class="p-3.5 rounded-lg bg-white/[0.02] border border-white/5">
+            <h4 class="font-bold text-white">3. Настройки эквалайзера и DSP</h4>
+            <p class="text-xs text-zinc-400 mt-1">
+              Выбранная визуальная тема (Obsidian Pure, OLED Zero и др.), пресеты эквалайзера и настройки эффекта винила сохраняются на вашем устройстве.
             </p>
           </div>
         </div>
       </section>
 
       <section class="border-t border-white/5 pt-6">
-        <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2.5">
-          <span class="text-emerald-400 font-mono text-lg">03.</span> Чего мы НИКОГДА не собираем
+        <h2 class="text-lg sm:text-xl font-bold text-white mb-2.5 flex items-center gap-2">
+          <span class="text-zinc-500 font-mono text-base">03.</span> Чего мы НИКОГДА не собираем
         </h2>
-        <ul class="list-disc list-inside space-y-2 text-slate-300">
-          <li>Мы не собираем биометрические данные, отпечатки пальцев или распознавание лиц.</li>
+        <ul class="list-disc list-inside space-y-1.5 text-zinc-400 text-xs sm:text-sm">
+          <li>Мы не собираем биометрические данные или отпечатки пальцев.</li>
           <li>Мы не запрашиваем доступ к контактам телефонной книги, SMS или истории звонков.</li>
-          <li>Мы не отслеживаем ваше точное географическое положение (GPS).</li>
-          <li>Мы не собираем историю использования других установленных на устройстве приложений.</li>
-          <li>Мы не используем сторонние рекламные SDK (Google AdMob, Unity Ads, Facebook Audience Network и т.д.).</li>
+          <li>Мы не отслеживаем ваше географическое положение (GPS).</li>
+          <li>Мы не собираем историю использования других приложений.</li>
+          <li>Мы не используем сторонние рекламные SDK (AdMob, Unity Ads, Facebook Audience Network).</li>
         </ul>
       </section>
 
       <section class="border-t border-white/5 pt-6">
-        <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2.5">
-          <span class="text-emerald-400 font-mono text-lg">04.</span> Взаимодействие со сторонними музыкальными платформами
+        <h2 class="text-lg sm:text-xl font-bold text-white mb-2.5 flex items-center gap-2">
+          <span class="text-zinc-500 font-mono text-base">04.</span> Взаимодействие со сторонними музыкальными платформами
         </h2>
-        <p>
-          Sonora Music функционирует как клиентский медиа-браузер и DSP-процессор. Поиск и стриминг аудиотреков осуществляются через обращение к публично доступным API и шлюзам музыкальных платформ (YouTube Music, SoundCloud, Deezer, Яндекс Музыка, Bandcamp и др.).
-        </p>
-        <p class="mt-2 text-slate-400 text-xs sm:text-sm">
-          При воспроизведении аудиопотока ваш IP-адрес может обрабатываться соответствующими CDN-сетями платформ-источников исключительно в рамках передачи аудиопотока. Sonora не передает сторонним платформам ваш идентификатор пользователя Sonora.
+        <p class="text-zinc-400">
+          Sonora Music функционирует как клиентский медиа-браузер и DSP-процессор. Поиск и стриминг аудиотреков осуществляются через обращение к публично доступным API музыкальных платформ (YouTube Music, SoundCloud, Deezer, Яндекс Музыка, Bandcamp и др.).
         </p>
       </section>
 
       <section class="border-t border-white/5 pt-6">
-        <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2.5">
-          <span class="text-emerald-400 font-mono text-lg">05.</span> Обратная связь и баг-репорты
+        <h2 class="text-lg sm:text-xl font-bold text-white mb-2.5 flex items-center gap-2">
+          <span class="text-zinc-500 font-mono text-base">05.</span> Контакты для связи
         </h2>
-        <p>
-          При отправке сообщения через форму обратной связи на сайте или через Telegram-бота передаются: категория обращения (баг/идея/вопрос), предоставленный вами контакт для связи, текст описания и технические параметры (версия клиента, операционная система).
-        </p>
-        <p class="mt-2">
-          Данные отчетов сохраняются в защищенной базе сообщений и доступны для анализа <strong>исключительно администраторам проекта</strong> с целью исправления технических неполадок.
-        </p>
-      </section>
-
-      <section class="border-t border-white/5 pt-6">
-        <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2.5">
-          <span class="text-emerald-400 font-mono text-lg">06.</span> Ваши права и управление данными
-        </h2>
-        <p>Вы имеете полное право в любой момент:</p>
-        <ul class="list-disc list-inside space-y-1.5 mt-2 text-slate-300">
-          <li><strong>Экспортировать свои плейлисты</strong> в открытый стандартный формат JSON прямо из настроек плеера;</li>
-          <li><strong>Удалить локальные данные</strong> очисткой хранилища приложения;</li>
-          <li><strong>Запросить полное удаление</strong> вашего профиля и облачных бэкапов плейлистов из Cloudflare KV, написав команду <code>/feedback</code> в Telegram-боте.</li>
-        </ul>
-      </section>
-
-      <section class="border-t border-white/5 pt-6">
-        <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2.5">
-          <span class="text-emerald-400 font-mono text-lg">07.</span> Контакты для связи
-        </h2>
-        <p>
-          По любым вопросам относительно настоящей Политики конфиденциальности или безопасности данных вы можете обратиться напрямую через официальный бот поддержки в Telegram: 
-          <a href="https://t.me/sonoramus1c_bot" target="_blank" class="text-emerald-400 underline hover:text-emerald-300 font-semibold">@sonoramus1c_bot</a> или через форму на главной странице сайта.
+        <p class="text-zinc-400">
+          По любым вопросам относительно настоящей Политики конфиденциальности вы можете обратиться напрямую через официальный бот поддержки в Telegram: 
+          <a href="https://t.me/sonoramus1c_bot" target="_blank" class="text-white underline font-medium">@sonoramus1c_bot</a> или через форму обратной связи на главной странице.
         </p>
       </section>
 
     </article>
 
     <div class="mt-8 text-center">
-      <a href="index.html" class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white transition">
-        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+      <a href="index.html" class="inline-flex items-center gap-2 text-xs font-mono text-zinc-400 hover:text-white transition">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
         Вернуться на главную страницу
       </a>
     </div>
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-white/5 py-8 mt-16 glass-card bg-[#07090E]">
-    <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+  <footer class="border-t border-white/5 py-8 mt-16 bg-black">
+    <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
       <div>© 2026 Sonora Music Project. Свободный звук без границ.</div>
       <div class="flex items-center gap-6">
-        <a href="privacy.html" class="text-emerald-400 font-bold">Конфиденциальность</a>
-        <a href="terms.html" class="hover:text-slate-300 transition">Условия использования</a>
-        <a href="https://t.me/sonoramus1c_bot" target="_blank" class="hover:text-slate-300 transition">Telegram-бот</a>
+        <a href="privacy.html" class="text-white font-medium">Конфиденциальность</a>
+        <a href="terms.html" class="hover:text-white transition">Условия использования</a>
+        <a href="https://t.me/sonoramus1c_bot" target="_blank" class="hover:text-white transition">Telegram-бот</a>
       </div>
     </div>
   </footer>
