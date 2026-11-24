@@ -22,6 +22,11 @@
       color: #EDEDED;
       background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
       background-size: 28px 28px;
+      overflow-x: hidden;
+      touch-action: manipulation;
+    }
+    button, a, input, select, textarea {
+      touch-action: manipulation;
     }
     .glass-card {
       background: rgba(10, 10, 13, 0.75);
@@ -37,21 +42,21 @@
   <!-- Navigation -->
   <header class="sticky top-0 z-50 glass-card border-b border-white/10 bg-black/80">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3 group">
-        <div class="w-8 h-8 rounded-lg bg-zinc-900 border border-white/15 flex items-center justify-center p-1.5 transition duration-300 group-hover:border-white/40">
+      <a href="index.html" class="flex items-center gap-2 sm:gap-3 group flex-shrink-0">
+        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-zinc-900 border border-white/15 flex items-center justify-center p-1 sm:p-1.5 transition duration-300 group-hover:border-white/40">
           <i data-lucide="disc" class="w-4 h-4 text-white group-hover:rotate-45 transition duration-500"></i>
         </div>
-        <div class="flex items-center gap-2">
-          <span class="text-sm font-black text-white tracking-widest font-mono">SONORA</span>
-          <span class="text-[10px] font-mono font-semibold text-zinc-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">v2.6.0</span>
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <span class="text-xs sm:text-sm font-black text-white tracking-wider sm:tracking-widest font-mono">SONORA</span>
+          <span class="hidden sm:inline-block text-[10px] font-mono font-semibold text-zinc-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">v2.6.0</span>
         </div>
       </a>
 
-      <div class="flex items-center gap-4">
-        <a href="privacy.html" class="text-xs font-semibold text-zinc-400 hover:text-white transition font-mono">Конфиденциальность</a>
-        <a href="index.html#download" class="bg-white hover:bg-zinc-200 text-black font-extrabold text-xs px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5">
+      <div class="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+        <a href="privacy.html" class="hidden sm:inline text-xs font-semibold text-zinc-400 hover:text-white transition font-mono">Конфиденциальность</a>
+        <a href="index.html#download" class="bg-white hover:bg-zinc-200 text-black font-extrabold text-xs px-3 sm:px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 shadow-md">
           <i data-lucide="download" class="w-3.5 h-3.5"></i>
-          <span>Скачать плеер</span>
+          <span>Скачать<span class="hidden sm:inline"> плеер</span></span>
         </a>
       </div>
     </div>

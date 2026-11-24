@@ -72,6 +72,28 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
+    /* Prevent mobile tap delay and optimize touch interaction */
+    button, a, input, select, textarea {
+      touch-action: manipulation;
+    }
+
+    /* Clean details marker */
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+    details summary {
+      list-style: none;
+    }
+
+    /* Video background pointer-events immunity */
+    #headerVideoWrapper,
+    #headerLightRaysVideo {
+      pointer-events: none !important;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
+
     /* Engineering Dot Grid Background */
     .bg-grid {
       background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
@@ -138,21 +160,21 @@
   </div>
 
   <!-- STICKY PRECISION HEADER -->
-  <header class="fixed top-4 inset-x-0 z-50 flex justify-center px-4" id="mainHeader">
-    <nav class="glass-card rounded-full px-5 py-2.5 flex items-center justify-between gap-6 max-w-4xl w-full border border-white/10 shadow-2xl">
+  <header class="fixed top-3 sm:top-4 inset-x-0 z-50 flex flex-col items-center px-2.5 sm:px-4" id="mainHeader">
+    <nav class="glass-card rounded-2xl lg:rounded-full px-3.5 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between gap-2 sm:gap-4 max-w-5xl w-full border border-white/10 shadow-2xl relative">
       <!-- Logo -->
-      <a href="#" class="flex items-center gap-3 group">
-        <div class="w-8 h-8 rounded-lg bg-zinc-900 border border-white/15 flex items-center justify-center p-1.5 transition duration-300 group-hover:border-white/40">
+      <a href="#" class="flex items-center gap-2 sm:gap-3 group flex-shrink-0">
+        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-zinc-900 border border-white/15 flex items-center justify-center p-1 sm:p-1.5 transition duration-300 group-hover:border-white/40">
           <i data-lucide="disc" class="w-4 h-4 text-white group-hover:rotate-90 transition duration-700"></i>
         </div>
-        <div class="flex items-center gap-2">
-          <span class="text-sm font-black text-white tracking-widest font-mono">SONORA</span>
-          <span class="text-[10px] font-mono font-semibold text-zinc-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">v2.6.0</span>
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <span class="text-xs sm:text-sm font-black text-white tracking-wider sm:tracking-widest font-mono">SONORA</span>
+          <span class="hidden sm:inline-block text-[10px] font-mono font-semibold text-zinc-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">v2.6.0</span>
         </div>
       </a>
 
-      <!-- Navigation Links -->
-      <div class="hidden md:flex items-center gap-6 text-xs font-semibold text-zinc-400 font-mono">
+      <!-- Navigation Links (Desktop) -->
+      <div class="hidden lg:flex items-center gap-4 xl:gap-6 text-xs font-semibold text-zinc-400 font-mono">
         <a href="#spectrogram" class="hover:text-white transition">Спектрограмма</a>
         <a href="#platforms" class="hover:text-white transition">18 Платформ</a>
         <a href="#dsp-studio" class="hover:text-white transition">Студия DSP</a>
@@ -162,64 +184,146 @@
       </div>
 
       <!-- Action Buttons -->
-      <div class="flex items-center gap-2.5">
-        <button onclick="openFeedbackModal()" class="text-xs font-bold text-zinc-300 hover:text-white px-3 py-1.5 rounded-lg border border-white/10 hover:bg-white/5 transition flex items-center gap-1.5">
+      <div class="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
+        <button onclick="openFeedbackModal()" class="text-xs font-bold text-zinc-300 hover:text-white p-1.5 sm:px-3 sm:py-1.5 rounded-lg border border-white/10 hover:bg-white/5 transition flex items-center gap-1.5" title="Обратная связь">
           <i data-lucide="message-square" class="w-3.5 h-3.5 text-zinc-400"></i>
           <span class="hidden sm:inline">Отзыв</span>
         </button>
-        <a href="#download" class="bg-white hover:bg-zinc-200 text-black font-extrabold text-xs px-4 py-1.5 rounded-full transition transform hover:scale-105 active:scale-95 flex items-center gap-1.5 shadow-lg shadow-white/5">
+        <a href="#download" class="bg-white hover:bg-zinc-200 text-black font-extrabold text-xs px-3 sm:px-4 py-1.5 rounded-full transition transform hover:scale-105 active:scale-95 flex items-center gap-1.5 shadow-lg shadow-white/5 flex-shrink-0">
           <i data-lucide="download" class="w-3.5 h-3.5"></i>
           <span>Скачать</span>
         </a>
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Открыть навигацию" class="lg:hidden text-zinc-300 hover:text-white p-1.5 rounded-lg border border-white/10 hover:bg-white/5 transition flex items-center justify-center">
+          <i data-lucide="menu" id="mobileMenuIcon" class="w-4 h-4"></i>
+        </button>
       </div>
     </nav>
+
+    <!-- Mobile Dropdown Navigation -->
+    <div id="mobileMenuDropdown" class="hidden lg:hidden w-full max-w-5xl mt-2 glass-card rounded-2xl p-3 sm:p-4 border border-white/10 shadow-2xl backdrop-blur-2xl bg-black/95 flex flex-col space-y-2 font-mono text-xs text-zinc-300 transition-all duration-300">
+      <a href="#spectrogram" onclick="closeMobileMenu()" class="p-2.5 hover:bg-white/5 rounded-xl hover:text-white flex items-center justify-between border border-transparent hover:border-white/5">
+        <span class="flex items-center gap-2"><i data-lucide="activity" class="w-3.5 h-3.5 text-zinc-400"></i> Спектрограмма</span>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-500"></i>
+      </a>
+      <a href="#platforms" onclick="closeMobileMenu()" class="p-2.5 hover:bg-white/5 rounded-xl hover:text-white flex items-center justify-between border border-transparent hover:border-white/5">
+        <span class="flex items-center gap-2"><i data-lucide="radio" class="w-3.5 h-3.5 text-zinc-400"></i> 18 Платформ</span>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-500"></i>
+      </a>
+      <a href="#dsp-studio" onclick="closeMobileMenu()" class="p-2.5 hover:bg-white/5 rounded-xl hover:text-white flex items-center justify-between border border-transparent hover:border-white/5">
+        <span class="flex items-center gap-2"><i data-lucide="sliders" class="w-3.5 h-3.5 text-zinc-400"></i> Студия DSP</span>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-500"></i>
+      </a>
+      <a href="#architecture" onclick="closeMobileMenu()" class="p-2.5 hover:bg-white/5 rounded-xl hover:text-white flex items-center justify-between border border-transparent hover:border-white/5">
+        <span class="flex items-center gap-2"><i data-lucide="layers" class="w-3.5 h-3.5 text-zinc-400"></i> Архитектура</span>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-500"></i>
+      </a>
+      <a href="#roadmap" onclick="closeMobileMenu()" class="p-2.5 hover:bg-white/5 rounded-xl hover:text-white flex items-center justify-between border border-transparent hover:border-white/5">
+        <span class="flex items-center gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-zinc-400"></i> Roadmap развития</span>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-500"></i>
+      </a>
+      <a href="#faq" onclick="closeMobileMenu()" class="p-2.5 hover:bg-white/5 rounded-xl hover:text-white flex items-center justify-between border border-transparent hover:border-white/5">
+        <span class="flex items-center gap-2"><i data-lucide="help-circle" class="w-3.5 h-3.5 text-zinc-400"></i> FAQ</span>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-500"></i>
+      </a>
+      <div class="pt-2.5 border-t border-white/10 flex items-center justify-between text-[11px] text-zinc-400">
+        <span>Sonora Music v2.6.0</span>
+        <a href="https://t.me/sonoramus1c_bot" target="_blank" class="text-white hover:underline flex items-center gap-1 font-sans">
+          <i data-lucide="send" class="w-3 h-3"></i> Telegram-бот
+        </a>
+      </div>
+    </div>
   </header>
 
   <!-- HERO SECTION WITH REAL-TIME 3D AUDIO SPECTROGRAM -->
-  <section class="relative z-10 pt-32 sm:pt-40 pb-20 max-w-6xl mx-auto px-4 text-center">
+  <section class="relative z-10 pt-28 sm:pt-40 pb-16 sm:pb-20 max-w-6xl mx-auto px-4 text-center">
     <!-- Version & Monolith Tag -->
-    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border border-white/10 mb-8">
-      <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-      <span class="text-xs font-mono font-medium text-zinc-300">
+    <div class="inline-flex max-w-full items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full glass-card border border-white/10 mb-8 text-center">
+      <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse flex-shrink-0"></span>
+      <span class="text-[11px] sm:text-xs font-mono font-medium text-zinc-300">
         Sonora v2.6.0 Obsidian Architecture • 0 подписок • 0 рекламы
       </span>
     </div>
 
     <!-- Main Headline -->
-    <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.08] max-w-5xl mx-auto">
+    <h1 class="text-3xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1] sm:leading-[1.08] max-w-5xl mx-auto">
       Музыка всех миров в одном <span class="text-zinc-400">монолитном плеере</span>
     </h1>
 
-    <p class="text-zinc-400 text-base sm:text-lg max-w-2xl mx-auto mt-6 leading-relaxed font-normal">
+    <p class="text-zinc-400 text-sm sm:text-lg max-w-2xl mx-auto mt-4 sm:mt-6 leading-relaxed font-normal">
       Слушайте треки из 18 мировых площадок в студийном FLAC 24-бит с математической 3D-спектрограммой, бесконечной Моей Волной и вечной синхронизацией медиатеки.
     </p>
 
     <!-- Official Installers Download Buttons -->
-    <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+    <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-xl mx-auto w-full">
       <!-- Windows Setup Button -->
-      <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Setup.exe" class="bg-white text-black font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-xl flex items-center gap-3 transition transform hover:scale-[1.02] active:scale-[0.98] shadow-2xl hover:bg-zinc-200">
-        <i data-lucide="monitor" class="w-4 h-4"></i>
+      <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Setup.exe" class="w-full sm:w-auto bg-white text-black font-extrabold text-xs sm:text-base px-6 sm:px-8 py-3.5 rounded-xl flex items-center justify-center gap-2.5 sm:gap-3 transition transform hover:scale-[1.02] active:scale-[0.98] shadow-2xl hover:bg-zinc-200">
+        <i data-lucide="monitor" class="w-4 h-4 flex-shrink-0"></i>
         <span>Скачать для Windows (.exe)</span>
-        <span class="text-xs font-mono font-bold bg-black/10 px-2 py-0.5 rounded">27.2 МБ</span>
+        <span class="text-[11px] sm:text-xs font-mono font-bold bg-black/10 px-2 py-0.5 rounded flex-shrink-0">27.2 МБ</span>
       </a>
 
       <!-- Android Universal APK Button -->
-      <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Android.apk" class="glass-card hover:bg-white/5 text-white font-bold text-sm sm:text-base px-8 py-3.5 rounded-xl flex items-center gap-3 transition transform hover:scale-[1.02] active:scale-[0.98] border border-white/15">
-        <i data-lucide="smartphone" class="w-4 h-4 text-zinc-300"></i>
+      <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Android.apk" class="w-full sm:w-auto glass-card hover:bg-white/5 text-white font-bold text-xs sm:text-base px-6 sm:px-8 py-3.5 rounded-xl flex items-center justify-center gap-2.5 sm:gap-3 transition transform hover:scale-[1.02] active:scale-[0.98] border border-white/15">
+        <i data-lucide="smartphone" class="w-4 h-4 text-zinc-300 flex-shrink-0"></i>
         <span>Скачать для Android (APK)</span>
-        <span class="text-xs font-mono text-zinc-400 bg-white/5 px-2 py-0.5 rounded border border-white/10">132.6 МБ</span>
+        <span class="text-[11px] sm:text-xs font-mono text-zinc-400 bg-white/5 px-2 py-0.5 rounded border border-white/10 flex-shrink-0">132.6 МБ</span>
       </a>
 
       <!-- Telegram Bot CTA -->
-      <a href="https://t.me/sonoramus1c_bot" target="_blank" class="glass-card hover:bg-white/5 text-zinc-300 hover:text-white font-bold text-sm sm:text-base px-6 py-3.5 rounded-xl flex items-center gap-2.5 transition transform hover:scale-[1.02] active:scale-[0.98] border border-white/10">
-        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.18 3.35-1.38 3.73-1.39.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
+      <a href="https://t.me/sonoramus1c_bot" target="_blank" class="w-full sm:w-auto glass-card hover:bg-white/5 text-zinc-300 hover:text-white font-bold text-xs sm:text-base px-5 sm:px-6 py-3.5 rounded-xl flex items-center justify-center gap-2 sm:gap-2.5 transition transform hover:scale-[1.02] active:scale-[0.98] border border-white/10">
+        <svg class="w-4 h-4 fill-current flex-shrink-0" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.18 3.35-1.38 3.73-1.39.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
         <span>Telegram-бот</span>
       </a>
     </div>
 
     <!-- INTERACTIVE 3D SPECTROGRAM STAGE CARD -->
-    <div id="spectrogram" class="mt-16 relative perspective-1000 max-w-4xl mx-auto">
-      <div id="spectrogramCard" class="glass-card rounded-2xl p-6 sm:p-8 border border-white/10 preserve-3d transition-transform duration-200 shadow-2xl relative overflow-hidden">
+    <div id="spectrogram" class="mt-12 sm:mt-16 relative perspective-1000 max-w-4xl mx-auto">
+      <div id="spectrogramCard" class="glass-card rounded-2xl p-4 sm:p-8 border border-white/10 preserve-3d transition-transform duration-200 shadow-2xl relative overflow-hidden">
+        
+        <!-- Header row of the Workbench -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4 pb-4 border-b border-white/5">
+          <div class="flex items-center gap-2.5 sm:gap-3">
+            <span class="w-2 h-2 rounded-full bg-white flex-shrink-0"></span>
+            <span class="text-[11px] sm:text-xs font-mono uppercase tracking-wider sm:tracking-widest text-zinc-300 font-bold">ИНТЕРАКТИВНАЯ 3D-СПЕКТРОГРАММА</span>
+          </div>
+          <div class="flex items-center gap-2 sm:gap-3 font-mono text-[10px] sm:text-xs">
+            <span class="px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">FLAC 24-BIT / 96kHz</span>
+            <span class="text-zinc-500">LOSSLESS 1411 KBPS</span>
+          </div>
+        </div>
+
+        <!-- 3D Canvas Spectrogram Container -->
+        <div class="relative w-full h-48 sm:h-64 my-4 flex items-center justify-center overflow-hidden rounded-xl bg-black/40 border border-white/5 touch-none">
+          <canvas id="spectrogramCanvas" class="w-full h-full cursor-crosshair"></canvas>
+          
+          <!-- Subtle Spectrogram Watermark Overlay -->
+          <div class="absolute bottom-3 right-4 pointer-events-none text-right font-mono text-[9px] sm:text-[10px] text-zinc-600">
+            <div>FFT SPECTRUM • 32 BANDS</div>
+            <div>REAL-TIME DSP HARMONICS</div>
+          </div>
+        </div>
+
+        <!-- Track & Audio Pipeline Status -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 pt-3 text-left">
+          <div class="space-y-1">
+            <div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+              <i data-lucide="volume-2" class="w-4 h-4 text-zinc-400 flex-shrink-0"></i>
+              <span>Shadows in the Dark — Kavinsky</span>
+            </div>
+            <p class="text-[11px] sm:text-xs font-mono text-zinc-500">Audio Pipeline: Direct WASAPI Output • Micro-Fade 40ms Active</p>
+          </div>
+
+          <!-- Feature Pills in Monochrome Titanium -->
+          <div class="flex flex-wrap gap-1.5 sm:gap-2">
+            <span class="text-[10px] sm:text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-zinc-300">10-Band EQ: Flat Hi-Fi</span>
+            <span class="text-[10px] sm:text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-zinc-300">Vinyl Crackle: 33⅓</span>
+            <span class="text-[10px] sm:text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/20 text-white font-semibold">Cloud KV Synced</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
         
         <!-- Header row of the Workbench -->
         <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/5">
@@ -491,16 +595,16 @@
       <p class="text-zinc-400 text-sm sm:text-base mt-2 max-w-xl mx-auto">Управляйте звуком без искажений. Аппаратная сатурация, аналоговый винил 33⅓ и сырой бас.</p>
     </div>
 
-    <div id="demoPlayerBox" class="glass-card rounded-2xl p-6 sm:p-8 border border-white/10 shadow-2xl relative overflow-hidden">
+    <div id="demoPlayerBox" class="glass-card rounded-2xl p-4 sm:p-8 border border-white/10 shadow-2xl relative overflow-hidden">
       
       <!-- Upper Controls: Theme Selector & Hardware Toggles -->
-      <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/5">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/5">
         <div>
           <span class="text-xs font-mono text-zinc-400 uppercase tracking-widest">Профиль оформления:</span>
-          <div class="flex gap-2 mt-2">
-            <button onclick="setDemoTheme('obsidian')" class="theme-btn px-3 py-1 text-xs font-bold rounded-lg bg-white text-black transition">Obsidian Pure</button>
-            <button onclick="setDemoTheme('oled')" class="theme-btn px-3 py-1 text-xs font-bold rounded-lg bg-white/5 text-zinc-300 hover:bg-white/10 transition">OLED Zero</button>
-            <button onclick="setDemoTheme('titanium')" class="theme-btn px-3 py-1 text-xs font-bold rounded-lg bg-white/5 text-zinc-300 hover:bg-white/10 transition">Titanium Raw</button>
+          <div class="flex flex-wrap gap-2 mt-2">
+            <button onclick="setDemoTheme('obsidian', this)" data-theme="obsidian" class="theme-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-white text-black transition">Obsidian Pure</button>
+            <button onclick="setDemoTheme('oled', this)" data-theme="oled" class="theme-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-white/5 text-zinc-300 hover:bg-white/10 transition">OLED Zero</button>
+            <button onclick="setDemoTheme('titanium', this)" data-theme="titanium" class="theme-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-white/5 text-zinc-300 hover:bg-white/10 transition">Titanium Raw</button>
           </div>
         </div>
 
@@ -508,11 +612,11 @@
         <div>
           <span class="text-xs font-mono text-zinc-400 uppercase tracking-widest">Аналоговый тракт:</span>
           <div class="flex flex-wrap gap-2 mt-2">
-            <button id="vinylToggle" onclick="toggleVinylEffect()" class="px-3.5 py-1 text-xs font-bold rounded-lg bg-white/5 text-zinc-300 border border-white/10 hover:border-white/30 transition flex items-center gap-1.5">
+            <button id="vinylToggle" onclick="toggleVinylEffect()" class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white/5 text-zinc-300 border border-white/10 hover:border-white/30 transition flex items-center gap-1.5">
               <i data-lucide="disc" class="w-3.5 h-3.5 text-zinc-400"></i>
               <span>Винил 33⅓ RPM</span>
             </button>
-            <button id="bassToggle" onclick="toggleBassEffect()" class="px-3.5 py-1 text-xs font-bold rounded-lg bg-white/5 text-zinc-300 border border-white/10 hover:border-white/30 transition flex items-center gap-1.5">
+            <button id="bassToggle" onclick="toggleBassEffect()" class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white/5 text-zinc-300 border border-white/10 hover:border-white/30 transition flex items-center gap-1.5">
               <i data-lucide="zap" class="w-3.5 h-3.5 text-zinc-400"></i>
               <span>Raw Bass +12dB</span>
             </button>
@@ -522,65 +626,67 @@
 
       <!-- 10-Band Equalizer Sliders Mockup -->
       <div class="mt-6">
-        <div class="flex items-center justify-between mb-4">
-          <span class="text-sm font-bold text-white flex items-center gap-2">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-4">
+          <span class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
             <i data-lucide="activity" class="w-4 h-4 text-zinc-400"></i>
             DSP-эквалайзер (-12dB .. +12dB)
           </span>
-          <span id="eqPresetLabel" class="text-xs font-mono text-zinc-400">Студийный пресет: Hi-Fi Linear Reference</span>
+          <span id="eqPresetLabel" class="text-[11px] sm:text-xs font-mono text-zinc-400">Студийный пресет: Hi-Fi Linear Reference</span>
         </div>
 
-        <div class="grid grid-cols-10 gap-2 sm:gap-4 items-end h-40 pt-4 pb-2 bg-black/40 rounded-xl px-4 border border-white/5">
-          <!-- 10 sliders -->
-          <div class="flex flex-col items-center h-full justify-between">
-            <span class="text-[10px] font-mono text-zinc-500">+6</span>
-            <input type="range" min="-12" max="12" value="6" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
-            <span class="text-[9px] font-mono text-zinc-400">31Hz</span>
-          </div>
-          <div class="flex flex-col items-center h-full justify-between">
-            <span class="text-[10px] font-mono text-zinc-500">+4</span>
-            <input type="range" min="-12" max="12" value="4" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
-            <span class="text-[9px] font-mono text-zinc-400">63Hz</span>
-          </div>
-          <div class="flex flex-col items-center h-full justify-between">
-            <span class="text-[10px] font-mono text-zinc-500">+2</span>
-            <input type="range" min="-12" max="12" value="2" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
-            <span class="text-[9px] font-mono text-zinc-400">125Hz</span>
-          </div>
-          <div class="flex flex-col items-center h-full justify-between">
-            <span class="text-[10px] font-mono text-zinc-500">0</span>
-            <input type="range" min="-12" max="12" value="0" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
-            <span class="text-[9px] font-mono text-zinc-400">250Hz</span>
-          </div>
-          <div class="flex flex-col items-center h-full justify-between">
-            <span class="text-[10px] font-mono text-zinc-500">-1</span>
-            <input type="range" min="-12" max="12" value="-1" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
-            <span class="text-[9px] font-mono text-zinc-400">500Hz</span>
-          </div>
-          <div class="flex flex-col items-center h-full justify-between">
-            <span class="text-[10px] font-mono text-zinc-500">+1</span>
-            <input type="range" min="-12" max="12" value="1" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
-            <span class="text-[9px] font-mono text-zinc-400">1kHz</span>
-          </div>
-          <div class="flex flex-col items-center h-full justify-between">
-            <span class="text-[10px] font-mono text-zinc-500">+3</span>
-            <input type="range" min="-12" max="12" value="3" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
-            <span class="text-[9px] font-mono text-zinc-400">2kHz</span>
-          </div>
-          <div class="flex flex-col items-center h-full justify-between">
-            <span class="text-[10px] font-mono text-zinc-500">+5</span>
-            <input type="range" min="-12" max="12" value="5" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
-            <span class="text-[9px] font-mono text-zinc-400">4kHz</span>
-          </div>
-          <div class="flex flex-col items-center h-full justify-between">
-            <span class="text-[10px] font-mono text-zinc-500">+7</span>
-            <input type="range" min="-12" max="12" value="7" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
-            <span class="text-[9px] font-mono text-zinc-400">8kHz</span>
-          </div>
-          <div class="flex flex-col items-center h-full justify-between">
-            <span class="text-[10px] font-mono text-zinc-500">+8</span>
-            <input type="range" min="-12" max="12" value="8" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual()">
-            <span class="text-[9px] font-mono text-zinc-400">16kHz</span>
+        <div class="overflow-x-auto pb-2 -mx-2 px-2 sm:mx-0 sm:px-0">
+          <div class="grid grid-cols-10 gap-2 sm:gap-4 items-end h-40 pt-4 pb-2 bg-black/40 rounded-xl px-4 border border-white/5 min-w-[540px] sm:min-w-0">
+            <!-- 10 sliders -->
+            <div class="flex flex-col items-center h-full justify-between">
+              <span class="text-[10px] font-mono text-zinc-500">+6</span>
+              <input type="range" min="-12" max="12" value="6" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+              <span class="text-[9px] font-mono text-zinc-400">31Hz</span>
+            </div>
+            <div class="flex flex-col items-center h-full justify-between">
+              <span class="text-[10px] font-mono text-zinc-500">+4</span>
+              <input type="range" min="-12" max="12" value="4" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+              <span class="text-[9px] font-mono text-zinc-400">63Hz</span>
+            </div>
+            <div class="flex flex-col items-center h-full justify-between">
+              <span class="text-[10px] font-mono text-zinc-500">+2</span>
+              <input type="range" min="-12" max="12" value="2" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+              <span class="text-[9px] font-mono text-zinc-400">125Hz</span>
+            </div>
+            <div class="flex flex-col items-center h-full justify-between">
+              <span class="text-[10px] font-mono text-zinc-500">0</span>
+              <input type="range" min="-12" max="12" value="0" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+              <span class="text-[9px] font-mono text-zinc-400">250Hz</span>
+            </div>
+            <div class="flex flex-col items-center h-full justify-between">
+              <span class="text-[10px] font-mono text-zinc-500">-1</span>
+              <input type="range" min="-12" max="12" value="-1" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+              <span class="text-[9px] font-mono text-zinc-400">500Hz</span>
+            </div>
+            <div class="flex flex-col items-center h-full justify-between">
+              <span class="text-[10px] font-mono text-zinc-500">+1</span>
+              <input type="range" min="-12" max="12" value="1" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+              <span class="text-[9px] font-mono text-zinc-400">1kHz</span>
+            </div>
+            <div class="flex flex-col items-center h-full justify-between">
+              <span class="text-[10px] font-mono text-zinc-500">+3</span>
+              <input type="range" min="-12" max="12" value="3" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+              <span class="text-[9px] font-mono text-zinc-400">2kHz</span>
+            </div>
+            <div class="flex flex-col items-center h-full justify-between">
+              <span class="text-[10px] font-mono text-zinc-500">+5</span>
+              <input type="range" min="-12" max="12" value="5" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+              <span class="text-[9px] font-mono text-zinc-400">4kHz</span>
+            </div>
+            <div class="flex flex-col items-center h-full justify-between">
+              <span class="text-[10px] font-mono text-zinc-500">+7</span>
+              <input type="range" min="-12" max="12" value="7" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+              <span class="text-[9px] font-mono text-zinc-400">8kHz</span>
+            </div>
+            <div class="flex flex-col items-center h-full justify-between">
+              <span class="text-[10px] font-mono text-zinc-500">+8</span>
+              <input type="range" min="-12" max="12" value="8" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+              <span class="text-[9px] font-mono text-zinc-400">16kHz</span>
+            </div>
           </div>
         </div>
       </div>
@@ -686,7 +792,7 @@
     </div>
 
     <div class="glass-card rounded-2xl overflow-x-auto border border-white/10 shadow-2xl">
-      <table class="w-full text-left text-xs sm:text-sm">
+      <table class="w-full text-left text-xs sm:text-sm min-w-[580px]">
         <thead>
           <tr class="border-b border-white/10 bg-white/[0.02]">
             <th class="p-4 sm:p-5 font-bold text-zinc-400 font-mono">Возможность</th>
@@ -774,19 +880,19 @@
   </section>
 
   <!-- FINAL DOWNLOAD SECTION -->
-  <section id="download" class="max-w-5xl mx-auto px-4 py-20 relative z-10">
-    <div class="glass-card rounded-3xl p-8 sm:p-12 text-center border border-white/10 shadow-2xl relative overflow-hidden">
+  <section id="download" class="max-w-5xl mx-auto px-4 py-16 sm:py-20 relative z-10">
+    <div class="glass-card rounded-3xl p-6 sm:p-12 text-center border border-white/10 shadow-2xl relative overflow-hidden">
       <div class="relative z-10 max-w-2xl mx-auto space-y-4">
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Начните слушать Sonora прямо сейчас</h2>
-        <p class="text-zinc-400 text-sm sm:text-base">Доступны 2 официальных дистрибутива с чистой побитовой установкой:</p>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">Начните слушать Sonora прямо сейчас</h2>
+        <p class="text-zinc-400 text-xs sm:text-base">Доступны 2 официальных дистрибутива с чистой побитовой установкой:</p>
 
-        <div class="pt-4 flex flex-wrap items-center justify-center gap-4">
-          <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Setup.exe" class="bg-white hover:bg-zinc-200 text-black font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-xl flex items-center gap-2.5 transition transform hover:scale-[1.02] active:scale-[0.98]">
-            <i data-lucide="monitor" class="w-4 h-4"></i>
+        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-xl mx-auto w-full">
+          <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Setup.exe" class="w-full sm:w-auto bg-white hover:bg-zinc-200 text-black font-extrabold text-xs sm:text-sm px-6 sm:px-8 py-3.5 rounded-xl flex items-center justify-center gap-2.5 transition transform hover:scale-[1.02] active:scale-[0.98]">
+            <i data-lucide="monitor" class="w-4 h-4 flex-shrink-0"></i>
             <span>Скачать для Windows (Setup .exe, 27.2 МБ)</span>
           </a>
-          <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Android.apk" class="glass-card hover:bg-white/5 text-white font-bold text-sm sm:text-base px-8 py-3.5 rounded-xl flex items-center gap-2.5 transition transform hover:scale-[1.02] active:scale-[0.98] border border-white/15">
-            <i data-lucide="smartphone" class="w-4 h-4 text-zinc-400"></i>
+          <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Android.apk" class="w-full sm:w-auto glass-card hover:bg-white/5 text-white font-bold text-xs sm:text-sm px-6 sm:px-8 py-3.5 rounded-xl flex items-center justify-center gap-2.5 transition transform hover:scale-[1.02] active:scale-[0.98] border border-white/15">
+            <i data-lucide="smartphone" class="w-4 h-4 text-zinc-400 flex-shrink-0"></i>
             <span>Скачать для Android (APK, 132.6 МБ)</span>
           </a>
         </div>
@@ -797,7 +903,7 @@
   </section>
 
   <!-- FOOTER WITH ABYSS & FLOATING LIGHT SPARKS CANVAS -->
-  <footer id="abyssFooter" class="relative z-10 overflow-hidden bg-black border-t border-white/10 pt-24 pb-14">
+  <footer id="abyssFooter" class="relative z-10 overflow-hidden bg-black border-t border-white/10 pt-20 sm:pt-24 pb-12 sm:pb-14">
     <!-- Deep Void Radial Gradient -->
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-zinc-900/50 via-black to-black pointer-events-none"></div>
 
@@ -807,9 +913,9 @@
     <!-- Fog / Mist layer at the threshold of the abyss -->
     <div class="absolute top-0 inset-x-0 h-20 bg-gradient-to-b from-black to-transparent pointer-events-none z-0"></div>
 
-    <div class="relative z-10 max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-zinc-500">
-      <div class="flex items-center gap-3">
-        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/15 flex items-center justify-center shadow-lg">
+    <div class="relative z-10 max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-zinc-500 text-center md:text-left">
+      <div class="flex items-center gap-3 justify-center">
+        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/15 flex items-center justify-center shadow-lg flex-shrink-0">
           <i data-lucide="disc" class="w-4 h-4 text-white"></i>
         </div>
         <div>
@@ -818,7 +924,7 @@
         </div>
       </div>
 
-      <div class="flex flex-wrap items-center gap-6 font-medium">
+      <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 font-medium">
         <a href="privacy.html" class="hover:text-white transition">Политика конфиденциальности</a>
         <a href="terms.html" class="hover:text-white transition">Условия использования</a>
         <a href="javascript:void(0)" onclick="openFeedbackModal()" class="hover:text-white transition">Обратная связь</a>
@@ -829,44 +935,44 @@
   </footer>
 
   <!-- FLOATING QUICK FEEDBACK BUTTON -->
-  <button onclick="openFeedbackModal()" class="fixed bottom-6 right-6 z-40 bg-zinc-900 border border-white/20 text-white font-bold p-3.5 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition transform flex items-center gap-2 group">
+  <button onclick="openFeedbackModal()" aria-label="Обратная связь" class="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 bg-zinc-900 border border-white/20 text-white font-bold p-3 sm:p-3.5 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition transform flex items-center gap-2 group">
     <i data-lucide="message-square" class="w-5 h-5 text-white"></i>
     <span class="hidden md:inline text-xs font-mono font-semibold pr-1 tracking-wider uppercase">Обратная связь</span>
   </button>
 
   <!-- FEEDBACK & BUG REPORT MODAL -->
-  <div id="feedbackModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
-    <div class="glass-card rounded-2xl p-6 sm:p-8 max-w-lg w-full border border-white/15 relative shadow-2xl space-y-5">
+  <div id="feedbackModal" onclick="if(event.target === this) closeFeedbackModal()" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 overflow-y-auto">
+    <div class="glass-card rounded-2xl p-5 sm:p-8 max-w-lg w-full border border-white/15 relative shadow-2xl space-y-4 sm:space-y-5 my-auto max-h-[92vh] flex flex-col overflow-hidden">
       
       <!-- Close Button -->
-      <button onclick="closeFeedbackModal()" class="absolute top-5 right-5 text-zinc-400 hover:text-white p-2 rounded-lg bg-white/5 hover:bg-white/10 transition">
+      <button onclick="closeFeedbackModal()" aria-label="Закрыть модальное окно" class="absolute top-4 right-4 sm:top-5 sm:right-5 text-zinc-400 hover:text-white p-2 rounded-lg bg-white/5 hover:bg-white/10 transition z-10">
         <i data-lucide="x" class="w-4 h-4"></i>
       </button>
 
-      <div>
-        <span class="text-xs font-mono text-zinc-400 uppercase tracking-widest flex items-center gap-1.5">
+      <div class="flex-shrink-0 pr-8">
+        <span class="text-[11px] sm:text-xs font-mono text-zinc-400 uppercase tracking-widest flex items-center gap-1.5">
           <i data-lucide="send" class="w-3.5 h-3.5"></i>
           Прямой диалог с разработчиками
         </span>
-        <h3 class="text-xl sm:text-2xl font-bold text-white mt-1">Обратная связь и баг-репорты</h3>
-        <p class="text-xs text-zinc-400 mt-1">Каждое обращение моментально регистрируется в системе и передается создателю проекта в Telegram.</p>
+        <h3 class="text-lg sm:text-2xl font-bold text-white mt-1">Обратная связь и баг-репорты</h3>
+        <p class="text-[11px] sm:text-xs text-zinc-400 mt-1">Каждое обращение моментально регистрируется в системе и передается создателю проекта в Telegram.</p>
       </div>
 
       <!-- Category Tabs -->
-      <div class="grid grid-cols-3 gap-2 p-1 bg-black/50 rounded-lg border border-white/10">
-        <button type="button" onclick="setFeedbackCategory('bug')" id="fbCatBtn-bug" class="fb-cat-btn py-1.5 text-xs font-bold rounded-md bg-white text-black flex items-center justify-center gap-1.5 transition">
+      <div class="grid grid-cols-3 gap-1.5 sm:gap-2 p-1 bg-black/50 rounded-lg border border-white/10 flex-shrink-0">
+        <button type="button" onclick="setFeedbackCategory('bug')" id="fbCatBtn-bug" class="fb-cat-btn py-1.5 text-xs font-bold rounded-md bg-white text-black flex items-center justify-center gap-1 sm:gap-1.5 transition">
           <span>🐞 Баг</span>
         </button>
-        <button type="button" onclick="setFeedbackCategory('idea')" id="fbCatBtn-idea" class="fb-cat-btn py-1.5 text-xs font-bold rounded-md text-zinc-400 hover:text-white flex items-center justify-center gap-1.5 transition">
+        <button type="button" onclick="setFeedbackCategory('idea')" id="fbCatBtn-idea" class="fb-cat-btn py-1.5 text-xs font-bold rounded-md text-zinc-400 hover:text-white flex items-center justify-center gap-1 sm:gap-1.5 transition">
           <span>💡 Идея</span>
         </button>
-        <button type="button" onclick="setFeedbackCategory('question')" id="fbCatBtn-question" class="fb-cat-btn py-1.5 text-xs font-bold rounded-md text-zinc-400 hover:text-white flex items-center justify-center gap-1.5 transition">
+        <button type="button" onclick="setFeedbackCategory('question')" id="fbCatBtn-question" class="fb-cat-btn py-1.5 text-xs font-bold rounded-md text-zinc-400 hover:text-white flex items-center justify-center gap-1 sm:gap-1.5 transition">
           <span>❓ Вопрос</span>
         </button>
       </div>
 
       <!-- Feedback Form -->
-      <form id="feedbackForm" onsubmit="submitFeedback(event)" class="space-y-3.5">
+      <form id="feedbackForm" onsubmit="submitFeedback(event)" class="space-y-3 overflow-y-auto pr-1 flex-grow">
         <input type="hidden" id="fbCategory" value="bug">
 
         <div>
@@ -894,7 +1000,7 @@
           <textarea id="fbMessage" required rows="3" placeholder="Опишите баг или предложите функцию..." class="w-full bg-white/5 border border-white/10 rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-white/30 resize-none"></textarea>
         </div>
 
-        <button type="submit" id="fbSubmitBtn" class="w-full bg-white hover:bg-zinc-200 text-black font-extrabold text-sm py-3 rounded-lg transition flex items-center justify-center gap-2">
+        <button type="submit" id="fbSubmitBtn" class="w-full bg-white hover:bg-zinc-200 text-black font-extrabold text-sm py-3 rounded-lg transition flex items-center justify-center gap-2 active:scale-[0.98]">
           <i data-lucide="send" class="w-4 h-4"></i>
           <span>Отправить обращение разработчикам</span>
         </button>
@@ -919,12 +1025,12 @@
   </div>
 
   <!-- COOKIE & PRIVACY NOTICE BANNER -->
-  <div id="cookieBanner" class="fixed bottom-4 inset-x-4 sm:inset-x-auto sm:left-6 z-40 max-w-md glass-card rounded-xl p-4 border border-white/10 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-3 opacity-0 pointer-events-none transition-all duration-500">
+  <div id="cookieBanner" class="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-auto z-50 max-w-sm sm:max-w-md glass-card rounded-xl p-3.5 sm:p-4 border border-white/10 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-3 opacity-0 pointer-events-none transition-all duration-300">
     <div class="text-xs text-zinc-300 flex items-center gap-2.5">
       <i data-lucide="shield" class="w-4 h-4 text-white flex-shrink-0"></i>
       <span>Sonora не использует трекеры и рекламу. <a href="privacy.html" class="text-white underline font-semibold">Политика</a></span>
     </div>
-    <button onclick="dismissCookieBanner()" class="bg-white text-black text-xs font-bold px-3.5 py-1.5 rounded-lg transition whitespace-nowrap hover:bg-zinc-200">
+    <button onclick="dismissCookieBanner()" class="w-full sm:w-auto bg-white text-black text-xs font-bold px-4 py-2 rounded-lg transition whitespace-nowrap hover:bg-zinc-200 active:scale-95 text-center flex-shrink-0">
       Понятно
     </button>
   </div>
@@ -969,6 +1075,22 @@
         targetTiltX = 0;
         targetTiltY = 0;
       });
+
+      // Mobile Touch Ripple Support
+      function handleTouch(e) {
+        if (!e.touches || !e.touches[0]) return;
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.touches[0].clientX - rect.left;
+        mouseY = e.touches[0].clientY - rect.top;
+        targetTiltX = (mouseX / w - 0.5) * 2;
+        targetTiltY = (mouseY / h - 0.5) * 2;
+      }
+      canvas.addEventListener('touchstart', handleTouch, { passive: true });
+      canvas.addEventListener('touchmove', handleTouch, { passive: true });
+      canvas.addEventListener('touchend', () => {
+        targetTiltX = 0;
+        targetTiltY = 0;
+      }, { passive: true });
 
       function render() {
         ctx.clearRect(0, 0, w, h);
@@ -1103,16 +1225,20 @@
     })();
 
     // 4. Interactive DSP Studio Engine
-    function setDemoTheme(theme) {
+    function setDemoTheme(theme, btnElement) {
       const box = document.getElementById('demoPlayerBox');
       const buttons = document.querySelectorAll('.theme-btn');
       buttons.forEach(b => {
         b.classList.remove('bg-white', 'text-black');
         b.classList.add('bg-white/5', 'text-zinc-300');
       });
-      event.target.classList.remove('bg-white/5', 'text-zinc-300');
-      event.target.classList.add('bg-white', 'text-black');
+      const activeBtn = btnElement || document.querySelector(`[data-theme="${theme}"]`);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-white/5', 'text-zinc-300');
+        activeBtn.classList.add('bg-white', 'text-black');
+      }
 
+      if (!box) return;
       if (theme === 'oled') {
         box.style.background = 'rgba(0, 0, 0, 0.98)';
         box.style.borderColor = 'rgba(255, 255, 255, 0.12)';
@@ -1129,12 +1255,14 @@
     function toggleVinylEffect() {
       vinylActive = !vinylActive;
       const btn = document.getElementById('vinylToggle');
-      if (vinylActive) {
-        btn.classList.add('bg-white', 'text-black');
-        btn.classList.remove('bg-white/5', 'text-zinc-300');
-      } else {
-        btn.classList.remove('bg-white', 'text-black');
-        btn.classList.add('bg-white/5', 'text-zinc-300');
+      if (btn) {
+        if (vinylActive) {
+          btn.classList.add('bg-white', 'text-black');
+          btn.classList.remove('bg-white/5', 'text-zinc-300');
+        } else {
+          btn.classList.remove('bg-white', 'text-black');
+          btn.classList.add('bg-white/5', 'text-zinc-300');
+        }
       }
     }
 
@@ -1142,46 +1270,73 @@
     function toggleBassEffect() {
       bassActive = !bassActive;
       const btn = document.getElementById('bassToggle');
-      if (bassActive) {
-        btn.classList.add('bg-white', 'text-black');
-        btn.classList.remove('bg-white/5', 'text-zinc-300');
-      } else {
-        btn.classList.remove('bg-white', 'text-black');
-        btn.classList.add('bg-white/5', 'text-zinc-300');
+      if (btn) {
+        if (bassActive) {
+          btn.classList.add('bg-white', 'text-black');
+          btn.classList.remove('bg-white/5', 'text-zinc-300');
+        } else {
+          btn.classList.remove('bg-white', 'text-black');
+          btn.classList.add('bg-white/5', 'text-zinc-300');
+        }
       }
     }
 
-    function updateEqVisual() {}
+    function updateEqVisual(slider) {
+      if (!slider) return;
+      const val = parseInt(slider.value, 10);
+      const col = slider.closest('.flex-col');
+      if (col) {
+        const label = col.querySelector('span:first-child');
+        if (label) {
+          label.textContent = val > 0 ? `+${val}` : `${val}`;
+          label.className = val !== 0 ? 'text-[10px] font-mono text-white font-bold' : 'text-[10px] font-mono text-zinc-500';
+        }
+      }
+    }
 
     // 5. Public Interactive Roadmap API Fetch & Voting
-    async function loadRoadmap() {
+    const defaultRoadmapItems = [
+      { id: 'carplay_auto', title: 'Поддержка Android Auto и Apple CarPlay', category: 'Платформы', votes: 148 },
+      { id: 'airplay_cast', title: 'Беспроводной стриминг (AirPlay, Chromecast, DLNA)', category: 'Связь', votes: 122 },
+      { id: 'smart_lyrics', title: 'Синхронный перевод иностранных песен на русский язык', category: 'Караоке', votes: 99 },
+      { id: 'listen_together', title: 'Комнаты совместного прослушивания (Listen Along с друзьями)', category: 'Сообщество', votes: 89 },
+      { id: 'smart_ai_wave', title: 'Умная Моя Волна: фильтрация по BPM, настроению и эпохам', category: 'Рекомендации', votes: 139 },
+    ];
+
+    function renderRoadmap(items) {
       const container = document.getElementById('roadmapList');
       if (!container) return;
+      container.innerHTML = '';
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'glass-card p-3.5 sm:p-4 rounded-xl flex items-center justify-between gap-3 sm:gap-4 border border-white/5 hover:border-white/20 transition';
+        card.innerHTML = `
+          <div class="space-y-1 min-w-0 pr-2">
+            <span class="text-[10px] font-mono text-zinc-400 uppercase tracking-widest bg-white/5 px-2 py-0.5 rounded border border-white/10">${item.category}</span>
+            <h4 class="text-xs sm:text-sm font-bold text-white leading-snug">${item.title}</h4>
+          </div>
+          <button onclick="voteRoadmap('${item.id}', this)" aria-label="Проголосовать" class="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white hover:text-black text-zinc-300 text-xs font-mono font-bold transition flex-shrink-0 border border-white/10 active:scale-95">
+            <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i>
+            <span class="vote-count font-mono">${item.votes}</span>
+          </button>
+        `;
+        container.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    async function loadRoadmap() {
       try {
         const res = await fetch('/api/roadmap');
         const data = await res.json();
-        if (data.success && Array.isArray(data.items)) {
-          container.innerHTML = '';
-          data.items.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'glass-card p-4 rounded-xl flex items-center justify-between gap-4 border border-white/5 hover:border-white/20 transition';
-            card.innerHTML = `
-              <div class="space-y-1">
-                <span class="text-[10px] font-mono text-zinc-400 uppercase tracking-widest bg-white/5 px-2 py-0.5 rounded border border-white/10">${item.category}</span>
-                <h4 class="text-sm font-bold text-white">${item.title}</h4>
-              </div>
-              <button onclick="voteRoadmap('${item.id}', this)" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white hover:text-black text-zinc-300 text-xs font-mono font-bold transition flex-shrink-0 border border-white/10">
-                <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i>
-                <span class="vote-count font-mono">${item.votes}</span>
-              </button>
-            `;
-            container.appendChild(card);
-          });
-          lucide.createIcons();
+        if (data.success && Array.isArray(data.items) && data.items.length > 0) {
+          renderRoadmap(data.items);
+          return;
         }
       } catch (e) {
-        console.warn('Roadmap load fallback:', e);
+        console.warn('Roadmap API fallback to default items:', e);
       }
+      renderRoadmap(defaultRoadmapItems);
     }
     loadRoadmap();
 
@@ -1210,21 +1365,60 @@
       } catch (e) {}
     }
 
-    // 6. Feedback Modal Controller
+    // 6. Mobile Navigation Dropdown Controller
+    function toggleMobileMenu() {
+      const dropdown = document.getElementById('mobileMenuDropdown');
+      const icon = document.getElementById('mobileMenuIcon');
+      if (!dropdown) return;
+      const isHidden = dropdown.classList.contains('hidden');
+      if (isHidden) {
+        dropdown.classList.remove('hidden');
+        if (icon) icon.setAttribute('data-lucide', 'x');
+      } else {
+        dropdown.classList.add('hidden');
+        if (icon) icon.setAttribute('data-lucide', 'menu');
+      }
+      lucide.createIcons();
+    }
+
+    function closeMobileMenu() {
+      const dropdown = document.getElementById('mobileMenuDropdown');
+      const icon = document.getElementById('mobileMenuIcon');
+      if (dropdown) dropdown.classList.add('hidden');
+      if (icon) icon.setAttribute('data-lucide', 'menu');
+      lucide.createIcons();
+    }
+
+    // 7. Feedback Modal Controller
     function openFeedbackModal() {
+      closeMobileMenu();
       const modal = document.getElementById('feedbackModal');
+      if (!modal) return;
       modal.classList.remove('opacity-0', 'pointer-events-none');
-      document.getElementById('feedbackForm').classList.remove('hidden');
-      document.getElementById('fbSuccessBox').classList.add('hidden');
+      const form = document.getElementById('feedbackForm');
+      const successBox = document.getElementById('fbSuccessBox');
+      if (form) form.classList.remove('hidden');
+      if (successBox) successBox.classList.add('hidden');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeFeedbackModal() {
       const modal = document.getElementById('feedbackModal');
+      if (!modal) return;
       modal.classList.add('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = '';
     }
 
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeFeedbackModal();
+        closeMobileMenu();
+      }
+    });
+
     function setFeedbackCategory(cat) {
-      document.getElementById('fbCategory').value = cat;
+      const catInput = document.getElementById('fbCategory');
+      if (catInput) catInput.value = cat;
       const btns = document.querySelectorAll('.fb-cat-btn');
       btns.forEach(b => {
         b.classList.remove('bg-white', 'text-black');
@@ -1281,14 +1475,33 @@
       }
     }
 
-    // 7. Cookie Banner Logic
+    // 8. Cookie Banner Controller
+    function dismissCookieBanner() {
+      try {
+        localStorage.setItem('sonora_cookie_accepted', 'true');
+      } catch (e) {}
+      const banner = document.getElementById('cookieBanner');
+      if (banner) {
+        banner.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => {
+          banner.style.display = 'none';
+        }, 300);
+      }
+    }
+
     (function initCookieBanner() {
       const banner = document.getElementById('cookieBanner');
       if (!banner) return;
-      if (!localStorage.getItem('sonora_cookie_accepted')) {
-        setTimeout(() => {
-          banner.classList.remove('opacity-0', 'pointer-events-none');
-        }, 1200);
+      try {
+        if (!localStorage.getItem('sonora_cookie_accepted')) {
+          setTimeout(() => {
+            banner.classList.remove('opacity-0', 'pointer-events-none');
+          }, 1200);
+        } else {
+          banner.style.display = 'none';
+        }
+      } catch (e) {
+        banner.style.display = 'none';
       }
     })();
 
