@@ -6,6 +6,16 @@
   "assets": {
     "directory": "."
   },
+  "routes": [
+    {
+      "pattern": "sonoramusic.ru",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.sonoramusic.ru",
+      "custom_domain": true
+    }
+  ],
   "kv_namespaces": [
     {
       "binding": "SONORA_KV",
