@@ -3,19 +3,10 @@
   "name": "sonora-website",
   "main": "worker.js",
   "compatibility_date": "2024-09-23",
+  "workers_dev": true,
   "assets": {
     "directory": "."
   },
-  "routes": [
-    {
-      "pattern": "sonoramusic.ru",
-      "custom_domain": true
-    },
-    {
-      "pattern": "www.sonoramusic.ru",
-      "custom_domain": true
-    }
-  ],
   "kv_namespaces": [
     {
       "binding": "SONORA_KV",
