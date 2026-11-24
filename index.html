@@ -125,7 +125,17 @@
     }
   </style>
 </head>
-<body class="bg-grid selection:bg-white/20 selection:text-white">
+<body class="bg-grid selection:bg-white/20 selection:text-white relative">
+
+  <!-- ATMOSPHERIC LIGHT RAYS VIDEO BACKGROUND (HEADER HERO) -->
+  <div id="headerVideoWrapper" class="fixed top-0 inset-x-0 h-[100vh] min-h-[720px] max-h-[1100px] overflow-hidden pointer-events-none z-0 transition-opacity duration-300" style="will-change: opacity;">
+    <video id="headerLightRaysVideo" autoplay muted loop playsinline preload="auto" class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full object-cover object-top" style="filter: blur(14px) contrast(1.18) brightness(0.92); mix-blend-mode: screen; opacity: 0.92;">
+      <source src="assets/videos/light_rays.mp4" type="video/mp4">
+    </video>
+    <!-- Seamless Gradient Vignette merging into Obsidian Black -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black pointer-events-none"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.8)_100%)] pointer-events-none"></div>
+  </div>
 
   <!-- STICKY PRECISION HEADER -->
   <header class="fixed top-4 inset-x-0 z-50 flex justify-center px-4" id="mainHeader">
@@ -786,14 +796,26 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="border-t border-white/5 py-10 relative z-10 bg-black">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-zinc-500">
+  <!-- FOOTER WITH ABYSS & FLOATING LIGHT SPARKS CANVAS -->
+  <footer id="abyssFooter" class="relative z-10 overflow-hidden bg-black border-t border-white/10 pt-24 pb-14">
+    <!-- Deep Void Radial Gradient -->
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-zinc-900/50 via-black to-black pointer-events-none"></div>
+
+    <!-- Interactive HTML5 Abyss Canvas with Flying Light Sparks -->
+    <canvas id="abyssCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- Fog / Mist layer at the threshold of the abyss -->
+    <div class="absolute top-0 inset-x-0 h-20 bg-gradient-to-b from-black to-transparent pointer-events-none z-0"></div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-zinc-500">
       <div class="flex items-center gap-3">
-        <div class="w-6 h-6 rounded bg-white/5 border border-white/10 flex items-center justify-center">
-          <i data-lucide="disc" class="w-3.5 h-3.5 text-white"></i>
+        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/15 flex items-center justify-center shadow-lg">
+          <i data-lucide="disc" class="w-4 h-4 text-white"></i>
         </div>
-        <span>© 2026 Sonora Music Project. Свободный звук без границ.</span>
+        <div>
+          <span class="text-zinc-300 font-bold block">Sonora Music Project</span>
+          <span class="text-[11px] text-zinc-600">Свободный звук без границ • 100% бесплатно</span>
+        </div>
       </div>
 
       <div class="flex flex-wrap items-center gap-6 font-medium">
@@ -1270,13 +1292,160 @@
       }
     })();
 
-    function dismissCookieBanner() {
-      localStorage.setItem('sonora_cookie_accepted', 'true');
-      const banner = document.getElementById('cookieBanner');
-      if (banner) {
-        banner.classList.add('opacity-0', 'pointer-events-none');
+    // 8. SCROLL-DRIVEN LIGHT RAYS OPACITY FADER (HEADER HERO)
+    (function initScrollFadeRays() {
+      const wrapper = document.getElementById('headerVideoWrapper');
+      if (!wrapper) return;
+      let ticking = false;
+
+      function updateRaysOpacity() {
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        // Fade from 1.0 down to 0.0 across 850px of downward scroll
+        const fadeRange = 850;
+        const opacity = Math.max(0, Math.min(1, 1 - (scrollY / fadeRange)));
+        wrapper.style.opacity = opacity.toFixed(3);
+        if (opacity <= 0.005) {
+          wrapper.style.visibility = 'hidden';
+        } else {
+          wrapper.style.visibility = 'visible';
+        }
+        ticking = false;
       }
-    }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(updateRaysOpacity);
+          ticking = true;
+        }
+      }, { passive: true });
+
+      updateRaysOpacity();
+    })();
+
+    // 9. HIGH-PERFORMANCE ABYSS CANVAS ENGINE (FLOATING LUMINESCENT SPARKS)
+    (function initAbyssSparks() {
+      const canvas = document.getElementById('abyssCanvas');
+      const footer = document.getElementById('abyssFooter');
+      if (!canvas || !footer) return;
+      const ctx = canvas.getContext('2d');
+      let w = 0, h = 0;
+      let isVisible = false;
+      let animId = null;
+
+      function resize() {
+        w = canvas.width = footer.clientWidth;
+        h = canvas.height = footer.clientHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      // Particle Count & Pool
+      const count = Math.min(65, Math.max(35, Math.floor(window.innerWidth / 25)));
+      const particles = [];
+
+      class Spark {
+        constructor() {
+          this.reset(true);
+        }
+
+        reset(initial = false) {
+          this.x = Math.random() * (w || 1000);
+          this.y = initial ? Math.random() * (h || 400) : (h + 10 + Math.random() * 20);
+          this.radius = 0.8 + Math.random() * 2.2;
+          this.speedY = 0.35 + Math.random() * 0.75;
+          this.swaySpeed = 0.015 + Math.random() * 0.025;
+          this.swayAmp = 0.6 + Math.random() * 1.8;
+          this.angle = Math.random() * Math.PI * 2;
+          this.maxAlpha = 0.35 + Math.random() * 0.55;
+          this.alpha = initial ? Math.random() * this.maxAlpha : 0;
+          this.fadeIn = true;
+          // 80% icy silver/white, 20% warm golden/amber micro-flashes
+          this.isWarm = Math.random() < 0.22;
+          this.colorR = this.isWarm ? 255 : (210 + Math.floor(Math.random() * 45));
+          this.colorG = this.isWarm ? (165 + Math.floor(Math.random() * 45)) : (220 + Math.floor(Math.random() * 35));
+          this.colorB = this.isWarm ? 85 : 255;
+        }
+
+        update() {
+          this.y -= this.speedY;
+          this.angle += this.swaySpeed;
+          this.x += Math.sin(this.angle) * this.swayAmp;
+
+          // Smooth Fade In as it emerges, Fade Out as it ascends
+          if (this.fadeIn) {
+            this.alpha += 0.018;
+            if (this.alpha >= this.maxAlpha) {
+              this.fadeIn = false;
+            }
+          } else {
+            // Natural dissipation near the top
+            const heightRatio = this.y / h;
+            if (heightRatio < 0.4) {
+              this.alpha *= 0.985;
+            }
+          }
+
+          if (this.y < -15 || this.alpha <= 0.01 || this.x < -20 || this.x > w + 20) {
+            this.reset(false);
+          }
+        }
+
+        draw() {
+          if (this.alpha <= 0.01) return;
+          const glowRadius = this.radius * 3.8;
+          const radGrad = ctx.createRadialGradient(
+            this.x, this.y, 0,
+            this.x, this.y, glowRadius
+          );
+          radGrad.addColorStop(0, `rgba(${this.colorR}, ${this.colorG}, ${this.colorB}, ${this.alpha.toFixed(2)})`);
+          radGrad.addColorStop(0.35, `rgba(${this.colorR}, ${this.colorG}, ${this.colorB}, ${(this.alpha * 0.45).toFixed(2)})`);
+          radGrad.addColorStop(1, `rgba(${this.colorR}, ${this.colorG}, ${this.colorB}, 0)`);
+
+          ctx.fillStyle = radGrad;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, glowRadius, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Bright Core Diamond
+          ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, this.alpha * 1.3).toFixed(2)})`;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius * 0.75, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      for (let i = 0; i < count; i++) {
+        particles.push(new Spark());
+      }
+
+      function loop() {
+        if (!isVisible) return;
+        ctx.clearRect(0, 0, w, h);
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update();
+          particles[i].draw();
+        }
+        animId = requestAnimationFrame(loop);
+      }
+
+      // Intersection Observer for 0% CPU consumption when out of view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!isVisible) {
+              isVisible = true;
+              resize();
+              loop();
+            }
+          } else {
+            isVisible = false;
+            if (animId) cancelAnimationFrame(animId);
+          }
+        });
+      }, { threshold: 0.05 });
+
+      observer.observe(footer);
+    })();
   </script>
 </body>
 </html>

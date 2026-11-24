@@ -16,7 +16,7 @@ html_content = r'''<!DOCTYPE html>
   <meta property="og:title" content="Sonora Music — Музыка всех миров">
   <meta property="og:description" content="18 музыкальных площадок в одном монолитном плеере. 100% бесплатно навсегда.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://sonora-website.maksinegor821.workers.dev/">
+  <meta property="og:url" content="https://sonora-website.sonoramusic.workers.dev/">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/sonora_icon.png?v=2.7">
