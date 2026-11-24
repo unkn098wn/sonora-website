@@ -165,10 +165,10 @@ html_content = r'''<!DOCTYPE html>
   </div>
 
   <!-- STICKY PRECISION HEADER -->
-  <header class="fixed top-3 sm:top-4 inset-x-0 z-50 flex flex-col items-center px-2.5 sm:px-4" id="mainHeader">
+  <header class="fixed top-2.5 sm:top-4 inset-x-0 z-50 flex flex-col items-center px-3 sm:px-4" id="mainHeader">
     <nav class="glass-card rounded-2xl lg:rounded-full px-3.5 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between gap-2 sm:gap-4 max-w-5xl w-full border border-white/10 shadow-2xl relative">
       <!-- Logo -->
-      <a href="#" class="flex items-center gap-2 sm:gap-3 group flex-shrink-0">
+      <a href="#" class="flex items-center gap-2 sm:gap-3 group flex-shrink-0" aria-label="Sonora Music Главная">
         <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-zinc-900 border border-white/15 flex items-center justify-center p-1 sm:p-1.5 transition duration-300 group-hover:border-white/40">
           <i data-lucide="disc" class="w-4 h-4 text-white group-hover:rotate-90 transition duration-700"></i>
         </div>
@@ -190,23 +190,25 @@ html_content = r'''<!DOCTYPE html>
 
       <!-- Action Buttons -->
       <div class="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
-        <button onclick="openFeedbackModal()" class="text-xs font-bold text-zinc-300 hover:text-white p-1.5 sm:px-3 sm:py-1.5 rounded-lg border border-white/10 hover:bg-white/5 transition flex items-center gap-1.5" title="Обратная связь">
+        <!-- Feedback Button (Desktop / Tablet) -->
+        <button onclick="openFeedbackModal()" class="hidden sm:flex text-xs font-bold text-zinc-300 hover:text-white px-3 py-1.5 rounded-lg border border-white/10 hover:bg-white/5 transition items-center gap-1.5 active:scale-95" title="Обратная связь">
           <i data-lucide="message-square" class="w-3.5 h-3.5 text-zinc-400"></i>
-          <span class="hidden sm:inline">Отзыв</span>
+          <span>Отзыв</span>
         </button>
-        <a href="#download" class="bg-white hover:bg-zinc-200 text-black font-extrabold text-xs px-3 sm:px-4 py-1.5 rounded-full transition transform hover:scale-105 active:scale-95 flex items-center gap-1.5 shadow-lg shadow-white/5 flex-shrink-0">
+        <!-- Download CTA Button (Responsive) -->
+        <a href="#download" class="bg-white hover:bg-zinc-200 text-black font-extrabold text-xs px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full transition transform hover:scale-105 active:scale-95 flex items-center gap-1.5 shadow-lg shadow-white/5 flex-shrink-0">
           <i data-lucide="download" class="w-3.5 h-3.5"></i>
           <span>Скачать</span>
         </a>
         <!-- Mobile Menu Toggle Button -->
-        <button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Открыть навигацию" class="lg:hidden text-zinc-300 hover:text-white p-1.5 rounded-lg border border-white/10 hover:bg-white/5 transition flex items-center justify-center">
+        <button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Открыть навигацию" class="lg:hidden text-zinc-300 hover:text-white p-1.5 sm:p-2 rounded-lg border border-white/10 hover:bg-white/5 transition flex items-center justify-center flex-shrink-0 active:scale-95">
           <i data-lucide="menu" id="mobileMenuIcon" class="w-4 h-4"></i>
         </button>
       </div>
     </nav>
 
     <!-- Mobile Dropdown Navigation -->
-    <div id="mobileMenuDropdown" class="hidden lg:hidden w-full max-w-5xl mt-2 glass-card rounded-2xl p-3 sm:p-4 border border-white/10 shadow-2xl backdrop-blur-2xl bg-black/95 flex flex-col space-y-2 font-mono text-xs text-zinc-300 transition-all duration-300">
+    <div id="mobileMenuDropdown" class="hidden lg:hidden w-full max-w-5xl mt-2 glass-card rounded-2xl p-3 sm:p-4 border border-white/10 shadow-2xl backdrop-blur-2xl bg-black/95 flex flex-col space-y-1 font-mono text-xs text-zinc-300 transition-all duration-300">
       <a href="#spectrogram" onclick="closeMobileMenu()" class="p-2.5 hover:bg-white/5 rounded-xl hover:text-white flex items-center justify-between border border-transparent hover:border-white/5">
         <span class="flex items-center gap-2"><i data-lucide="activity" class="w-3.5 h-3.5 text-zinc-400"></i> Спектрограмма</span>
         <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-500"></i>
@@ -231,7 +233,16 @@ html_content = r'''<!DOCTYPE html>
         <span class="flex items-center gap-2"><i data-lucide="help-circle" class="w-3.5 h-3.5 text-zinc-400"></i> FAQ</span>
         <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-500"></i>
       </a>
-      <div class="pt-2.5 border-t border-white/10 flex items-center justify-between text-[11px] text-zinc-400">
+      <div class="my-1 border-t border-white/10"></div>
+      <a href="#download" onclick="closeMobileMenu()" class="p-2.5 bg-white text-black font-extrabold rounded-xl flex items-center justify-between">
+        <span class="flex items-center gap-2"><i data-lucide="download" class="w-3.5 h-3.5"></i> Скачать плеер (Windows / Android)</span>
+        <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
+      </a>
+      <button onclick="openFeedbackModal(); closeMobileMenu();" class="w-full p-2.5 hover:bg-white/5 rounded-xl hover:text-white flex items-center justify-between border border-transparent hover:border-white/5 text-left">
+        <span class="flex items-center gap-2"><i data-lucide="message-square" class="w-3.5 h-3.5 text-zinc-400"></i> Написать разработчику (Отзыв / Баг)</span>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-500"></i>
+      </button>
+      <div class="pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-zinc-400">
         <span>Sonora Music v2.6.0</span>
         <a href="https://t.me/sonoramus1c_bot" target="_blank" class="text-white hover:underline flex items-center gap-1 font-sans">
           <i data-lucide="send" class="w-3 h-3"></i> Telegram-бот
@@ -260,30 +271,30 @@ html_content = r'''<!DOCTYPE html>
     </p>
 
     <!-- Official Installers Download Buttons -->
-    <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-xl mx-auto w-full">
+    <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-2xl mx-auto w-full">
       <!-- Windows Setup Button -->
-      <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Setup.exe" class="w-full sm:w-auto bg-white text-black font-extrabold text-xs sm:text-base px-6 sm:px-8 py-3.5 rounded-xl flex items-center justify-center gap-2.5 sm:gap-3 transition transform hover:scale-[1.02] active:scale-[0.98] shadow-2xl hover:bg-zinc-200">
+      <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Setup.exe" class="w-full sm:w-auto bg-white text-black font-extrabold text-xs sm:text-sm md:text-base px-5 sm:px-7 py-3.5 rounded-xl flex items-center justify-center gap-2 sm:gap-3 transition transform hover:scale-[1.02] active:scale-[0.98] shadow-2xl hover:bg-zinc-200">
         <i data-lucide="monitor" class="w-4 h-4 flex-shrink-0"></i>
-        <span>Скачать для Windows (.exe)</span>
+        <span>Windows Setup (.exe)</span>
         <span class="text-[11px] sm:text-xs font-mono font-bold bg-black/10 px-2 py-0.5 rounded flex-shrink-0">27.2 МБ</span>
       </a>
 
       <!-- Android Universal APK Button -->
-      <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Android.apk" class="w-full sm:w-auto glass-card hover:bg-white/5 text-white font-bold text-xs sm:text-base px-6 sm:px-8 py-3.5 rounded-xl flex items-center justify-center gap-2.5 sm:gap-3 transition transform hover:scale-[1.02] active:scale-[0.98] border border-white/15">
+      <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Android.apk" class="w-full sm:w-auto glass-card hover:bg-white/5 text-white font-bold text-xs sm:text-sm md:text-base px-5 sm:px-7 py-3.5 rounded-xl flex items-center justify-center gap-2 sm:gap-3 transition transform hover:scale-[1.02] active:scale-[0.98] border border-white/15">
         <i data-lucide="smartphone" class="w-4 h-4 text-zinc-300 flex-shrink-0"></i>
-        <span>Скачать для Android (APK)</span>
+        <span>Android (APK)</span>
         <span class="text-[11px] sm:text-xs font-mono text-zinc-400 bg-white/5 px-2 py-0.5 rounded border border-white/10 flex-shrink-0">132.6 МБ</span>
       </a>
 
       <!-- Telegram Bot CTA -->
-      <a href="https://t.me/sonoramus1c_bot" target="_blank" class="w-full sm:w-auto glass-card hover:bg-white/5 text-zinc-300 hover:text-white font-bold text-xs sm:text-base px-5 sm:px-6 py-3.5 rounded-xl flex items-center justify-center gap-2 sm:gap-2.5 transition transform hover:scale-[1.02] active:scale-[0.98] border border-white/10">
+      <a href="https://t.me/sonoramus1c_bot" target="_blank" class="w-full sm:w-auto glass-card hover:bg-white/5 text-zinc-300 hover:text-white font-bold text-xs sm:text-sm md:text-base px-4 sm:px-5 py-3.5 rounded-xl flex items-center justify-center gap-2 transition transform hover:scale-[1.02] active:scale-[0.98] border border-white/10">
         <svg class="w-4 h-4 fill-current flex-shrink-0" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.18 3.35-1.38 3.73-1.39.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
         <span>Telegram-бот</span>
       </a>
     </div>
 
     <!-- INTERACTIVE 3D SPECTROGRAM STAGE CARD -->
-    <div id="spectrogram" class="mt-12 sm:mt-16 relative perspective-1000 max-w-4xl mx-auto">
+    <div id="spectrogram" class="scroll-mt-24 mt-12 sm:mt-16 relative perspective-1000 max-w-4xl mx-auto">
       <div id="spectrogramCard" class="glass-card rounded-2xl p-4 sm:p-8 border border-white/10 preserve-3d transition-transform duration-200 shadow-2xl relative overflow-hidden">
         
         <!-- Header row of the Workbench -->
@@ -298,8 +309,8 @@ html_content = r'''<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- 3D Canvas Spectrogram Container -->
-        <div class="relative w-full h-48 sm:h-64 my-4 flex items-center justify-center overflow-hidden rounded-xl bg-black/40 border border-white/5 touch-none">
+        <!-- 3D Canvas Spectrogram Container with Touch-Pan-Y -->
+        <div class="relative w-full h-48 sm:h-64 my-4 flex items-center justify-center overflow-hidden rounded-xl bg-black/40 border border-white/5 touch-pan-y">
           <canvas id="spectrogramCanvas" class="w-full h-full cursor-crosshair"></canvas>
           
           <!-- Subtle Spectrogram Watermark Overlay -->
@@ -324,50 +335,6 @@ html_content = r'''<!DOCTYPE html>
             <span class="text-[10px] sm:text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-zinc-300">10-Band EQ: Flat Hi-Fi</span>
             <span class="text-[10px] sm:text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-zinc-300">Vinyl Crackle: 33⅓</span>
             <span class="text-[10px] sm:text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/20 text-white font-semibold">Cloud KV Synced</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-        
-        <!-- Header row of the Workbench -->
-        <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/5">
-          <div class="flex items-center gap-3">
-            <span class="w-2 h-2 rounded-full bg-white"></span>
-            <span class="text-xs font-mono uppercase tracking-widest text-zinc-300 font-bold">ИНТЕРАКТИВНАЯ 3D-СПЕКТРОГРАММА</span>
-          </div>
-          <div class="flex items-center gap-3 font-mono text-xs">
-            <span class="px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">FLAC 24-BIT / 96kHz</span>
-            <span class="text-zinc-500">LOSSLESS 1411 KBPS</span>
-          </div>
-        </div>
-
-        <!-- 3D Canvas Spectrogram Container -->
-        <div class="relative w-full h-56 sm:h-64 my-4 flex items-center justify-center overflow-hidden rounded-xl bg-black/40 border border-white/5">
-          <canvas id="spectrogramCanvas" class="w-full h-full cursor-crosshair"></canvas>
-          
-          <!-- Subtle Spectrogram Watermark Overlay -->
-          <div class="absolute bottom-3 right-4 pointer-events-none text-right font-mono text-[10px] text-zinc-600">
-            <div>FFT SPECTRUM • 32 BANDS</div>
-            <div>REAL-TIME DSP HARMONICS</div>
-          </div>
-        </div>
-
-        <!-- Track & Audio Pipeline Status -->
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-3 text-left">
-          <div class="space-y-1">
-            <div class="text-sm font-bold text-white flex items-center gap-2">
-              <i data-lucide="volume-2" class="w-4 h-4 text-zinc-400"></i>
-              <span>Shadows in the Dark — Kavinsky</span>
-            </div>
-            <p class="text-xs font-mono text-zinc-500">Audio Pipeline: Direct WASAPI Output • Micro-Fade 40ms Active</p>
-          </div>
-
-          <!-- Feature Pills in Monochrome Titanium -->
-          <div class="flex flex-wrap gap-2">
-            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-zinc-300">10-Band EQ: Flat Hi-Fi</span>
-            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-zinc-300">Vinyl Crackle: 33⅓</span>
-            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/10 border border-white/20 text-white font-semibold">Cloud KV Synced</span>
           </div>
         </div>
 
@@ -411,7 +378,7 @@ html_content = r'''<!DOCTYPE html>
   </section>
 
   <!-- 18 STREAMING PLATFORMS SHOWCASE (MONOCHROME TITANIUM BADGES) -->
-  <section id="platforms" class="max-w-6xl mx-auto px-4 py-16 relative z-10">
+  <section id="platforms" class="scroll-mt-24 max-w-6xl mx-auto px-4 py-16 relative z-10">
     <div class="text-center mb-12">
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono font-medium mb-3">
         <i data-lucide="radio" class="w-3.5 h-3.5"></i>
@@ -422,165 +389,165 @@ html_content = r'''<!DOCTYPE html>
     </div>
 
     <!-- 18 Platform Cards Grid with Official Monochrome SVGs -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-4">
       
       <!-- 1. YouTube Music -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14.5c-2.49 0-4.5-2.01-4.5-4.5S9.51 7.5 12 7.5s4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5zm0-5.5c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-2 1l5-3-5-3v6z"/></svg>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-white" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14.5c-2.49 0-4.5-2.01-4.5-4.5S9.51 7.5 12 7.5s4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5zm0-5.5c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-2 1l5-3-5-3v6z"/></svg>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">YouTube Music</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">FLAC & Клипы</span>
       </div>
 
       <!-- 2. SoundCloud -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.88c1.96 0 3.56-1.57 3.56-3.5 0-1.9-1.52-3.44-3.42-3.5-.27-2.73-2.58-4.87-5.42-4.87-1.39 0-2.67.51-3.6 1.37zm-2.04 8.13V9.67c-.2.27-.37.58-.51.9v6.43h.51zm-1.53 0v-5.8c-.26.47-.46.99-.58 1.54v4.26h.58zm-1.53 0v-3.72c-.17.65-.26 1.34-.26 2.05v1.67h.26zm-1.53 0v-1.67c0-.28-.02-.56-.05-.84v2.51h.05z"/></svg>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-white" viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.88c1.96 0 3.56-1.57 3.56-3.5 0-1.9-1.52-3.44-3.42-3.5-.27-2.73-2.58-4.87-5.42-4.87-1.39 0-2.67.51-3.6 1.37zm-2.04 8.13V9.67c-.2.27-.37.58-.51.9v6.43h.51zm-1.53 0v-5.8c-.26.47-.46.99-.58 1.54v4.26h.58zm-1.53 0v-3.72c-.17.65-.26 1.34-.26 2.05v1.67h.26zm-1.53 0v-1.67c0-.28-.02-.56-.05-.84v2.51h.05z"/></svg>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">SoundCloud</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">Remixes & HQ</span>
       </div>
 
       <!-- 3. Deezer -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M18.8 6.2h3.9V9h-3.9zm-4.7 0H18V9h-3.9zm9.4 4.3v2.8h-3.9v-2.8zm-4.7 0v2.8H18v-2.8zm-4.7 0v2.8h3.9v-2.8zm9.4 4.3v2.8h-3.9v-2.8zm-4.7 0v2.8H18v-2.8zm-4.7 0v2.8h3.9v-2.8zm-4.7 0v2.8h3.9v-2.8zm-4.7 0v2.8H9v-2.8zm18.8 4.3v2.8h-3.9v-2.8zm-4.7 0v2.8H18v-2.8zm-4.7 0v2.8h3.9v-2.8zm-4.7 0v2.8H9v-2.8zm-4.7 0v2.8H4.3v-2.8z"/></svg>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-white" viewBox="0 0 24 24"><path d="M18.8 6.2h3.9V9h-3.9zm-4.7 0H18V9h-3.9zm9.4 4.3v2.8h-3.9v-2.8zm-4.7 0v2.8H18v-2.8zm-4.7 0v2.8h3.9v-2.8zm9.4 4.3v2.8h-3.9v-2.8zm-4.7 0v2.8H18v-2.8zm-4.7 0v2.8h3.9v-2.8zm-4.7 0v2.8h3.9v-2.8zm-4.7 0v2.8H9v-2.8zm18.8 4.3v2.8h-3.9v-2.8zm-4.7 0v2.8H18v-2.8zm-4.7 0v2.8h3.9v-2.8zm-4.7 0v2.8H9v-2.8zm-4.7 0v2.8H4.3v-2.8z"/></svg>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">Deezer</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">FLAC 1411 kbps</span>
       </div>
 
       <!-- 4. Яндекс Музыка -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-white" viewBox="0 0 24 24"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">Яндекс Музыка</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">Моя Волна HQ</span>
       </div>
 
       <!-- 5. Spotify -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.35-1.434-5.308-1.758-8.793-.963-.335.077-.67-.133-.746-.469-.077-.334.132-.67.467-.747 3.813-.871 7.08-.507 9.721 1.115.295.18.388.563.208.857zm1.226-2.723c-.226.367-.706.482-1.072.257-2.687-1.652-6.785-2.131-9.965-1.166-.413.127-.849-.106-.974-.517-.125-.413.108-.849.52-.974 3.632-1.102 8.147-.568 11.234 1.328.366.226.481.707.257 1.072zm.106-2.835C14.692 8.87 9.375 8.694 6.297 9.628c-.494.15-1.018-.13-1.168-.624-.15-.494.13-1.018.624-1.168 3.532-1.072 9.404-.866 13.115 1.338.445.264.59.838.327 1.282-.264.443-.838.59-1.277.33z"/></svg>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-white" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.35-1.434-5.308-1.758-8.793-.963-.335.077-.67-.133-.746-.469-.077-.334.132-.67.467-.747 3.813-.871 7.08-.507 9.721 1.115.295.18.388.563.208.857zm1.226-2.723c-.226.367-.706.482-1.072.257-2.687-1.652-6.785-2.131-9.965-1.166-.413.127-.849-.106-.974-.517-.125-.413.108-.849.52-.974 3.632-1.102 8.147-.568 11.234 1.328.366.226.481.707.257 1.072zm.106-2.835C14.692 8.87 9.375 8.694 6.297 9.628c-.494.15-1.018-.13-1.168-.624-.15-.494.13-1.018.624-1.168 3.532-1.072 9.404-.866 13.115 1.338.445.264.59.838.327 1.282-.264.443-.838.59-1.277.33z"/></svg>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">Spotify</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">Импорт плейлистов</span>
       </div>
 
       <!-- 6. Apple Music -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.7 6.3l.003 4.88c0 1.63-1.08 2.62-2.5 2.62-1.32 0-2.32-.9-2.32-2.18s1-2.22 2.32-2.22c.4 0 .8.08 1.15.24V9.62l-3.35.83v4.32c0 1.63-1.08 2.62-2.5 2.62-1.32 0-2.32-.9-2.32-2.18s1-2.22 2.32-2.22c.4 0 .8.08 1.15.24V8.5c0-.6.44-1.1 1.03-1.22l4.17-.98c.55-.13 1.02.28 1.02.87z"/></svg>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-white" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.7 6.3l.003 4.88c0 1.63-1.08 2.62-2.5 2.62-1.32 0-2.32-.9-2.32-2.18s1-2.22 2.32-2.22c.4 0 .8.08 1.15.24V9.62l-3.35.83v4.32c0 1.63-1.08 2.62-2.5 2.62-1.32 0-2.32-.9-2.32-2.18s1-2.22 2.32-2.22c.4 0 .8.08 1.15.24V8.5c0-.6.44-1.1 1.03-1.22l4.17-.98c.55-.13 1.02.28 1.02.87z"/></svg>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">Apple Music</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">Каталоги & Тексты</span>
       </div>
 
       <!-- 7. VK Музыка -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5c-2.49 0-4.5-2.01-4.5-4.5S9.51 7.5 13 7.5v4.5h3.5c0 2.49-2.01 4.5-4.5 4.5z"/></svg>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-white" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5c-2.49 0-4.5-2.01-4.5-4.5S9.51 7.5 13 7.5v4.5h3.5c0 2.49-2.01 4.5-4.5 4.5z"/></svg>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">VK Музыка</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">Редкие ремиксы</span>
       </div>
 
       <!-- 8. Tidal -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M4 8l4-4 4 4-4 4-4-4zm8 0l4-4 4 4-4 4-4-4zm-4 4l4-4 4 4-4 4-4-4zm8 0l4-4 4 4-4 4-4-4z"/></svg>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-white" viewBox="0 0 24 24"><path d="M4 8l4-4 4 4-4 4-4-4zm8 0l4-4 4 4-4 4-4-4zm-4 4l4-4 4 4-4 4-4-4zm8 0l4-4 4 4-4 4-4-4z"/></svg>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">Tidal</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">MQA & Master</span>
       </div>
 
       <!-- 9. Bandcamp -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M0 18.75l7.437-13.5h16.563l-7.438 13.5z"/></svg>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-white" viewBox="0 0 24 24"><path d="M0 18.75l7.437-13.5h16.563l-7.438 13.5z"/></svg>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">Bandcamp</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">Инди & Андеграунд</span>
       </div>
 
       <!-- 10. PromoDJ -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="#000000"/></svg>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-white" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="#000000"/></svg>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">PromoDJ</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">DJ-миксы & Сеты</span>
       </div>
 
       <!-- 11. Audius -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M12 3l9 16H3l9-16zm0 5l-5 9h10l-5-9z"/></svg>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-white" viewBox="0 0 24 24"><path d="M12 3l9 16H3l9-16zm0 5l-5 9h10l-5-9z"/></svg>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">Audius</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">Web3 Музыка</span>
       </div>
 
       <!-- 12. JioSaavn -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6a6 6 0 100 12 6 6 0 000-12zm0 9a3 3 0 110-6 3 3 0 010 6z" fill="#000000"/></svg>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-white" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6a6 6 0 100 12 6 6 0 000-12zm0 9a3 3 0 110-6 3 3 0 010 6z" fill="#000000"/></svg>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">JioSaavn</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">Азиатские чарты</span>
       </div>
 
       <!-- 13. Mixcloud -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M5.5 12c0-1.9 1.5-3.5 3.5-3.5 1 0 1.9.4 2.5 1.1.7-1.3 2.1-2.1 3.7-2.1 2.3 0 4.2 1.8 4.3 4.1.8.4 1.5 1.3 1.5 2.4 0 1.4-1.1 2.5-2.5 2.5H6c-1.7 0-3-1.3-3-3 0-1.4 1-2.6 2.5-2.9v1.4z"/></svg>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-white" viewBox="0 0 24 24"><path d="M5.5 12c0-1.9 1.5-3.5 3.5-3.5 1 0 1.9.4 2.5 1.1.7-1.3 2.1-2.1 3.7-2.1 2.3 0 4.2 1.8 4.3 4.1.8.4 1.5 1.3 1.5 2.4 0 1.4-1.1 2.5-2.5 2.5H6c-1.7 0-3-1.3-3-3 0-1.4 1-2.6 2.5-2.9v1.4z"/></svg>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">Mixcloud</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">Радиошоу</span>
       </div>
 
       <!-- 14. Genius -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M4 4h16v16H4V4zm9 4h-2v4h2V8zm0 6h-2v2h2v-2z"/></svg>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-white" viewBox="0 0 24 24"><path d="M4 4h16v16H4V4zm9 4h-2v4h2V8zm0 6h-2v2h2v-2z"/></svg>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">Genius Lyrics</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">Тексты & Смыслы</span>
       </div>
 
       <!-- 15. Jamendo -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-white" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">Jamendo</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">Creative Commons</span>
       </div>
 
       <!-- 16. Newgrounds -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3"/><circle cx="8" cy="12" r="2" fill="#000000"/><circle cx="16" cy="12" r="2" fill="#000000"/></svg>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-white" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3"/><circle cx="8" cy="12" r="2" fill="#000000"/><circle cx="16" cy="12" r="2" fill="#000000"/></svg>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">Newgrounds</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">Игровые OST</span>
       </div>
 
       <!-- 17. Archive.org -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7L12 2zm-8 8v8h2v-8H4zm5 0v8h2v-8H9zm5 0v8h2v-8h-2zm5 0v8h2v-8h-2zM2 20v2h20v-2H2z"/></svg>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-white" viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7L12 2zm-8 8v8h2v-8H4zm5 0v8h2v-8H9zm5 0v8h2v-8h-2zm5 0v8h2v-8h-2zM2 20v2h20v-2H2z"/></svg>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">Archive.org</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">Ретро фонотека</span>
       </div>
 
       <!-- 18. Cloudflare KV Sync -->
-      <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center group">
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2.5 group-hover:scale-105 transition">
-          <i data-lucide="cloud" class="w-6 h-6 text-white"></i>
+      <div class="glass-card p-3.5 sm:p-4 rounded-xl flex flex-col items-center text-center group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 flex items-center justify-center p-2 mb-2 group-hover:scale-105 transition">
+          <i data-lucide="cloud" class="w-5 h-5 sm:w-6 sm:h-6 text-white"></i>
         </div>
         <span class="font-bold text-xs sm:text-sm text-white">Cloudflare KV</span>
         <span class="text-[10px] font-mono text-zinc-400 mt-1">Синхронизация</span>
@@ -590,7 +557,7 @@ html_content = r'''<!DOCTYPE html>
   </section>
 
   <!-- INTERACTIVE DSP EQUALIZER WORKBENCH (STUDIO RACKMOUNT CONSOLE) -->
-  <section id="dsp-studio" class="max-w-5xl mx-auto px-4 py-16 relative z-10">
+  <section id="dsp-studio" class="scroll-mt-24 max-w-5xl mx-auto px-4 py-16 relative z-10">
     <div class="text-center mb-10">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono font-medium mb-3">
         <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
@@ -607,9 +574,9 @@ html_content = r'''<!DOCTYPE html>
         <div>
           <span class="text-xs font-mono text-zinc-400 uppercase tracking-widest">Профиль оформления:</span>
           <div class="flex flex-wrap gap-2 mt-2">
-            <button onclick="setDemoTheme('obsidian', this)" data-theme="obsidian" class="theme-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-white text-black transition">Obsidian Pure</button>
-            <button onclick="setDemoTheme('oled', this)" data-theme="oled" class="theme-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-white/5 text-zinc-300 hover:bg-white/10 transition">OLED Zero</button>
-            <button onclick="setDemoTheme('titanium', this)" data-theme="titanium" class="theme-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-white/5 text-zinc-300 hover:bg-white/10 transition">Titanium Raw</button>
+            <button onclick="setDemoTheme('obsidian', this)" data-theme="obsidian" class="theme-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-white text-black transition active:scale-95 cursor-pointer">Obsidian Pure</button>
+            <button onclick="setDemoTheme('oled', this)" data-theme="oled" class="theme-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-white/5 text-zinc-300 hover:bg-white/10 transition active:scale-95 cursor-pointer">OLED Zero</button>
+            <button onclick="setDemoTheme('titanium', this)" data-theme="titanium" class="theme-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-white/5 text-zinc-300 hover:bg-white/10 transition active:scale-95 cursor-pointer">Titanium Raw</button>
           </div>
         </div>
 
@@ -617,11 +584,11 @@ html_content = r'''<!DOCTYPE html>
         <div>
           <span class="text-xs font-mono text-zinc-400 uppercase tracking-widest">Аналоговый тракт:</span>
           <div class="flex flex-wrap gap-2 mt-2">
-            <button id="vinylToggle" onclick="toggleVinylEffect()" class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white/5 text-zinc-300 border border-white/10 hover:border-white/30 transition flex items-center gap-1.5">
+            <button id="vinylToggle" onclick="toggleVinylEffect()" class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white/5 text-zinc-300 border border-white/10 hover:border-white/30 transition flex items-center gap-1.5 active:scale-95 cursor-pointer">
               <i data-lucide="disc" class="w-3.5 h-3.5 text-zinc-400"></i>
               <span>Винил 33⅓ RPM</span>
             </button>
-            <button id="bassToggle" onclick="toggleBassEffect()" class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white/5 text-zinc-300 border border-white/10 hover:border-white/30 transition flex items-center gap-1.5">
+            <button id="bassToggle" onclick="toggleBassEffect()" class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-white/5 text-zinc-300 border border-white/10 hover:border-white/30 transition flex items-center gap-1.5 active:scale-95 cursor-pointer">
               <i data-lucide="zap" class="w-3.5 h-3.5 text-zinc-400"></i>
               <span>Raw Bass +12dB</span>
             </button>
@@ -629,70 +596,87 @@ html_content = r'''<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- 10-Band Equalizer Sliders Mockup -->
-      <div class="mt-6">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-4">
+      <!-- DSP Studio Presets Quick Bar -->
+      <div class="mt-6 pt-1">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-3">
           <span class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
             <i data-lucide="activity" class="w-4 h-4 text-zinc-400"></i>
             DSP-эквалайзер (-12dB .. +12dB)
           </span>
-          <span id="eqPresetLabel" class="text-[11px] sm:text-xs font-mono text-zinc-400">Студийный пресет: Hi-Fi Linear Reference</span>
+          <span id="eqPresetLabel" class="text-[11px] sm:text-xs font-mono text-zinc-400">Пресет: Hi-Fi Linear Reference</span>
         </div>
 
+        <!-- Preset Switcher Pills -->
+        <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 -mx-1 px-1 mb-3">
+          <span class="text-[10px] font-mono text-zinc-500 uppercase tracking-wider whitespace-nowrap hidden sm:inline">Пресеты:</span>
+          <button onclick="applyEqPreset('flat')" class="eq-preset-btn text-[11px] font-mono px-2.5 py-1 rounded bg-white text-black font-bold border border-white transition active:scale-95 whitespace-nowrap cursor-pointer">Flat Hi-Fi</button>
+          <button onclick="applyEqPreset('bass')" class="eq-preset-btn text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 text-zinc-300 border border-white/10 hover:bg-white/10 transition active:scale-95 whitespace-nowrap cursor-pointer">Bass Boost +10dB</button>
+          <button onclick="applyEqPreset('edm')" class="eq-preset-btn text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 text-zinc-300 border border-white/10 hover:bg-white/10 transition active:scale-95 whitespace-nowrap cursor-pointer">Club / EDM</button>
+          <button onclick="applyEqPreset('vocal')" class="eq-preset-btn text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 text-zinc-300 border border-white/10 hover:bg-white/10 transition active:scale-95 whitespace-nowrap cursor-pointer">Vocal Clarity</button>
+          <button onclick="applyEqPreset('acoustic')" class="eq-preset-btn text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 text-zinc-300 border border-white/10 hover:bg-white/10 transition active:scale-95 whitespace-nowrap cursor-pointer">Acoustic</button>
+        </div>
+
+        <!-- 10 Sliders Track with Native Touch-Friendly Columns -->
         <div class="overflow-x-auto pb-2 -mx-2 px-2 sm:mx-0 sm:px-0">
-          <div class="grid grid-cols-10 gap-2 sm:gap-4 items-end h-40 pt-4 pb-2 bg-black/40 rounded-xl px-4 border border-white/5 min-w-[540px] sm:min-w-0">
-            <!-- 10 sliders -->
-            <div class="flex flex-col items-center h-full justify-between">
-              <span class="text-[10px] font-mono text-zinc-500">+6</span>
-              <input type="range" min="-12" max="12" value="6" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+          <div id="eqBandsContainer" class="grid grid-cols-10 gap-2 sm:gap-4 items-end h-40 pt-4 pb-2 bg-black/40 rounded-xl px-4 border border-white/5 min-w-[540px] sm:min-w-0 select-none">
+            <!-- 10 Sliders -->
+            <div class="eq-col flex flex-col items-center h-full justify-between cursor-pointer py-1" data-band="0">
+              <span class="text-[10px] font-mono text-zinc-500">0</span>
+              <input type="range" min="-12" max="12" value="0" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
               <span class="text-[9px] font-mono text-zinc-400">31Hz</span>
             </div>
-            <div class="flex flex-col items-center h-full justify-between">
-              <span class="text-[10px] font-mono text-zinc-500">+4</span>
-              <input type="range" min="-12" max="12" value="4" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+            <div class="eq-col flex flex-col items-center h-full justify-between cursor-pointer py-1" data-band="1">
+              <span class="text-[10px] font-mono text-zinc-500">0</span>
+              <input type="range" min="-12" max="12" value="0" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
               <span class="text-[9px] font-mono text-zinc-400">63Hz</span>
             </div>
-            <div class="flex flex-col items-center h-full justify-between">
-              <span class="text-[10px] font-mono text-zinc-500">+2</span>
-              <input type="range" min="-12" max="12" value="2" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+            <div class="eq-col flex flex-col items-center h-full justify-between cursor-pointer py-1" data-band="2">
+              <span class="text-[10px] font-mono text-zinc-500">0</span>
+              <input type="range" min="-12" max="12" value="0" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
               <span class="text-[9px] font-mono text-zinc-400">125Hz</span>
             </div>
-            <div class="flex flex-col items-center h-full justify-between">
+            <div class="eq-col flex flex-col items-center h-full justify-between cursor-pointer py-1" data-band="3">
               <span class="text-[10px] font-mono text-zinc-500">0</span>
               <input type="range" min="-12" max="12" value="0" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
               <span class="text-[9px] font-mono text-zinc-400">250Hz</span>
             </div>
-            <div class="flex flex-col items-center h-full justify-between">
-              <span class="text-[10px] font-mono text-zinc-500">-1</span>
-              <input type="range" min="-12" max="12" value="-1" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+            <div class="eq-col flex flex-col items-center h-full justify-between cursor-pointer py-1" data-band="4">
+              <span class="text-[10px] font-mono text-zinc-500">0</span>
+              <input type="range" min="-12" max="12" value="0" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
               <span class="text-[9px] font-mono text-zinc-400">500Hz</span>
             </div>
-            <div class="flex flex-col items-center h-full justify-between">
-              <span class="text-[10px] font-mono text-zinc-500">+1</span>
-              <input type="range" min="-12" max="12" value="1" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+            <div class="eq-col flex flex-col items-center h-full justify-between cursor-pointer py-1" data-band="5">
+              <span class="text-[10px] font-mono text-zinc-500">0</span>
+              <input type="range" min="-12" max="12" value="0" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
               <span class="text-[9px] font-mono text-zinc-400">1kHz</span>
             </div>
-            <div class="flex flex-col items-center h-full justify-between">
-              <span class="text-[10px] font-mono text-zinc-500">+3</span>
-              <input type="range" min="-12" max="12" value="3" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+            <div class="eq-col flex flex-col items-center h-full justify-between cursor-pointer py-1" data-band="6">
+              <span class="text-[10px] font-mono text-zinc-500">0</span>
+              <input type="range" min="-12" max="12" value="0" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
               <span class="text-[9px] font-mono text-zinc-400">2kHz</span>
             </div>
-            <div class="flex flex-col items-center h-full justify-between">
-              <span class="text-[10px] font-mono text-zinc-500">+5</span>
-              <input type="range" min="-12" max="12" value="5" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+            <div class="eq-col flex flex-col items-center h-full justify-between cursor-pointer py-1" data-band="7">
+              <span class="text-[10px] font-mono text-zinc-500">0</span>
+              <input type="range" min="-12" max="12" value="0" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
               <span class="text-[9px] font-mono text-zinc-400">4kHz</span>
             </div>
-            <div class="flex flex-col items-center h-full justify-between">
-              <span class="text-[10px] font-mono text-zinc-500">+7</span>
-              <input type="range" min="-12" max="12" value="7" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+            <div class="eq-col flex flex-col items-center h-full justify-between cursor-pointer py-1" data-band="8">
+              <span class="text-[10px] font-mono text-zinc-500">0</span>
+              <input type="range" min="-12" max="12" value="0" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
               <span class="text-[9px] font-mono text-zinc-400">8kHz</span>
             </div>
-            <div class="flex flex-col items-center h-full justify-between">
-              <span class="text-[10px] font-mono text-zinc-500">+8</span>
-              <input type="range" min="-12" max="12" value="8" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
+            <div class="eq-col flex flex-col items-center h-full justify-between cursor-pointer py-1" data-band="9">
+              <span class="text-[10px] font-mono text-zinc-500">0</span>
+              <input type="range" min="-12" max="12" value="0" class="eq-slider w-20 transform -rotate-90 origin-center my-6" oninput="updateEqVisual(this)">
               <span class="text-[9px] font-mono text-zinc-400">16kHz</span>
             </div>
           </div>
+        </div>
+
+        <!-- Mobile horizontal scroll hint -->
+        <div class="sm:hidden text-center text-[10px] font-mono text-zinc-500 mt-2 flex items-center justify-center gap-1">
+          <i data-lucide="arrow-left-right" class="w-3 h-3"></i>
+          <span>Прокрутите для всех 10 полос или выберите пресет выше</span>
         </div>
       </div>
 
@@ -700,7 +684,7 @@ html_content = r'''<!DOCTYPE html>
   </section>
 
   <!-- AUDIO ARCHITECTURE DEEP DIVE -->
-  <section id="architecture" class="max-w-5xl mx-auto px-4 py-16 relative z-10">
+  <section id="architecture" class="scroll-mt-24 max-w-5xl mx-auto px-4 py-16 relative z-10">
     <div class="text-center mb-12">
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono font-medium mb-3">
         <i data-lucide="layers" class="w-3.5 h-3.5"></i>
@@ -768,7 +752,7 @@ html_content = r'''<!DOCTYPE html>
   </section>
 
   <!-- PUBLIC ROADMAP SECTION -->
-  <section id="roadmap" class="max-w-4xl mx-auto px-4 py-16 relative z-10">
+  <section id="roadmap" class="scroll-mt-24 max-w-4xl mx-auto px-4 py-16 relative z-10">
     <div class="text-center mb-10">
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono font-medium mb-3">
         <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
@@ -791,9 +775,15 @@ html_content = r'''<!DOCTYPE html>
 
   <!-- COMPARISON TABLE SECTION -->
   <section id="comparison" class="max-w-5xl mx-auto px-4 py-16 relative z-10">
-    <div class="text-center mb-10">
+    <div class="text-center mb-8">
       <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">Сравнение с популярными стримингами</h2>
       <p class="text-zinc-400 text-sm sm:text-base max-w-lg mx-auto mt-2">Почему пользователи выбирают автономность Sonora.</p>
+    </div>
+
+    <!-- Mobile Scroll Hint -->
+    <div class="sm:hidden text-right font-mono text-[11px] text-zinc-500 mb-2 flex items-center justify-end gap-1">
+      <span>Прокрутите таблицу вправо</span>
+      <i data-lucide="arrow-right" class="w-3 h-3"></i>
     </div>
 
     <div class="glass-card rounded-2xl overflow-x-auto border border-white/10 shadow-2xl">
@@ -843,7 +833,7 @@ html_content = r'''<!DOCTYPE html>
   </section>
 
   <!-- FAQ SECTION -->
-  <section id="faq" class="max-w-4xl mx-auto px-4 py-16 relative z-10">
+  <section id="faq" class="scroll-mt-24 max-w-4xl mx-auto px-4 py-16 relative z-10">
     <div class="text-center mb-10">
       <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">Часто задаваемые вопросы</h2>
       <p class="text-zinc-400 text-sm sm:text-base mt-2">Всё об архитектуре и безопасности Sonora.</p>
@@ -885,20 +875,20 @@ html_content = r'''<!DOCTYPE html>
   </section>
 
   <!-- FINAL DOWNLOAD SECTION -->
-  <section id="download" class="max-w-5xl mx-auto px-4 py-16 sm:py-20 relative z-10">
+  <section id="download" class="scroll-mt-24 max-w-5xl mx-auto px-4 py-16 sm:py-20 relative z-10">
     <div class="glass-card rounded-3xl p-6 sm:p-12 text-center border border-white/10 shadow-2xl relative overflow-hidden">
       <div class="relative z-10 max-w-2xl mx-auto space-y-4">
         <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">Начните слушать Sonora прямо сейчас</h2>
         <p class="text-zinc-400 text-xs sm:text-base">Доступны 2 официальных дистрибутива с чистой побитовой установкой:</p>
 
-        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-xl mx-auto w-full">
+        <div class="pt-4 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-xl mx-auto w-full">
           <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Setup.exe" class="w-full sm:w-auto bg-white hover:bg-zinc-200 text-black font-extrabold text-xs sm:text-sm px-6 sm:px-8 py-3.5 rounded-xl flex items-center justify-center gap-2.5 transition transform hover:scale-[1.02] active:scale-[0.98]">
             <i data-lucide="monitor" class="w-4 h-4 flex-shrink-0"></i>
-            <span>Скачать для Windows (Setup .exe, 27.2 МБ)</span>
+            <span>Windows Setup (.exe, 27.2 МБ)</span>
           </a>
           <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Android.apk" class="w-full sm:w-auto glass-card hover:bg-white/5 text-white font-bold text-xs sm:text-sm px-6 sm:px-8 py-3.5 rounded-xl flex items-center justify-center gap-2.5 transition transform hover:scale-[1.02] active:scale-[0.98] border border-white/15">
             <i data-lucide="smartphone" class="w-4 h-4 text-zinc-400 flex-shrink-0"></i>
-            <span>Скачать для Android (APK, 132.6 МБ)</span>
+            <span>Android (APK, 132.6 МБ)</span>
           </a>
         </div>
 
@@ -940,17 +930,17 @@ html_content = r'''<!DOCTYPE html>
   </footer>
 
   <!-- FLOATING QUICK FEEDBACK BUTTON -->
-  <button onclick="openFeedbackModal()" aria-label="Обратная связь" class="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 bg-zinc-900 border border-white/20 text-white font-bold p-3 sm:p-3.5 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition transform flex items-center gap-2 group">
+  <button onclick="openFeedbackModal()" aria-label="Обратная связь" class="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 bg-zinc-900 border border-white/20 text-white font-bold p-3 sm:p-3.5 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition transform flex items-center gap-2 group cursor-pointer">
     <i data-lucide="message-square" class="w-5 h-5 text-white"></i>
     <span class="hidden md:inline text-xs font-mono font-semibold pr-1 tracking-wider uppercase">Обратная связь</span>
   </button>
 
   <!-- FEEDBACK & BUG REPORT MODAL -->
   <div id="feedbackModal" onclick="if(event.target === this) closeFeedbackModal()" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 overflow-y-auto">
-    <div class="glass-card rounded-2xl p-5 sm:p-8 max-w-lg w-full border border-white/15 relative shadow-2xl space-y-4 sm:space-y-5 my-auto max-h-[92vh] flex flex-col overflow-hidden">
+    <div class="glass-card rounded-2xl p-5 sm:p-8 max-w-lg w-full border border-white/15 relative shadow-2xl space-y-4 sm:space-y-5 my-auto max-h-[92dvh] sm:max-h-[90vh] flex flex-col overflow-hidden">
       
       <!-- Close Button -->
-      <button onclick="closeFeedbackModal()" aria-label="Закрыть модальное окно" class="absolute top-4 right-4 sm:top-5 sm:right-5 text-zinc-400 hover:text-white p-2 rounded-lg bg-white/5 hover:bg-white/10 transition z-10">
+      <button onclick="closeFeedbackModal()" aria-label="Закрыть модальное окно" class="absolute top-4 right-4 sm:top-5 sm:right-5 text-zinc-400 hover:text-white p-2 rounded-lg bg-white/5 hover:bg-white/10 transition z-10 active:scale-95 cursor-pointer">
         <i data-lucide="x" class="w-4 h-4"></i>
       </button>
 
@@ -965,13 +955,13 @@ html_content = r'''<!DOCTYPE html>
 
       <!-- Category Tabs -->
       <div class="grid grid-cols-3 gap-1.5 sm:gap-2 p-1 bg-black/50 rounded-lg border border-white/10 flex-shrink-0">
-        <button type="button" onclick="setFeedbackCategory('bug')" id="fbCatBtn-bug" class="fb-cat-btn py-1.5 text-xs font-bold rounded-md bg-white text-black flex items-center justify-center gap-1 sm:gap-1.5 transition">
+        <button type="button" onclick="setFeedbackCategory('bug')" id="fbCatBtn-bug" class="fb-cat-btn py-1.5 text-xs font-bold rounded-md bg-white text-black flex items-center justify-center gap-1 sm:gap-1.5 transition active:scale-95 cursor-pointer">
           <span>🐞 Баг</span>
         </button>
-        <button type="button" onclick="setFeedbackCategory('idea')" id="fbCatBtn-idea" class="fb-cat-btn py-1.5 text-xs font-bold rounded-md text-zinc-400 hover:text-white flex items-center justify-center gap-1 sm:gap-1.5 transition">
+        <button type="button" onclick="setFeedbackCategory('idea')" id="fbCatBtn-idea" class="fb-cat-btn py-1.5 text-xs font-bold rounded-md text-zinc-400 hover:text-white flex items-center justify-center gap-1 sm:gap-1.5 transition active:scale-95 cursor-pointer">
           <span>💡 Идея</span>
         </button>
-        <button type="button" onclick="setFeedbackCategory('question')" id="fbCatBtn-question" class="fb-cat-btn py-1.5 text-xs font-bold rounded-md text-zinc-400 hover:text-white flex items-center justify-center gap-1 sm:gap-1.5 transition">
+        <button type="button" onclick="setFeedbackCategory('question')" id="fbCatBtn-question" class="fb-cat-btn py-1.5 text-xs font-bold rounded-md text-zinc-400 hover:text-white flex items-center justify-center gap-1 sm:gap-1.5 transition active:scale-95 cursor-pointer">
           <span>❓ Вопрос</span>
         </button>
       </div>
@@ -1005,7 +995,7 @@ html_content = r'''<!DOCTYPE html>
           <textarea id="fbMessage" required rows="3" placeholder="Опишите баг или предложите функцию..." class="w-full bg-white/5 border border-white/10 rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-white/30 resize-none"></textarea>
         </div>
 
-        <button type="submit" id="fbSubmitBtn" class="w-full bg-white hover:bg-zinc-200 text-black font-extrabold text-sm py-3 rounded-lg transition flex items-center justify-center gap-2 active:scale-[0.98]">
+        <button type="submit" id="fbSubmitBtn" class="w-full bg-white hover:bg-zinc-200 text-black font-extrabold text-sm py-3 rounded-lg transition flex items-center justify-center gap-2 active:scale-[0.98] cursor-pointer">
           <i data-lucide="send" class="w-4 h-4"></i>
           <span>Отправить обращение разработчикам</span>
         </button>
@@ -1021,7 +1011,7 @@ html_content = r'''<!DOCTYPE html>
           Номер вашего тикета: <span id="fbTicketId" class="text-white font-mono font-bold">#SON-0000</span>.<br>
           Отчет успешно сохранен и передан администратору в Telegram-бот.
         </p>
-        <button onclick="closeFeedbackModal()" class="px-5 py-2 rounded-lg bg-white/10 hover:bg-white text-white hover:text-black font-bold text-xs transition">
+        <button onclick="closeFeedbackModal()" class="px-5 py-2 rounded-lg bg-white/10 hover:bg-white text-white hover:text-black font-bold text-xs transition active:scale-95 cursor-pointer">
           Закрыть окно
         </button>
       </div>
@@ -1035,7 +1025,7 @@ html_content = r'''<!DOCTYPE html>
       <i data-lucide="shield" class="w-4 h-4 text-white flex-shrink-0"></i>
       <span>Sonora не использует трекеры и рекламу. <a href="privacy.html" class="text-white underline font-semibold">Политика</a></span>
     </div>
-    <button onclick="dismissCookieBanner()" class="w-full sm:w-auto bg-white text-black text-xs font-bold px-4 py-2 rounded-lg transition whitespace-nowrap hover:bg-zinc-200 active:scale-95 text-center flex-shrink-0">
+    <button onclick="dismissCookieBanner()" class="w-full sm:w-auto bg-white text-black text-xs font-bold px-4 py-2 rounded-lg transition whitespace-nowrap hover:bg-zinc-200 active:scale-95 text-center flex-shrink-0 cursor-pointer">
       Понятно
     </button>
   </div>
@@ -1123,13 +1113,12 @@ html_content = r'''<!DOCTYPE html>
 
         // Draw 36 Precision Audio Frequency Columns in 3D Isometric Projection
         for (let i = 0; i < numBars; i++) {
-          const norm = i / (numBars - 1);
           // Complex audio waveform harmonic calculation
           const harmonic1 = Math.sin(phase * 1.2 + i * 0.28) * 45;
           const harmonic2 = Math.cos(phase * 2.1 + i * 0.45) * 25;
           const harmonic3 = Math.sin(phase * 3.4 + i * 0.72) * 15;
           
-          // Mouse cursor proximity wave ripple
+          // Mouse / touch cursor proximity wave ripple
           const barX = startX + i * barSpacing + currentTiltX * (i - numBars / 2) * 2;
           const distToMouse = Math.abs(mouseX - barX);
           const mouseBonus = distToMouse < 90 ? (1 - distToMouse / 90) * 35 : 0;
@@ -1193,7 +1182,7 @@ html_content = r'''<!DOCTYPE html>
       render();
     })();
 
-    // 2. 3D Tilt Parallax on Hero Card
+    // 2. 3D Tilt Parallax on Hero Card (Mouse on Desktop)
     (function init3DHeroTilt() {
       const card = document.getElementById('spectrogramCard');
       if (!card) return;
@@ -1202,8 +1191,8 @@ html_content = r'''<!DOCTYPE html>
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
-        const rotateX = (-y / rect.height) * 12;
-        const rotateY = (x / rect.width) * 12;
+        const rotateX = (-y / rect.height) * 10;
+        const rotateY = (x / rect.width) * 10;
         card.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
       });
 
@@ -1261,12 +1250,15 @@ html_content = r'''<!DOCTYPE html>
       vinylActive = !vinylActive;
       const btn = document.getElementById('vinylToggle');
       if (btn) {
+        const icon = btn.querySelector('svg, i');
         if (vinylActive) {
-          btn.classList.add('bg-white', 'text-black');
-          btn.classList.remove('bg-white/5', 'text-zinc-300');
+          btn.classList.add('bg-white', 'text-black', 'border-white', 'shadow-md');
+          btn.classList.remove('bg-white/5', 'text-zinc-300', 'border-white/10');
+          if (icon) icon.classList.replace('text-zinc-400', 'text-black');
         } else {
-          btn.classList.remove('bg-white', 'text-black');
-          btn.classList.add('bg-white/5', 'text-zinc-300');
+          btn.classList.remove('bg-white', 'text-black', 'border-white', 'shadow-md');
+          btn.classList.add('bg-white/5', 'text-zinc-300', 'border-white/10');
+          if (icon) icon.classList.replace('text-black', 'text-zinc-400');
         }
       }
     }
@@ -1276,12 +1268,15 @@ html_content = r'''<!DOCTYPE html>
       bassActive = !bassActive;
       const btn = document.getElementById('bassToggle');
       if (btn) {
+        const icon = btn.querySelector('svg, i');
         if (bassActive) {
-          btn.classList.add('bg-white', 'text-black');
-          btn.classList.remove('bg-white/5', 'text-zinc-300');
+          btn.classList.add('bg-white', 'text-black', 'border-white', 'shadow-md');
+          btn.classList.remove('bg-white/5', 'text-zinc-300', 'border-white/10');
+          if (icon) icon.classList.replace('text-zinc-400', 'text-black');
         } else {
-          btn.classList.remove('bg-white', 'text-black');
-          btn.classList.add('bg-white/5', 'text-zinc-300');
+          btn.classList.remove('bg-white', 'text-black', 'border-white', 'shadow-md');
+          btn.classList.add('bg-white/5', 'text-zinc-300', 'border-white/10');
+          if (icon) icon.classList.replace('text-black', 'text-zinc-400');
         }
       }
     }
@@ -1289,7 +1284,7 @@ html_content = r'''<!DOCTYPE html>
     function updateEqVisual(slider) {
       if (!slider) return;
       const val = parseInt(slider.value, 10);
-      const col = slider.closest('.flex-col');
+      const col = slider.closest('.eq-col') || slider.closest('.flex-col');
       if (col) {
         const label = col.querySelector('span:first-child');
         if (label) {
@@ -1298,6 +1293,80 @@ html_content = r'''<!DOCTYPE html>
         }
       }
     }
+
+    // DSP Presets
+    const eqPresets = {
+      flat: { name: 'Hi-Fi Linear (Flat)', values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+      bass: { name: 'Raw Bass Boost (+10dB)', values: [10, 8, 6, 2, 0, 0, 1, 3, 5, 6] },
+      edm: { name: 'Club / Electronic Punch', values: [7, 5, 2, -1, -2, 0, 3, 6, 8, 9] },
+      vocal: { name: 'Vocal Clarity & Presence', values: [-3, -2, 0, 2, 4, 6, 5, 3, 1, 0] },
+      acoustic: { name: 'Acoustic Hi-Res', values: [3, 2, 0, 1, 2, 3, 4, 5, 6, 7] },
+    };
+
+    function applyEqPreset(presetKey) {
+      const preset = eqPresets[presetKey];
+      if (!preset) return;
+      const label = document.getElementById('eqPresetLabel');
+      if (label) label.textContent = 'Пресет: ' + preset.name;
+
+      const buttons = document.querySelectorAll('.eq-preset-btn');
+      buttons.forEach(b => {
+        b.classList.remove('bg-white', 'text-black', 'border-white', 'font-bold');
+        b.classList.add('bg-white/5', 'text-zinc-300', 'border-white/10');
+      });
+      if (event && event.target) {
+        const targetBtn = event.target.closest('button');
+        if (targetBtn) {
+          targetBtn.classList.remove('bg-white/5', 'text-zinc-300', 'border-white/10');
+          targetBtn.classList.add('bg-white', 'text-black', 'border-white', 'font-bold');
+        }
+      }
+
+      const sliders = document.querySelectorAll('.eq-slider');
+      sliders.forEach((slider, i) => {
+        if (i < preset.values.length) {
+          const targetVal = preset.values[i];
+          slider.value = targetVal;
+          updateEqVisual(slider);
+        }
+      });
+    }
+
+    // Touch & Drag Support on EQ Band Columns for Phones
+    (function initEqTouchControls() {
+      const container = document.getElementById('eqBandsContainer');
+      if (!container) return;
+
+      const cols = container.querySelectorAll('.eq-col');
+      cols.forEach(col => {
+        const slider = col.querySelector('.eq-slider');
+        if (!slider) return;
+
+        function setFromClientY(clientY) {
+          const rect = col.getBoundingClientRect();
+          // Height between top label and bottom label (~120px)
+          const top = rect.top + 20;
+          const bottom = rect.bottom - 20;
+          const clampedY = Math.max(top, Math.min(bottom, clientY));
+          const ratio = 1 - ((clampedY - top) / (bottom - top)); // 0 at bottom, 1 at top
+          const val = Math.round(ratio * 24 - 12); // -12 to +12
+          slider.value = val;
+          updateEqVisual(slider);
+        }
+
+        col.addEventListener('touchstart', (e) => {
+          if (e.touches && e.touches[0]) {
+            setFromClientY(e.touches[0].clientY);
+          }
+        }, { passive: true });
+
+        col.addEventListener('touchmove', (e) => {
+          if (e.touches && e.touches[0]) {
+            setFromClientY(e.touches[0].clientY);
+          }
+        }, { passive: true });
+      });
+    })();
 
     // 5. Public Interactive Roadmap API Fetch & Voting
     const defaultRoadmapItems = [
@@ -1320,7 +1389,7 @@ html_content = r'''<!DOCTYPE html>
             <span class="text-[10px] font-mono text-zinc-400 uppercase tracking-widest bg-white/5 px-2 py-0.5 rounded border border-white/10">${item.category}</span>
             <h4 class="text-xs sm:text-sm font-bold text-white leading-snug">${item.title}</h4>
           </div>
-          <button onclick="voteRoadmap('${item.id}', this)" aria-label="Проголосовать" class="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white hover:text-black text-zinc-300 text-xs font-mono font-bold transition flex-shrink-0 border border-white/10 active:scale-95">
+          <button onclick="voteRoadmap('${item.id}', this)" aria-label="Проголосовать" class="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-2 rounded-lg bg-white/5 hover:bg-white hover:text-black text-zinc-300 text-xs font-mono font-bold transition flex-shrink-0 border border-white/10 active:scale-95 min-h-[38px] cursor-pointer">
             <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i>
             <span class="vote-count font-mono">${item.votes}</span>
           </button>
@@ -1421,6 +1490,17 @@ html_content = r'''<!DOCTYPE html>
       }
     });
 
+    // Close mobile menu if user clicks outside of header
+    document.addEventListener('click', (e) => {
+      const header = document.getElementById('mainHeader');
+      const dropdown = document.getElementById('mobileMenuDropdown');
+      if (dropdown && !dropdown.classList.contains('hidden')) {
+        if (header && !header.contains(e.target)) {
+          closeMobileMenu();
+        }
+      }
+    });
+
     function setFeedbackCategory(cat) {
       const catInput = document.getElementById('fbCategory');
       if (catInput) catInput.value = cat;
@@ -1488,9 +1568,7 @@ html_content = r'''<!DOCTYPE html>
       const banner = document.getElementById('cookieBanner');
       if (banner) {
         banner.classList.add('opacity-0', 'pointer-events-none');
-        setTimeout(() => {
-          banner.style.display = 'none';
-        }, 300);
+        banner.style.display = 'none';
       }
     }
 
@@ -1672,4 +1750,4 @@ html_content = r'''<!DOCTYPE html>
 with open(index_path, "w", encoding="utf-8") as f:
     f.write(html_content)
 
-print(f"Successfully generated modern index.html ({len(html_content)} bytes)")
+print("[OK] index.html successfully generated!")
