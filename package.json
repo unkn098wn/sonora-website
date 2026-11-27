@@ -1,6 +1,6 @@
 {
   "name": "sonora-website",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "description": "Sonora Official Website and Web Player",
   "scripts": {
     "build": "echo 'Static build ready'",

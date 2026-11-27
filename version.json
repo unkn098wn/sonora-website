@@ -1,22 +1,22 @@
 {
-  "version": "2.6.0",
-  "build_number": 26,
-  "tag_name": "v2.6.0",
-  "release_notes": "Sonora 2.6.0: Интерактивный маскот с паркуром, настройкой цветов/аксессуаров, плюшевым SFX и нажатием Паузы по таймеру сна, стоковый видео-фон «Лучи света» 1080p60, синхронизация звука, 10-полосный EQ и DSP, единый профиль (Email + Telegram), облачная синхронизация Cloudflare KV, HD-обложки, тексты песен, Shazam.",
-  "body": "Sonora 2.6.0: Интерактивный маскот с паркуром, настройкой цветов/аксессуаров, плюшевым SFX и нажатием Паузы по таймеру сна, стоковый видео-фон «Лучи света» 1080p60, синхронизация звука, 10-полосный EQ и DSP, единый профиль (Email + Telegram), облачная синхронизация Cloudflare KV, HD-обложки, тексты песен, Shazam.",
+  "version": "2.7.0",
+  "build_number": 27,
+  "tag_name": "v2.7.0",
+  "release_notes": "Sonora 2.7.0: Интерактивный маскот с рикошет-физикой до полной остановки, паркуром каждые 4-9с на всех экранах, 6 TikTok-танцами в бит и исправленным сном; умный кросс-языковой поиск с точным приоритетом оригиналов; ежедневное обновление вкладок Главной; 10-полосный EQ и DSP, единый профиль, облачная синхронизация Cloudflare KV, HD-обложки, тексты песен, Shazam.",
+  "body": "Sonora 2.7.0: Интерактивный маскот с рикошет-физикой до полной остановки, паркуром каждые 4-9с на всех экранах, 6 TikTok-танцами в бит и исправленным сном; умный кросс-языковой поиск с точным приоритетом оригиналов; ежедневное обновление вкладок Главной; 10-полосный EQ и DSP, единый профиль, облачная синхронизация Cloudflare KV, HD-обложки, тексты песен, Shazam.",
   "html_url": "https://sonora-website.sonoramusic.workers.dev",
-  "download_url_windows": "https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Setup.exe",
-  "download_url_android": "https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Android.apk",
+  "download_url_windows": "https://github.com/unkn098wn/sonora-website/releases/download/v2.7.0/Sonora-v2.7.0-Setup.exe",
+  "download_url_android": "https://github.com/unkn098wn/sonora-website/releases/download/v2.7.0/Sonora-v2.7.0-Android.apk",
   "assets": [
     {
-      "name": "Sonora-v2.6.0-Setup.exe",
-      "browser_download_url": "https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Setup.exe",
-      "size": 31886130
+      "name": "Sonora-v2.7.0-Setup.exe",
+      "browser_download_url": "https://github.com/unkn098wn/sonora-website/releases/download/v2.7.0/Sonora-v2.7.0-Setup.exe",
+      "size": 31936969
     },
     {
-      "name": "Sonora-v2.6.0-Android.apk",
-      "browser_download_url": "https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Android.apk",
-      "size": 144242801
+      "name": "Sonora-v2.7.0-Android.apk",
+      "browser_download_url": "https://github.com/unkn098wn/sonora-website/releases/download/v2.7.0/Sonora-v2.7.0-Android.apk",
+      "size": 144816309
     }
   ]
 }

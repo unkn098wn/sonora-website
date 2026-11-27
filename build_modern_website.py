@@ -174,7 +174,7 @@ html_content = r'''<!DOCTYPE html>
         </div>
         <div class="flex items-center gap-1.5 sm:gap-2">
           <span class="text-xs sm:text-sm font-black text-white tracking-wider sm:tracking-widest font-mono">SONORA</span>
-          <span class="hidden sm:inline-block text-[10px] font-mono font-semibold text-zinc-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">v2.6.0</span>
+          <span class="hidden sm:inline-block text-[10px] font-mono font-semibold text-zinc-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">v2.7.0</span>
         </div>
       </a>
 
@@ -243,7 +243,7 @@ html_content = r'''<!DOCTYPE html>
         <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-500"></i>
       </button>
       <div class="pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-zinc-400">
-        <span>Sonora Music v2.6.0</span>
+        <span>Sonora Music v2.7.0</span>
         <a href="https://t.me/sonoramus1c_bot" target="_blank" class="text-white hover:underline flex items-center gap-1 font-sans">
           <i data-lucide="send" class="w-3 h-3"></i> Telegram-бот
         </a>
@@ -257,7 +257,7 @@ html_content = r'''<!DOCTYPE html>
     <div class="inline-flex max-w-full items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full glass-card border border-white/10 mb-8 text-center">
       <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse flex-shrink-0"></span>
       <span class="text-[11px] sm:text-xs font-mono font-medium text-zinc-300">
-        Sonora v2.6.0 Obsidian Architecture • 0 подписок • 0 рекламы
+        Sonora v2.7.0 Obsidian Architecture • 0 подписок • 0 рекламы
       </span>
     </div>
 
@@ -273,17 +273,17 @@ html_content = r'''<!DOCTYPE html>
     <!-- Official Installers Download Buttons -->
     <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-2xl mx-auto w-full">
       <!-- Windows Setup Button -->
-      <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Setup.exe" class="w-full sm:w-auto bg-white text-black font-extrabold text-xs sm:text-sm md:text-base px-5 sm:px-7 py-3.5 rounded-xl flex items-center justify-center gap-2 sm:gap-3 transition transform hover:scale-[1.02] active:scale-[0.98] shadow-2xl hover:bg-zinc-200">
+      <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.7.0/Sonora-v2.7.0-Setup.exe" class="w-full sm:w-auto bg-white text-black font-extrabold text-xs sm:text-sm md:text-base px-5 sm:px-7 py-3.5 rounded-xl flex items-center justify-center gap-2 sm:gap-3 transition transform hover:scale-[1.02] active:scale-[0.98] shadow-2xl hover:bg-zinc-200">
         <i data-lucide="monitor" class="w-4 h-4 flex-shrink-0"></i>
         <span>Windows Setup (.exe)</span>
-        <span class="text-[11px] sm:text-xs font-mono font-bold bg-black/10 px-2 py-0.5 rounded flex-shrink-0">30.4 МБ</span>
+        <span class="text-[11px] sm:text-xs font-mono font-bold bg-black/10 px-2 py-0.5 rounded flex-shrink-0">30.5 МБ</span>
       </a>
 
       <!-- Android Universal APK Button -->
-      <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Android.apk" class="w-full sm:w-auto glass-card hover:bg-white/5 text-white font-bold text-xs sm:text-sm md:text-base px-5 sm:px-7 py-3.5 rounded-xl flex items-center justify-center gap-2 sm:gap-3 transition transform hover:scale-[1.02] active:scale-[0.98] border border-white/15">
+      <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.7.0/Sonora-v2.7.0-Android.apk" class="w-full sm:w-auto glass-card hover:bg-white/5 text-white font-bold text-xs sm:text-sm md:text-base px-5 sm:px-7 py-3.5 rounded-xl flex items-center justify-center gap-2 sm:gap-3 transition transform hover:scale-[1.02] active:scale-[0.98] border border-white/15">
         <i data-lucide="smartphone" class="w-4 h-4 text-zinc-300 flex-shrink-0"></i>
         <span>Android (APK)</span>
-        <span class="text-[11px] sm:text-xs font-mono text-zinc-400 bg-white/5 px-2 py-0.5 rounded border border-white/10 flex-shrink-0">137.6 МБ</span>
+        <span class="text-[11px] sm:text-xs font-mono text-zinc-400 bg-white/5 px-2 py-0.5 rounded border border-white/10 flex-shrink-0">138.1 МБ</span>
       </a>
 
       <!-- Telegram Bot CTA -->
@@ -793,7 +793,7 @@ html_content = r'''<!DOCTYPE html>
             <th class="p-4 sm:p-5 font-bold text-zinc-400 font-mono">Возможность</th>
             <th class="p-4 sm:p-5 font-bold text-zinc-400">Spotify</th>
             <th class="p-4 sm:p-5 font-bold text-zinc-400">Яндекс Музыка</th>
-            <th class="p-4 sm:p-5 font-bold text-white bg-white/5 border-x border-white/10">Sonora Music 2.6.0</th>
+            <th class="p-4 sm:p-5 font-bold text-white bg-white/5 border-x border-white/10">Sonora Music 2.7.0</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-white/5 text-zinc-300">
@@ -882,17 +882,17 @@ html_content = r'''<!DOCTYPE html>
         <p class="text-zinc-400 text-xs sm:text-base">Доступны 2 официальных дистрибутива с чистой побитовой установкой:</p>
 
         <div class="pt-4 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-xl mx-auto w-full">
-          <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Setup.exe" class="w-full sm:w-auto bg-white hover:bg-zinc-200 text-black font-extrabold text-xs sm:text-sm px-6 sm:px-8 py-3.5 rounded-xl flex items-center justify-center gap-2.5 transition transform hover:scale-[1.02] active:scale-[0.98]">
+          <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.7.0/Sonora-v2.7.0-Setup.exe" class="w-full sm:w-auto bg-white hover:bg-zinc-200 text-black font-extrabold text-xs sm:text-sm px-6 sm:px-8 py-3.5 rounded-xl flex items-center justify-center gap-2.5 transition transform hover:scale-[1.02] active:scale-[0.98]">
             <i data-lucide="monitor" class="w-4 h-4 flex-shrink-0"></i>
-            <span>Windows Setup (.exe, 30.4 МБ)</span>
+            <span>Windows Setup (.exe, 30.5 МБ)</span>
           </a>
-          <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/Sonora-v2.6.0-Android.apk" class="w-full sm:w-auto glass-card hover:bg-white/5 text-white font-bold text-xs sm:text-sm px-6 sm:px-8 py-3.5 rounded-xl flex items-center justify-center gap-2.5 transition transform hover:scale-[1.02] active:scale-[0.98] border border-white/15">
+          <a href="https://github.com/unkn098wn/sonora-website/releases/download/v2.7.0/Sonora-v2.7.0-Android.apk" class="w-full sm:w-auto glass-card hover:bg-white/5 text-white font-bold text-xs sm:text-sm px-6 sm:px-8 py-3.5 rounded-xl flex items-center justify-center gap-2.5 transition transform hover:scale-[1.02] active:scale-[0.98] border border-white/15">
             <i data-lucide="smartphone" class="w-4 h-4 text-zinc-400 flex-shrink-0"></i>
-            <span>Android (APK, 137.6 МБ)</span>
+            <span>Android (APK, 138.1 МБ)</span>
           </a>
         </div>
 
-        <p class="text-xs font-mono text-zinc-500 pt-4">Релиз: v2.6.0 Obsidian Architecture • 100% бесплатно • Без телеметрии</p>
+        <p class="text-xs font-mono text-zinc-500 pt-4">Релиз: v2.7.0 Obsidian Architecture • 100% бесплатно • Без телеметрии</p>
       </div>
     </div>
   </section>
@@ -983,8 +983,8 @@ html_content = r'''<!DOCTYPE html>
         <div>
           <label class="block text-xs font-mono text-zinc-400 mb-1">Версия клиента:</label>
           <select id="fbVersion" class="w-full bg-[#0D1017] border border-white/10 rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-white/30">
-            <option value="Android Universal APK v2.6.0">Android (Универсальный APK v2.6.0)</option>
-            <option value="Windows Setup v2.6.0">Windows (Setup .exe v2.6.0)</option>
+            <option value="Android Universal APK v2.7.0">Android (Универсальный APK v2.7.0)</option>
+            <option value="Windows Setup v2.7.0">Windows (Setup .exe v2.7.0)</option>
             <option value="Веб-сайт Sonora">Веб-сайт Sonora</option>
             <option value="Telegram Бот @sonoramus1c_bot">Telegram-бот</option>
           </select>

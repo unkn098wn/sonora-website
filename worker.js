@@ -130,7 +130,7 @@ export default {
           const name = (body.name || 'Слушатель Sonora').trim();
           const contact = (body.contact || '').trim();
           const message = (body.message || '').trim();
-          const version = (body.version || 'v2.6.0').trim();
+          const version = (body.version || 'v2.7.0').trim();
 
           if (!message) {
             return new Response(
@@ -255,12 +255,12 @@ export default {
       const fileName = url.pathname.replace('/downloads/', '');
       let targetFile = fileName;
       if (fileName.toLowerCase().includes('android') || fileName.toLowerCase().endsWith('.apk')) {
-        targetFile = 'Sonora-v2.6.0-Android.apk';
+        targetFile = 'Sonora-v2.7.0-Android.apk';
       } else if (fileName.toLowerCase().includes('setup') || fileName.toLowerCase().includes('windows') || fileName.toLowerCase().endsWith('.exe')) {
-        targetFile = 'Sonora-v2.6.0-Setup.exe';
+        targetFile = 'Sonora-v2.7.0-Setup.exe';
       }
       return Response.redirect(
-        `https://github.com/unkn098wn/sonora-website/releases/download/v2.6.0/${targetFile}`,
+        `https://github.com/unkn098wn/sonora-website/releases/download/v2.7.0/${targetFile}`,
         302
       );
     }
